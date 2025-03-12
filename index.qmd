@@ -15,7 +15,7 @@ Data comes from this source and ....
 
 ## Preprocessing
 
-To attribute the gender for the authors, we used gender API [gender_attribution.qmd](gender_attribution.qmd). 
+To attribute the gender for the authors, we used gender API [analysis/gender_attribution.qmd](analysis/gender_attribution.qmd). 
 
 ## Analysis
 

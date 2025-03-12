@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "README",
     "section": "",
-    "text": "Gender in authors in music psychology\nWhat is the gender distribution is music psychology specialist journals?\nThe public-facing version of the repository is available at https://tuomaseerola.github.io/gender_in_music_psych/\n\n\nData comes from this source and ….\n\n\n\nTo attribute the gender for the authors, we used gender API gender_attribution.qmd.\n\n\n\nData analysis is covered in analysis/analysis.qmd document.\n\n\n\nThe study report is available manuscript/manuscript.qmd document."
+    "text": "Gender in authors in music psychology\nWhat is the gender distribution is music psychology specialist journals?\nThe public-facing version of the repository is available at https://tuomaseerola.github.io/gender_in_music_psych/\n\n\nData comes from this source and ….\n\n\n\nTo attribute the gender for the authors, we used gender API analysis/gender_attribution.qmd.\n\n\n\nData analysis is covered in analysis/analysis.qmd document.\n\n\n\nThe study report is available manuscript/manuscript.qmd document."
   },
   {
     "objectID": "index.html#data",
@@ -18,7 +18,7 @@
     "href": "index.html#preprocessing",
     "title": "README",
     "section": "",
-    "text": "To attribute the gender for the authors, we used gender API gender_attribution.qmd."
+    "text": "To attribute the gender for the authors, we used gender API analysis/gender_attribution.qmd."
   },
   {
     "objectID": "index.html#analysis",
@@ -54,5 +54,19 @@
     "title": "Gender Distribution of Authors in Music Psychology",
     "section": "Materials and analyses",
     "text": "Materials and analyses\n\nDataset description. All papers between 2010 and 2022 from specialist journals used in (Jakubowski et al., 2025).\nInitial attribution of genders based on first names. Automatic attribution of gender based on first name databases (Gender API) + manual fixes\nQuality control.\nManual corrections."
+  },
+  {
+    "objectID": "analysis/analysis.html",
+    "href": "analysis/analysis.html",
+    "title": "Gender in Music Psychology",
+    "section": "",
+    "text": "empty at the moment\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "analysis/gender_attribution.html",
+    "href": "analysis/gender_attribution.html",
+    "title": "Gender in Music Psychology",
+    "section": "",
+    "text": "empty at the moment\n\n\n\n Back to top"
   }
 ]
