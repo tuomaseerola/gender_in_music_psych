@@ -1,0 +1,131 @@
+---
+title             : "Gender Distribution of Authors in Music Psychology"
+shorttitle        : "Gender in Music Psychology"
+author: 
+  - name          : "Tuomas Eerola"
+    affiliation   : "1"
+    corresponding : yes    # Define only one corresponding author
+    address       : "Palace Green, Department of Music, Durham University, DH1 3RL Durham, United Kingdom"
+    email         : "tuomas.eerola@durham.ac.uk"
+  - name          : "Anna Czepiel"
+    affiliation   : "2"
+    address       : "Department of Psychology, University of Toronto, Mississauga, Canada"
+    email         : "a.czepiel@utoronto.ca"
+affiliation:
+  - id            : "1"
+    institution   : "Department of Music, Durham University"
+  - id            : "2"
+    institution   : "Department of Psychology, University of Toronto"
+
+author_note: |
+  Tuomas Eerola is at the Department of Music, Durham University, UK.
+  Anna Czepiel is at the Department of Psychology, University of Toronto, Canada.
+
+abstract: |
+ blah blah blah.  
+keywords          : "gender, transparency, music psychology, open science, meta-research"
+wordcount         : "5555"
+figsintext        : yes
+figurelist        : no
+tablelist         : no
+footnotelist      : no
+lineno            : no
+mask              : no
+csl: apa7.csl
+class             : "man"
+bibliography: references.bib
+format:
+  html: default
+---
+
+```{r global options, include = FALSE}
+knitr::opts_chunk$set(warning=FALSE, message=FALSE)
+```
+
+# Introduction
+
+
+Equality – Why Should We Care?
+
+- Lack of equity impacts 
+
+- productivity
+- innovation
+- job satisfaction
+
+Academia has acknowledged challenges in gender equity
+
+- women less present in positions of power (e.g. 30% UK profs)
+- pay gap is wider in academia (16%) than in other sectors (9%)
+- women represent fewer than 30% authorships globally
+
+
+@son2022scientific Scientific authorship by gender
+
+@shah2021gender Gender parity in scientific authorship in a National Institute for Health Research Biomedical Research Centre: a bibliometric analysis
+
+@rock2021quantifying Quantifying the Gender Gap in Authorship in Herpetology
+
+@ni2021gendered The gendered nature of authorship
+
+See @gonzalez2020women for a baseline from other disciplines:
+
+- Hard Sciences (N=119,592)  0.148
+- Bio and Social Sciences (N=262,122)   0.433
+- Psychology (N=90,067)     0.452
+
+What is the situation in music psychology?
+
+## Aims
+
+
+
+# Methods
+
+## Materials and analyses
+
+- Dataset description. All papers between 2010 and 2022 from specialist journals used in [@jakubowski2024].
+
+- Initial attribution of genders based on first names. Automatic attribution of gender based on first name databases (Gender API) + manual fixes
+
+- Quality control.
+
+- Manual corrections.
+
+# Results
+
+- Overall proportion: First authors
+
+- First authors prevalence by Country (Figure)
+
+- Association with the topics (Figure?)
+
+- Time trends (Figure)
+
+# Conclusions
+
+Encouraging
+
+Compare with sub-disciplines of psychology (Alvarez 2017) Psychology: First authors (N=33,631)
+
+Female role models (past and present)
+
+Area that appeals to women?
+
+Not matched by musicology: 25% female profs, 38% below???
+
+
+
+### Funding statement
+
+???
+
+### Competing interests statement
+
+There were no competing interests.
+
+### Open practices statement
+
+Study data, analysis scripts and supporting information is available at GitHub, <https://tuomaseerola.github.io/gender_in_music_psych>.
+
+# References

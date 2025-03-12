@@ -3,13 +3,10 @@ project:
   output-dir: docs
 website:
   page-footer: 
-    left: "Copyright 2025, Tuomas Eerola" 
     right: 
       - icon: github
         href: https://github.com/tuomaseerola/
-      - icon: twitter 
-        href: https://twitter.com/tuomas_ee 
-  title: "Gender in MusicPsych"
+  title: "Gender in Music Psychology"
   navbar:
     left:
       - href: index.qmd
@@ -17,7 +14,7 @@ website:
   back-to-top-navigation: true
 format:
   html:
-    theme: yeti # lumen, pulse, materia, yeti, zephyr
+    theme: materia # lumen, pulse, materia, yeti, zephyr
     css: styles.css
     toc: false
     page-layout: full

@@ -33,5 +33,26 @@
     "title": "README",
     "section": "",
     "text": "The study report is available manuscript/manuscript.qmd document."
+  },
+  {
+    "objectID": "manuscript/manuscript.html",
+    "href": "manuscript/manuscript.html",
+    "title": "Gender Distribution of Authors in Music Psychology",
+    "section": "",
+    "text": "Equality – Why Should We Care?\n\nLack of equity impacts\nproductivity\ninnovation\njob satisfaction\n\nAcademia has acknowledged challenges in gender equity\n\nwomen less present in positions of power (e.g. 30% UK profs)\npay gap is wider in academia (16%) than in other sectors (9%)\nwomen represent fewer than 30% authorships globally\n\nSon & Bell (2022) Scientific authorship by gender\nShah et al. (2021) Gender parity in scientific authorship in a National Institute for Health Research Biomedical Research Centre: a bibliometric analysis\nRock et al. (2021) Quantifying the Gender Gap in Authorship in Herpetology\nNi et al. (2021) The gendered nature of authorship\nSee González-Alvarez & Sos-Peña (2020) for a baseline from other disciplines:\n\nHard Sciences (N=119,592) 0.148\nBio and Social Sciences (N=262,122) 0.433\nPsychology (N=90,067) 0.452\n\nWhat is the situation in music psychology?"
+  },
+  {
+    "objectID": "manuscript/manuscript.html#materials",
+    "href": "manuscript/manuscript.html#materials",
+    "title": "Gender Distribution of Authors in Music Psychology",
+    "section": "",
+    "text": "Dataset description. All papers between 2010 and 2022 from specialist journals used in (Jakubowski et al., 2025).\nInitial attribution of genders based on first names. Automatic attribution of gender based on first name databases (Gender API) + manual fixes\nQuality control.\nManual corrections."
+  },
+  {
+    "objectID": "manuscript/manuscript.html#materials-and-analyses",
+    "href": "manuscript/manuscript.html#materials-and-analyses",
+    "title": "Gender Distribution of Authors in Music Psychology",
+    "section": "Materials and analyses",
+    "text": "Materials and analyses\n\nDataset description. All papers between 2010 and 2022 from specialist journals used in (Jakubowski et al., 2025).\nInitial attribution of genders based on first names. Automatic attribution of gender based on first name databases (Gender API) + manual fixes\nQuality control.\nManual corrections."
   }
 ]
