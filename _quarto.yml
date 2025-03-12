@@ -17,7 +17,7 @@ website:
   back-to-top-navigation: true
 format:
   html:
-    theme: pulse # lumen, pulse, materia, yeti, zephyr
+    theme: yeti # lumen, pulse, materia, yeti, zephyr
     css: styles.css
     toc: false
     page-layout: full

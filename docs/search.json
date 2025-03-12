@@ -1,0 +1,37 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "README",
+    "section": "",
+    "text": "Gender in authors in music psychology\nWhat is the gender distribution is music psychology specialist journals?\nThe public-facing version of the repository is available at https://tuomaseerola.github.io/gender_in_music_psych/\n\n\nData comes from this source and ….\n\n\n\nTo attribute the gender for the authors, we used gender API gender_attribution.qmd.\n\n\n\nData analysis is covered in analysis/analysis.qmd document.\n\n\n\nThe study report is available manuscript/manuscript.qmd document."
+  },
+  {
+    "objectID": "index.html#data",
+    "href": "index.html#data",
+    "title": "README",
+    "section": "",
+    "text": "Data comes from this source and …."
+  },
+  {
+    "objectID": "index.html#preprocessing",
+    "href": "index.html#preprocessing",
+    "title": "README",
+    "section": "",
+    "text": "To attribute the gender for the authors, we used gender API gender_attribution.qmd."
+  },
+  {
+    "objectID": "index.html#analysis",
+    "href": "index.html#analysis",
+    "title": "README",
+    "section": "",
+    "text": "Data analysis is covered in analysis/analysis.qmd document."
+  },
+  {
+    "objectID": "index.html#manuscript",
+    "href": "index.html#manuscript",
+    "title": "README",
+    "section": "",
+    "text": "The study report is available manuscript/manuscript.qmd document."
+  }
+]
