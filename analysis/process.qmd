@@ -1,0 +1,75 @@
+# Analyse gender in music psychology
+
+T. Eerola, 19/3/2025
+
+Gender analysis of the WEIRD data (Jakubowski et al., 2025).
+
+## Required libraries
+
+```{r}
+#| id: libraries
+#| warning: false
+#| eval: true
+#| echo: false
+#| message: false
+library(tidyverse)
+library(stringr)
+library(ggplot2)
+library(ggwordcloud)
+library(modelsummary)
+```
+
+
+## Load and preprocess data
+
+```{r}
+#| id: preprocess
+#| eval: true
+
+full_process <- FALSE
+if(full_process==TRUE){
+    d <- read.csv('../data/WEIRD part cleaned Feb24.csv',header = TRUE)
+    source('scripts/preprocess.R')      # Routine to process the WEIRD dataset
+    source('scripts/gender_analysis.R') # creates enriched dataset
+}
+#### Get processed data --------------------
+if(full_process==FALSE){
+    d <- readRDS('../data/enriched_dataset.rds')
+}
+
+D <- dplyr::filter(d,study_id=='study1') # 1360 articles
+print(paste("number of unique studies:",nrow(D)))
+```
+
+## Deal with other authors (non-first authors)
+
+This needs to be done. 
+
+1. The author first names for all authors (except for the 1st author) are not in the WEIRD data frame, so these needs to be retrieved.   
+
+2. Then the gender attribution process needs to be done with some manual checking.
+
+3. Aggregate with the present (first author) data 
+
+## Summarise
+
+This is now only first author data.
+
+```{r}
+#| id: summarise
+#| eval: true
+#| output: asis
+source('scripts/summarise_gender.R') #
+```
+
+## Visualise
+
+This is now only first author data.
+
+```{r}
+#| id: visualise
+#| eval: true
+source('scripts/visualise_gender.R') # creates a figure
+source('scripts/visualise_gender_trends.R') # creates a figure
+source('scripts/visualise_names.R')  # creates a figure
+```

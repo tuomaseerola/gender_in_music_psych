@@ -47,38 +47,39 @@ knitr::opts_chunk$set(warning=FALSE, message=FALSE)
 
 Equality – Why Should We Care?
 
-- Lack of equity impacts 
+- Lack of equity impacts: 
 
 - productivity
 - innovation
 - job satisfaction
 
-Academia has acknowledged challenges in gender equity
+Academia has acknowledged serious challenges in gender equity
 
 - women less present in positions of power (e.g. 30% UK profs)
 - pay gap is wider in academia (16%) than in other sectors (9%)
 - women represent fewer than 30% authorships globally
 
+Weave these studies into the narrative: 
 
-@son2022scientific Scientific authorship by gender
+- @son2022scientific Scientific authorship by gender
 
-@shah2021gender Gender parity in scientific authorship in a National Institute for Health Research Biomedical Research Centre: a bibliometric analysis
+- @shah2021gender showed how far off is the gender parity in scientific authorship using a bibliometric analysis
 
-@rock2021quantifying Quantifying the Gender Gap in Authorship in Herpetology
+- @rock2021quantifying quantified the gender gap in authorship in herpetology, showing that ....
 
-@ni2021gendered The gendered nature of authorship
+- @ni2021gendered presented an overview of the gendered nature of authorship
 
 See @gonzalez2020women for a baseline from other disciplines:
 
-- Hard Sciences (N=119,592)  0.148
-- Bio and Social Sciences (N=262,122)   0.433
-- Psychology (N=90,067)     0.452
+- Hard Sciences (N=119,592) = 0.148
+- Bio and Social Sciences (N=262,122) =  0.433
+- Psychology (N=90,067) =  0.452
 
 What is the situation in music psychology?
 
 ## Aims
 
-
+Our aim is to find out what is the gender distribution in the specialist journals of music psychology. What is the proportion of first authors in the published papers in the last 10 years? What is the situation with all authors and senior authors? Are there specific trends in terms of countries of the affiliations, topics, or time?
 
 # Methods
 
@@ -92,6 +93,8 @@ What is the situation in music psychology?
 
 - Manual corrections.
 
+- Expansion into all other first names (requires getting more data and repeating the process above).
+
 # Results
 
 - Overall proportion: First authors
@@ -104,16 +107,15 @@ What is the situation in music psychology?
 
 # Conclusions
 
-Encouraging
+- Encouraging overall?
 
-Compare with sub-disciplines of psychology (Alvarez 2017) Psychology: First authors (N=33,631)
+- Compare with sub-disciplines of psychology [@gonzalez2020women] Psychology: First authors (N=33,631)
 
-Female role models (past and present)
+- Female role models (past and present) exist in music psychology (list names and their eminent roles, chairs of societies, editors of the main journals, etc. Diana Deutsch, Carol Krumhansl, Irene Deliege, to a more recent ICMPC and ESCOM presidents).
 
-Area that appeals to women?
+- Is this an area that appeals to women? (see comparison to sub-disciplines of psychology, where "softer" areas tend to have higher proportion)
 
-Not matched by musicology: 25% female profs, 38% below???
-
+- Not matched by musicology: 25% female profs, 38% below??? (these are just some UK stats, I don't think the field-wide analysis has been done)
 
 
 ### Funding statement

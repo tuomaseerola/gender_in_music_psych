@@ -2,35 +2,35 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "README",
+    "title": "Gender in music psychology",
     "section": "",
-    "text": "Gender in authors in music psychology\nWhat is the gender distribution is music psychology specialist journals?\nThe public-facing version of the repository is available at https://tuomaseerola.github.io/gender_in_music_psych/\n\n\nData comes from this source and ….\n\n\n\nTo attribute the gender for the authors, we used gender API analysis/gender_attribution.qmd.\n\n\n\nData analysis is covered in analysis/analysis.qmd document.\n\n\n\nThe study report is available manuscript/manuscript.qmd document."
+    "text": "What is the gender distribution is music psychology?\nThe public-facing version of the repository is available at https://tuomaseerola.github.io/gender_in_music_psych/\n\n\nData comes from this source and …\n\n\n\nTo attribute the gender for the authors, we used gender API analysis/process.qmd.\n\n\n\nData analysis is covered in analysis/process.qmd document.\n\n\n\nThe study report is available manuscript/manuscript.qmd document."
   },
   {
     "objectID": "index.html#data",
     "href": "index.html#data",
-    "title": "README",
+    "title": "Gender in music psychology",
     "section": "",
-    "text": "Data comes from this source and …."
+    "text": "Data comes from this source and …"
   },
   {
     "objectID": "index.html#preprocessing",
     "href": "index.html#preprocessing",
-    "title": "README",
+    "title": "Gender in music psychology",
     "section": "",
-    "text": "To attribute the gender for the authors, we used gender API analysis/gender_attribution.qmd."
+    "text": "To attribute the gender for the authors, we used gender API analysis/process.qmd."
   },
   {
     "objectID": "index.html#analysis",
     "href": "index.html#analysis",
-    "title": "README",
+    "title": "Gender in music psychology",
     "section": "",
-    "text": "Data analysis is covered in analysis/analysis.qmd document."
+    "text": "Data analysis is covered in analysis/process.qmd document."
   },
   {
     "objectID": "index.html#manuscript",
     "href": "index.html#manuscript",
-    "title": "README",
+    "title": "Gender in music psychology",
     "section": "",
     "text": "The study report is available manuscript/manuscript.qmd document."
   },
@@ -39,7 +39,7 @@
     "href": "manuscript/manuscript.html",
     "title": "Gender Distribution of Authors in Music Psychology",
     "section": "",
-    "text": "Equality – Why Should We Care?\n\nLack of equity impacts\nproductivity\ninnovation\njob satisfaction\n\nAcademia has acknowledged challenges in gender equity\n\nwomen less present in positions of power (e.g. 30% UK profs)\npay gap is wider in academia (16%) than in other sectors (9%)\nwomen represent fewer than 30% authorships globally\n\nSon & Bell (2022) Scientific authorship by gender\nShah et al. (2021) Gender parity in scientific authorship in a National Institute for Health Research Biomedical Research Centre: a bibliometric analysis\nRock et al. (2021) Quantifying the Gender Gap in Authorship in Herpetology\nNi et al. (2021) The gendered nature of authorship\nSee González-Alvarez & Sos-Peña (2020) for a baseline from other disciplines:\n\nHard Sciences (N=119,592) 0.148\nBio and Social Sciences (N=262,122) 0.433\nPsychology (N=90,067) 0.452\n\nWhat is the situation in music psychology?"
+    "text": "Equality – Why Should We Care?\n\nLack of equity impacts:\nproductivity\ninnovation\njob satisfaction\n\nAcademia has acknowledged serious challenges in gender equity\n\nwomen less present in positions of power (e.g. 30% UK profs)\npay gap is wider in academia (16%) than in other sectors (9%)\nwomen represent fewer than 30% authorships globally\n\nWeave these studies into the narrative:\n\nSon & Bell (2022) Scientific authorship by gender\nShah et al. (2021) showed how far off is the gender parity in scientific authorship using a bibliometric analysis\nRock et al. (2021) quantified the gender gap in authorship in herpetology, showing that ….\nNi et al. (2021) presented an overview of the gendered nature of authorship\n\nSee González-Alvarez & Sos-Peña (2020) for a baseline from other disciplines:\n\nHard Sciences (N=119,592) = 0.148\nBio and Social Sciences (N=262,122) = 0.433\nPsychology (N=90,067) = 0.452\n\nWhat is the situation in music psychology?\n\n\nOur aim is to find out what is the gender distribution in the specialist journals of music psychology. What is the proportion of first authors in the published papers in the last 10 years? What is the situation with all authors and senior authors? Are there specific trends in terms of countries of the affiliations, topics, or time?"
   },
   {
     "objectID": "manuscript/manuscript.html#materials",
@@ -53,7 +53,7 @@
     "href": "manuscript/manuscript.html#materials-and-analyses",
     "title": "Gender Distribution of Authors in Music Psychology",
     "section": "Materials and analyses",
-    "text": "Materials and analyses\n\nDataset description. All papers between 2010 and 2022 from specialist journals used in (Jakubowski et al., 2025).\nInitial attribution of genders based on first names. Automatic attribution of gender based on first name databases (Gender API) + manual fixes\nQuality control.\nManual corrections."
+    "text": "Materials and analyses\n\nDataset description. All papers between 2010 and 2022 from specialist journals used in (Jakubowski et al., 2025).\nInitial attribution of genders based on first names. Automatic attribution of gender based on first name databases (Gender API) + manual fixes\nQuality control.\nManual corrections.\nExpansion into all other first names (requires getting more data and repeating the process above)."
   },
   {
     "objectID": "analysis/analysis.html",
@@ -68,5 +68,47 @@
     "title": "Gender in Music Psychology",
     "section": "",
     "text": "empty at the moment\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "analysis/process.html",
+    "href": "analysis/process.html",
+    "title": "Analyse gender in music psychology",
+    "section": "",
+    "text": "T. Eerola, 19/3/2025\nGender analysis of the WEIRD data (Jakubowski et al., 2025).\n\n\n\n\n\n\nfull_process &lt;- FALSE\nif(full_process==TRUE){\n    d &lt;- read.csv('../data/WEIRD part cleaned Feb24.csv',header = TRUE)\n    source('scripts/preprocess.R')      # Routine to process the WEIRD dataset\n    source('scripts/gender_analysis.R') # creates enriched dataset\n}\n#### Get processed data --------------------\nif(full_process==FALSE){\n    d &lt;- readRDS('../data/enriched_dataset.rds')\n}\n\nD &lt;- dplyr::filter(d,study_id=='study1') # 1360 articles\nprint(paste(\"number of unique studies:\",nrow(D)))\n\n[1] \"number of unique studies: 1360\"\n\n\n\n\n\nThis needs to be done.\n\nThe author first names for all authors (except for the 1st author) are not in the WEIRD data frame, so these needs to be retrieved.\nThen the gender attribution process needs to be done with some manual checking.\nAggregate with the present (first author) data\n\n\n\n\nThis is now only first author data.\nsource('scripts/summarise_gender.R') #\nCheck for errors\n\nTop 5 names.\n\n\nfirstn\nn\n\n\n\n\nlaura\n16\n\n\nandrea\n14\n\n\namanda\n11\n\n\njennifer\n11\n\n\nmaria\n11\n\n\n\n\nBottom 5 names.\n\n\nfirstn\nn\n\n\n\n\nDiana\n1\n\n\nFrancesca\n1\n\n\nabbey\n1\n\n\nadela\n1\n\n\nagnes\n1\n\n\n\n\n\n\n\n\n\n\n\ngender\nN\nPercent\n\n\n\n\nfemale\n735\n54.04\n\n\nmale\n625\n45.96\n\n\nAll\n1360\n100.00\n\n\n\nSummaries\n\n\n\n\n\n\n\n\n\nFirstAuthorCountry_WEOG\ngender\nN\nPercent\n\n\n\n\nNon-WEOG\nfemale\n67\n4.93\n\n\n\nmale\n72\n5.29\n\n\nWEOG\nfemale\n668\n49.12\n\n\n\nmale\n553\n40.66\n\n\n\nAll\n1360\n100.00\n\n\n\n\n\n\nThis is now only first author data.\n\nsource('scripts/visualise_gender.R') # creates a figure\n\nTop countries \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nContinents \n\n\nLinking to GEOS 3.11.0, GDAL 3.5.3, PROJ 9.1.0; sf_use_s2() is TRUE\n\n\n\n\n\n\n\n\n\nAmericas \n\n\n\n\n\n\n\n\n\nAsia \n\n\n\n\n\n\n\n\n\nPsychology \n\n\n\n\n\n\n\n\nsource('scripts/visualise_gender_trends.R') # creates a figure\n\n\n\n\n\n\n\nsource('scripts/visualise_names.R')  # creates a figure\n\nScale for size is already present.\nAdding another scale for size, which will replace the existing scale."
+  },
+  {
+    "objectID": "analysis/process.html#load-and-preprocess-data",
+    "href": "analysis/process.html#load-and-preprocess-data",
+    "title": "Analyse gender in music psychology",
+    "section": "",
+    "text": "full_process &lt;- FALSE\nif(full_process==TRUE){\n    d &lt;- read.csv('../data/WEIRD part cleaned Feb24.csv',header = TRUE)\n    source('scripts/preprocess.R')      # Routine to process the WEIRD dataset\n    source('scripts/gender_analysis.R') # creates enriched dataset\n}\n#### Get processed data --------------------\nif(full_process==FALSE){\n    d &lt;- readRDS('../data/enriched_dataset.rds')\n}\n\nD &lt;- dplyr::filter(d,study_id=='study1') # 1360 articles\nprint(paste(\"number of unique studies:\",nrow(D)))\n\n[1] \"number of unique studies: 1360\""
+  },
+  {
+    "objectID": "analysis/process.html#deal-with-other-authors-non-first-authors",
+    "href": "analysis/process.html#deal-with-other-authors-non-first-authors",
+    "title": "Analyse gender in music psychology",
+    "section": "",
+    "text": "This needs to be done.\n\nThe author first names for all authors (except for the 1st author) are not in the WEIRD data frame, so these needs to be retrieved.\nThen the gender attribution process needs to be done with some manual checking.\nAggregate with the present (first author) data"
+  },
+  {
+    "objectID": "analysis/process.html#summarise",
+    "href": "analysis/process.html#summarise",
+    "title": "Analyse gender in music psychology",
+    "section": "",
+    "text": "This is now only first author data.\nsource('scripts/summarise_gender.R') #\nCheck for errors\n\nTop 5 names.\n\n\nfirstn\nn\n\n\n\n\nlaura\n16\n\n\nandrea\n14\n\n\namanda\n11\n\n\njennifer\n11\n\n\nmaria\n11\n\n\n\n\nBottom 5 names.\n\n\nfirstn\nn\n\n\n\n\nDiana\n1\n\n\nFrancesca\n1\n\n\nabbey\n1\n\n\nadela\n1\n\n\nagnes\n1\n\n\n\n\n\n\n\n\n\n\n\ngender\nN\nPercent\n\n\n\n\nfemale\n735\n54.04\n\n\nmale\n625\n45.96\n\n\nAll\n1360\n100.00\n\n\n\nSummaries\n\n\n\n\n\n\n\n\n\nFirstAuthorCountry_WEOG\ngender\nN\nPercent\n\n\n\n\nNon-WEOG\nfemale\n67\n4.93\n\n\n\nmale\n72\n5.29\n\n\nWEOG\nfemale\n668\n49.12\n\n\n\nmale\n553\n40.66\n\n\n\nAll\n1360\n100.00"
+  },
+  {
+    "objectID": "analysis/process.html#visualise",
+    "href": "analysis/process.html#visualise",
+    "title": "Analyse gender in music psychology",
+    "section": "",
+    "text": "This is now only first author data.\n\nsource('scripts/visualise_gender.R') # creates a figure\n\nTop countries \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nContinents \n\n\nLinking to GEOS 3.11.0, GDAL 3.5.3, PROJ 9.1.0; sf_use_s2() is TRUE\n\n\n\n\n\n\n\n\n\nAmericas \n\n\n\n\n\n\n\n\n\nAsia \n\n\n\n\n\n\n\n\n\nPsychology \n\n\n\n\n\n\n\n\nsource('scripts/visualise_gender_trends.R') # creates a figure\n\n\n\n\n\n\n\nsource('scripts/visualise_names.R')  # creates a figure\n\nScale for size is already present.\nAdding another scale for size, which will replace the existing scale."
+  },
+  {
+    "objectID": "manuscript/manuscript.html#aims",
+    "href": "manuscript/manuscript.html#aims",
+    "title": "Gender Distribution of Authors in Music Psychology",
+    "section": "",
+    "text": "Our aim is to find out what is the gender distribution in the specialist journals of music psychology. What is the proportion of first authors in the published papers in the last 10 years? What is the situation with all authors and senior authors? Are there specific trends in terms of countries of the affiliations, topics, or time?"
   }
 ]

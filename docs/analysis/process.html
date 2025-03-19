@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>gender_attribution – Gender in Music Psychology</title>
+<title>process – Gender in Music Psychology</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -110,9 +144,295 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>empty at the moment</p>
+<section id="analyse-gender-in-music-psychology" class="level1">
+<h1>Analyse gender in music psychology</h1>
+<p>T. Eerola, 19/3/2025</p>
+<p>Gender analysis of the WEIRD data (Jakubowski et al., 2025).</p>
+<section id="required-libraries" class="level2">
+<h2 class="anchored" data-anchor-id="required-libraries">Required libraries</h2>
+</section>
+<section id="load-and-preprocess-data" class="level2">
+<h2 class="anchored" data-anchor-id="load-and-preprocess-data">Load and preprocess data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>full_process <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(full_process<span class="sc">==</span><span class="cn">TRUE</span>){</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    d <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">'../data/WEIRD part cleaned Feb24.csv'</span>,<span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">source</span>(<span class="st">'scripts/preprocess.R'</span>)      <span class="co"># Routine to process the WEIRD dataset</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">source</span>(<span class="st">'scripts/gender_analysis.R'</span>) <span class="co"># creates enriched dataset</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="do">#### Get processed data --------------------</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(full_process<span class="sc">==</span><span class="cn">FALSE</span>){</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    d <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">'../data/enriched_dataset.rds'</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>D <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(d,study_id<span class="sc">==</span><span class="st">'study1'</span>) <span class="co"># 1360 articles</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"number of unique studies:"</span>,<span class="fu">nrow</span>(D)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "number of unique studies: 1360"</code></pre>
+</div>
+</div>
+</section>
+<section id="deal-with-other-authors-non-first-authors" class="level2">
+<h2 class="anchored" data-anchor-id="deal-with-other-authors-non-first-authors">Deal with other authors (non-first authors)</h2>
+<p>This needs to be done.</p>
+<ol type="1">
+<li><p>The author first names for all authors (except for the 1st author) are not in the WEIRD data frame, so these needs to be retrieved.</p></li>
+<li><p>Then the gender attribution process needs to be done with some manual checking.</p></li>
+<li><p>Aggregate with the present (first author) data</p></li>
+</ol>
+</section>
+<section id="summarise" class="level2">
+<h2 class="anchored" data-anchor-id="summarise">Summarise</h2>
+<p>This is now only first author data.</p>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">'scripts/summarise_gender.R'</span>) <span class="co">#</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Check for errors</p>
+<table class="caption-top table">
+<caption>Top 5 names.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">firstn</th>
+<th style="text-align: right;">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">laura</td>
+<td style="text-align: right;">16</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">andrea</td>
+<td style="text-align: right;">14</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">amanda</td>
+<td style="text-align: right;">11</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">jennifer</td>
+<td style="text-align: right;">11</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">maria</td>
+<td style="text-align: right;">11</td>
+</tr>
+</tbody>
+</table>
+<table class="caption-top table">
+<caption>Bottom 5 names.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">firstn</th>
+<th style="text-align: right;">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Diana</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Francesca</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">abbey</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">adela</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">agnes</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 9%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>gender</th>
+<th>N</th>
+<th>Percent</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>female</td>
+<td>735</td>
+<td>54.04</td>
+</tr>
+<tr class="even">
+<td>male</td>
+<td>625</td>
+<td>45.96</td>
+</tr>
+<tr class="odd">
+<td>All</td>
+<td>1360</td>
+<td>100.00</td>
+</tr>
+</tbody>
+</table>
+<p>Summaries</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 36%">
+<col style="width: 12%">
+<col style="width: 9%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>FirstAuthorCountry_WEOG</th>
+<th>gender</th>
+<th>N</th>
+<th>Percent</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Non-WEOG</td>
+<td>female</td>
+<td>67</td>
+<td>4.93</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>male</td>
+<td>72</td>
+<td>5.29</td>
+</tr>
+<tr class="odd">
+<td>WEOG</td>
+<td>female</td>
+<td>668</td>
+<td>49.12</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>male</td>
+<td>553</td>
+<td>40.66</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>All</td>
+<td>1360</td>
+<td>100.00</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="visualise" class="level2">
+<h2 class="anchored" data-anchor-id="visualise">Visualise</h2>
+<p>This is now only first author data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">'scripts/visualise_gender.R'</span>) <span class="co"># creates a figure</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Top countries </code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="process_files/figure-html/visualise-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="process_files/figure-html/visualise-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="process_files/figure-html/visualise-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="process_files/figure-html/visualise-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Continents </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Linking to GEOS 3.11.0, GDAL 3.5.3, PROJ 9.1.0; sf_use_s2() is TRUE</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="process_files/figure-html/visualise-5.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Americas </code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="process_files/figure-html/visualise-6.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Asia </code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="process_files/figure-html/visualise-7.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Psychology </code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="process_files/figure-html/visualise-8.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">'scripts/visualise_gender_trends.R'</span>) <span class="co"># creates a figure</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="process_files/figure-html/visualise-9.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">'scripts/visualise_names.R'</span>)  <span class="co"># creates a figure</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Scale for size is already present.
+Adding another scale for size, which will replace the existing scale.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="process_files/figure-html/visualise-10.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
+</section>
+</section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
