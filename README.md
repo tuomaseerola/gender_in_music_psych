@@ -1,9 +1,6 @@
-# gender_in_music_psych
+# Gender in music psychology
 
-Gender in authors in music psychology
-
-What is the gender distribution is music psychology specialist journals?
-
+What is the gender distribution is music psychology?
 
 The public-facing version of the repository is available at
 [https://tuomaseerola.github.io/gender_in_music_psych/](https://tuomaseerola.github.io/gender_in_music_psych/)
@@ -11,16 +8,15 @@ The public-facing version of the repository is available at
 
 ## Data
 
-Data comes from this source and ....
-
+Data comes from this source and ...
 
 ## Preprocessing
 
-To attribute the gender for the authors, we used gender API [gender_attribution.qmd](gender_attribution.qmd). 
+To attribute the gender for the authors, we used gender API [analysis/process.qmd](analysis/process.qmd). 
 
 ## Analysis
 
-Data analysis is covered in [analysis/analysis.qmd](analysis/analysis.qmd) document.
+Data analysis is covered in [analysis/process.qmd](analysis/process.qmd) document.
 
 ## Manuscript
 
