@@ -1,6 +1,6 @@
 # Gender in music psychology
 
-What is the gender distribution is music psychology?
+What is the gender distribution of publishing authors is music psychology? Has there been a change over the years in authorship positions (first, coauthor, last) and how is this discipline compared to for instance to psychology?
 
 The public-facing version of the repository is available at
 [https://tuomaseerola.github.io/gender_in_music_psych/](https://tuomaseerola.github.io/gender_in_music_psych/)
@@ -8,15 +8,11 @@ The public-facing version of the repository is available at
 
 ## Data
 
-Data comes from this source and ...
-
-## Preprocessing
-
-To attribute the gender for the authors, we used gender API [analysis/process.qmd](analysis/process.qmd). 
+Data comes from this Scopus with the specific syntax: `SRCTITLE ( JOURNAL NAME ) AND PUBYEAR > 1999`. We focussed on 5 highest ranked journals in Music Psychology, namely _Musicae Scientiae_, _Psychology of Music_, _Music Perception_, _Journal of New Music Research_, and _Music & Science_. To attribute the gender for the authors, we used genderize API from the extracted first names. We manually checked a subset of the data and attributed some of those names that the API could not resolve. 
 
 ## Analysis
 
-Data analysis is covered in [analysis/process.qmd](analysis/process.qmd) document.
+Data analysis is covered in [analysis.qmd](analysis.qmd) document.
 
 ## Manuscript
 
