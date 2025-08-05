@@ -4,14 +4,14 @@
     "href": "index.html",
     "title": "Gender in music psychology",
     "section": "",
-    "text": "What is the gender distribution of publishing authors is music psychology? Has there been a change over the years in authorship positions (first, coauthor, last) and how is this discipline compared to for instance to psychology?\nThe public-facing version of the repository is available at https://tuomaseerola.github.io/gender_in_music_psych/\n\n\nData comes from this Scopus with the specific syntax: SRCTITLE ( JOURNAL NAME ) AND PUBYEAR &gt; 1999. We focussed on 5 highest ranked journals in Music Psychology, namely Musicae Scientiae, Psychology of Music, Music Perception, Journal of New Music Research, and Music & Science. To attribute the gender for the authors, we used genderize API from the extracted first names. We manually checked a subset of the data and attributed some of those names that the API could not resolve.\n\n\n\nData analysis is covered in analysis.qmd document.\n\n\n\nThe study report is available manuscript/manuscript.qmd document."
+    "text": "What is the gender distribution of publishing authors is music psychology? Has there been a change over the years in authorship positions (first, coauthor, last) and how is this discipline compared to for instance to psychology?\nThe public-facing version of the repository is available at https://tuomaseerola.github.io/gender_in_music_psych/\n\n\nData comes from this Scopus with the specific syntax: SRCTITLE ( JOURNAL NAME ) AND PUBYEAR &gt; 1999. We focussed on 5 journals in Music Psychology, namely Musicae Scientiae, Psychology of Music, Music Perception, Journal of New Music Research, and Music & Science. To attribute the gender for the authors, we used genderize API. The details of the process are given in the manuscript.\n\n\n\nData analysis steps are covered in the analysis.qmd document.\n\n\n\nThe study report is available at manuscript/manuscript.qmd document."
   },
   {
     "objectID": "index.html#data",
     "href": "index.html#data",
     "title": "Gender in music psychology",
     "section": "",
-    "text": "Data comes from this Scopus with the specific syntax: SRCTITLE ( JOURNAL NAME ) AND PUBYEAR &gt; 1999. We focussed on 5 highest ranked journals in Music Psychology, namely Musicae Scientiae, Psychology of Music, Music Perception, Journal of New Music Research, and Music & Science. To attribute the gender for the authors, we used genderize API from the extracted first names. We manually checked a subset of the data and attributed some of those names that the API could not resolve."
+    "text": "Data comes from this Scopus with the specific syntax: SRCTITLE ( JOURNAL NAME ) AND PUBYEAR &gt; 1999. We focussed on 5 journals in Music Psychology, namely Musicae Scientiae, Psychology of Music, Music Perception, Journal of New Music Research, and Music & Science. To attribute the gender for the authors, we used genderize API. The details of the process are given in the manuscript."
   },
   {
     "objectID": "index.html#preprocessing",
@@ -25,14 +25,14 @@
     "href": "index.html#analysis",
     "title": "Gender in music psychology",
     "section": "",
-    "text": "Data analysis is covered in analysis.qmd document."
+    "text": "Data analysis steps are covered in the analysis.qmd document."
   },
   {
     "objectID": "index.html#manuscript",
     "href": "index.html#manuscript",
     "title": "Gender in music psychology",
     "section": "",
-    "text": "The study report is available manuscript/manuscript.qmd document."
+    "text": "The study report is available at manuscript/manuscript.qmd document."
   },
   {
     "objectID": "manuscript/manuscript.html",

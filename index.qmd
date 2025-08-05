@@ -8,13 +8,13 @@ The public-facing version of the repository is available at
 
 ## Data
 
-Data comes from this Scopus with the specific syntax: `SRCTITLE ( JOURNAL NAME ) AND PUBYEAR > 1999`. We focussed on 5 highest ranked journals in Music Psychology, namely _Musicae Scientiae_, _Psychology of Music_, _Music Perception_, _Journal of New Music Research_, and _Music & Science_. To attribute the gender for the authors, we used genderize API from the extracted first names. We manually checked a subset of the data and attributed some of those names that the API could not resolve. 
+Data comes from this Scopus with the specific syntax: `SRCTITLE ( JOURNAL NAME ) AND PUBYEAR > 1999`. We focussed on 5 journals in Music Psychology, namely _Musicae Scientiae_, _Psychology of Music_, _Music Perception_, _Journal of New Music Research_, and _Music & Science_. To attribute the gender for the authors, we used [genderize API](https://genderize.io/). The details of the process are given in the manuscript.
 
 ## Analysis
 
-Data analysis is covered in [analysis.qmd](analysis.qmd) document.
+Data analysis steps are covered in the [analysis.qmd](analysis.qmd) document.
 
 ## Manuscript
 
-The study report is available [manuscript/manuscript.qmd](manuscript/manuscript.qmd) document.
+The study report is available at [manuscript/manuscript.qmd](manuscript/manuscript.qmd) document.
 
