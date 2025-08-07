@@ -4,37 +4,72 @@ shorttitle        : "Gender in Music Psychology"
 author: 
   - name          : "Tuomas Eerola"
     affiliation   : "1"
-    corresponding : yes    # Define only one corresponding author
-    address       : "Palace Green, Department of Music, Durham University, DH1 3RL Durham, United Kingdom"
-    email         : "tuomas.eerola@durham.ac.uk"
+    corresponding: true
+    email: tuomas.eerola@durham.ac.uk
+    url: https://tuomaseerola.github.io/
+    roles:
+      - conceptualization
+      - methodology
+      - formal Analysis
+      - writing
+    affiliations:
+      - id: id1
+        name: "Durham University"
+        department: Department of Music
+        address: Palace Green
+        city: Durham
+        country: United Kingdom
+        postal-code: DH1 3DA
   - name          : "Anna Czepiel"
-    affiliation   : "2"
-    address       : "Department of Psychology, University of Toronto, Mississauga, Canada"
-    email         : "a.czepiel@utoronto.ca"
-affiliation:
-  - id            : "1"
-    institution   : "Department of Music, Durham University"
-  - id            : "2"
-    institution   : "Department of Psychology, University of Toronto"
-
-author_note: |
-  Tuomas Eerola is at the Department of Music, Durham University, UK.
-  Anna Czepiel is at the Department of Psychology, University of Toronto, Canada.
-
-abstract: "This study examines the gender distribution of the authors in music psychology. N=XXXX published papers between years 2000 to 2025 from 5 journals were ..."  
+    roles:
+      - data curation
+      - formal analysis
+      - writing
+    affiliations   :
+      - id: id2
+        name       : "Department of Psychology, University of Toronto"
+        city: Toronto
+        country: Canada
+author_note:
+      data-sharing: "https://tuomaseerola.github.io/gender_in_music_psych"
+abstract: "This study examines the gender distribution of the authors in music psychology."
 keywords          : "gender, transparency, music psychology, open science, meta-research"
-wordcount         : "5555"
-figsintext        : yes
-figurelist        : no
-tablelist         : no
-footnotelist      : no
-lineno            : no
-mask              : no
-csl: apa7.csl
-class             : "man"
+impact-statement: ~
+floatsintext: true
+# Numbered lines (.pdf and .docx only)
+numbered-lines: false
+# File with references
 bibliography: references.bib
+# Suppress title page
+suppress-title-page: false
+# Link citations to references
+link-citations: true
+# Masks references that appear in the masked-citations list
+mask: false
+# If true, adds today's date below author affiliations. If text, can be any value.
+# This is not standard APA format, but it is convenient.
+# Works with docx, html, and typst. 
+draft-date: false
+# Language options. See https://quarto.org/docs/authoring/language.html
+lang: en
+language:
+  citation-last-author-separator: "and"
+  citation-masked-author: "Masked Citation"
+  citation-masked-date: "n.d."
+  citation-masked-title: "Masked Title"
+  email: "Email"
+  title-block-author-note: "Author Note"
+  title-block-correspondence-note: "Correspondence concerning this article should be addressed to"
+  title-block-role-introduction: "Author roles were classified using the Contributor Role Taxonomy (CRediT; https://credit.niso.org/) as follows:"
+  title-impact-statement: "Impact Statement"
+  references-meta-analysis: "References marked with an asterisk indicate studies included in the meta-analysis."
 format:
-  html: default
+#  apaquarto-docx: default
+#  apaquarto-html: default
+  apaquarto-typst: 
+    keep-typ: true
+    list-of-figures: false
+    list-of-tables: false
 ---
 
 ```{r global options, include = FALSE}
