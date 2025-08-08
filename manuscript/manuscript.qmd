@@ -201,6 +201,8 @@ Table: Female author odds ratios across continents.
 
 # Conclusions
 
+The analysis of gender distributions in the five most prominent music psychology journals over the last 25 years presented a rich and evolving history of gender distribution in various authorship roles. While overall women hold smaller number of authorship overall (xx%),  
+
 - Encouraging overall
 
 - Compare with sub-disciplines of psychology [@gonzalez2020women] Psychology: First authors (N=33,631)
