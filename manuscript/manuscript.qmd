@@ -47,6 +47,9 @@ here::i_am("manuscript/manuscript.qmd")
 
 In recent years, meta-scientific attention has increasingly turned toward music psychology, with a focus on how WEIRD [@jakubowski2024] and transparent [@eerola2023transparency] the discipline is. In this study, we examine gender equality in authorship as an indicator of how equitably gender is represented within the field. Disparities in gender distribution may signal structural barriers and disciplinary cultures that constrain the diversity of contributors and hinder optimal knowledge production [@ni2021gendered]. Authorship visibility is also critical for academic career progression, influencing recognition, funding, and advancement opportunities. Establishing a clear understanding of gender representation in music psychology is therefore essential for supporting a more inclusive and sustainable academic community. Previous studies across various disciplines—including psychology—have consistently revealed persistent gender inequalities in authorship, though the extent of these disparities varies by field [@son2022scientific; @shah2021gender; @rock2021quantifying; @gonzalez2020women].
 
+Academia suffers from issues regarding equity. A lack equity impacts productivity, innovation, and job satisfaction in the workplace, which hugely impact academic progress. One aspect of this inequity is that gender. Women are more at a disadvantage than men, with evidence suggesting that women are less present in positions of power, a pay gap remains between men and women in academia (16%) which is wider than other sectors (9%). In a “publish or perish” culture of science and academia (Kiai, 2019), one crucial aspect to focus on is authorship. The number and quality (e.g., journal reputation) of authorships an individual determines crucial career development such as grant funding and future (permanent) positions. 
+
+
 Equality – Why Should We Care?
 
 - Lack of equity impacts: 
