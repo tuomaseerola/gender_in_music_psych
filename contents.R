@@ -20,6 +20,7 @@ rm(list = ls())
 source('scripts/load_scopus_datasets.R') # Creates full_names dataset
 source('scripts/attribute_country.R') # Add country affiliations
 source('scripts/attribute_gender.R') # Adds gender attributions (precalcutaed with API)
+source('scripts/name_gender_fixes.R') # Fixes the gender attribution of some names manually 
 source('scripts/create_keys.R') # Add keys for authors and study+author
 source('scripts/clean_citations_and_OA.R') # Process citations and OA status
 source('scripts/attribute_gender_diagnostics.R') # Calculate how reliable is the attribution

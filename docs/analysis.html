@@ -128,6 +128,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Gender in music psychology</span></a>
   </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/tuomaseerola/gender_in_music_psych/"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -203,7 +208,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 <p>Entries in the author-expanded database after filtering books/unattributed: 9066</p>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">'scripts/create_keys.R'</span>) <span class="co"># Add keys for authors and study+author</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Unique authors count: 5312 Unique countries count: 63</p>
+<p>Single authors count: 778 Single + last authors count: 3373 Unique authors count: 5312 Unique countries count: 63</p>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">'scripts/clean_citations_and_OA.R'</span>) <span class="co"># Process citations and OA status</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">'scripts/attribute_gender_diagnostics.R'</span>) <span class="co"># Process citations and OA status</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code>
@@ -410,34 +415,36 @@ Attaching package: 'modelsummary'</code></pre>
 <table class="caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
+<th style="text-align: left;">name</th>
 <th style="text-align: right;">Odds_ratio</th>
-<th style="text-align: right;">CI</th>
 <th style="text-align: right;">CI_low</th>
 <th style="text-align: right;">CI_high</th>
-<th style="text-align: left;">name</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;">1.3208911</td>
-<td style="text-align: right;">0.95</td>
-<td style="text-align: right;">1.2116236</td>
-<td style="text-align: right;">1.4400127</td>
-<td style="text-align: left;">First</td>
+<td style="text-align: left;">Single</td>
+<td style="text-align: right;">1.1022995</td>
+<td style="text-align: right;">0.9480282</td>
+<td style="text-align: right;">1.2816751</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">0.9865031</td>
-<td style="text-align: right;">0.95</td>
-<td style="text-align: right;">0.9030958</td>
-<td style="text-align: right;">1.0776138</td>
-<td style="text-align: left;">Coauthor</td>
+<td style="text-align: left;">First</td>
+<td style="text-align: right;">1.4237952</td>
+<td style="text-align: right;">1.2987228</td>
+<td style="text-align: right;">1.5609126</td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;">Coauthor</td>
+<td style="text-align: right;">0.9865031</td>
+<td style="text-align: right;">0.9030958</td>
+<td style="text-align: right;">1.0776138</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Last</td>
 <td style="text-align: right;">0.7338588</td>
-<td style="text-align: right;">0.95</td>
 <td style="text-align: right;">0.6678541</td>
 <td style="text-align: right;">0.8063867</td>
-<td style="text-align: left;">Last</td>
 </tr>
 </tbody>
 </table>
@@ -566,188 +573,6 @@ Attaching package: 'modelsummary'</code></pre>
 <section id="geographical" class="level2">
 <h2 class="anchored" data-anchor-id="geographical">Geographical</h2>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">'scripts/country_table.R'</span>) <span class="co"># OK</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<table class="caption-top table">
-<caption>Make this into two-column table in future.</caption>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Country</th>
-<th style="text-align: right;">N</th>
-<th style="text-align: right;">Odds_ratio</th>
-<th style="text-align: right;">CI_low</th>
-<th style="text-align: right;">CI_high</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">United Kingdom</td>
-<td style="text-align: right;">1470</td>
-<td style="text-align: right;">1.19</td>
-<td style="text-align: right;">1.06</td>
-<td style="text-align: right;">1.33</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">United States</td>
-<td style="text-align: right;">1465</td>
-<td style="text-align: right;">1.06</td>
-<td style="text-align: right;">0.94</td>
-<td style="text-align: right;">1.19</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Germany</td>
-<td style="text-align: right;">780</td>
-<td style="text-align: right;">0.72</td>
-<td style="text-align: right;">0.62</td>
-<td style="text-align: right;">0.84</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Australia</td>
-<td style="text-align: right;">718</td>
-<td style="text-align: right;">1.69</td>
-<td style="text-align: right;">1.45</td>
-<td style="text-align: right;">1.97</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Canada</td>
-<td style="text-align: right;">669</td>
-<td style="text-align: right;">1.30</td>
-<td style="text-align: right;">1.11</td>
-<td style="text-align: right;">1.52</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Finland</td>
-<td style="text-align: right;">369</td>
-<td style="text-align: right;">1.14</td>
-<td style="text-align: right;">0.93</td>
-<td style="text-align: right;">1.41</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">France</td>
-<td style="text-align: right;">317</td>
-<td style="text-align: right;">0.77</td>
-<td style="text-align: right;">0.61</td>
-<td style="text-align: right;">0.97</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Spain</td>
-<td style="text-align: right;">275</td>
-<td style="text-align: right;">0.90</td>
-<td style="text-align: right;">0.70</td>
-<td style="text-align: right;">1.15</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Italy</td>
-<td style="text-align: right;">223</td>
-<td style="text-align: right;">0.95</td>
-<td style="text-align: right;">0.73</td>
-<td style="text-align: right;">1.25</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Netherlands</td>
-<td style="text-align: right;">204</td>
-<td style="text-align: right;">0.92</td>
-<td style="text-align: right;">0.70</td>
-<td style="text-align: right;">1.23</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Belgium</td>
-<td style="text-align: right;">187</td>
-<td style="text-align: right;">0.49</td>
-<td style="text-align: right;">0.35</td>
-<td style="text-align: right;">0.68</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">China</td>
-<td style="text-align: right;">180</td>
-<td style="text-align: right;">1.42</td>
-<td style="text-align: right;">1.05</td>
-<td style="text-align: right;">1.90</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Austria</td>
-<td style="text-align: right;">179</td>
-<td style="text-align: right;">0.61</td>
-<td style="text-align: right;">0.45</td>
-<td style="text-align: right;">0.85</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Sweden</td>
-<td style="text-align: right;">172</td>
-<td style="text-align: right;">0.52</td>
-<td style="text-align: right;">0.37</td>
-<td style="text-align: right;">0.73</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Norway</td>
-<td style="text-align: right;">171</td>
-<td style="text-align: right;">0.83</td>
-<td style="text-align: right;">0.61</td>
-<td style="text-align: right;">1.14</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Israel</td>
-<td style="text-align: right;">158</td>
-<td style="text-align: right;">1.21</td>
-<td style="text-align: right;">0.88</td>
-<td style="text-align: right;">1.66</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Japan</td>
-<td style="text-align: right;">156</td>
-<td style="text-align: right;">0.42</td>
-<td style="text-align: right;">0.29</td>
-<td style="text-align: right;">0.62</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Brazil</td>
-<td style="text-align: right;">138</td>
-<td style="text-align: right;">0.84</td>
-<td style="text-align: right;">0.59</td>
-<td style="text-align: right;">1.19</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Switzerland</td>
-<td style="text-align: right;">134</td>
-<td style="text-align: right;">0.94</td>
-<td style="text-align: right;">0.66</td>
-<td style="text-align: right;">1.33</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">India</td>
-<td style="text-align: right;">105</td>
-<td style="text-align: right;">0.81</td>
-<td style="text-align: right;">0.54</td>
-<td style="text-align: right;">1.21</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Portugal</td>
-<td style="text-align: right;">103</td>
-<td style="text-align: right;">1.03</td>
-<td style="text-align: right;">0.69</td>
-<td style="text-align: right;">1.53</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Denmark</td>
-<td style="text-align: right;">95</td>
-<td style="text-align: right;">0.66</td>
-<td style="text-align: right;">0.43</td>
-<td style="text-align: right;">1.02</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Turkey</td>
-<td style="text-align: right;">83</td>
-<td style="text-align: right;">0.58</td>
-<td style="text-align: right;">0.36</td>
-<td style="text-align: right;">0.94</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Poland</td>
-<td style="text-align: right;">65</td>
-<td style="text-align: right;">1.02</td>
-<td style="text-align: right;">0.62</td>
-<td style="text-align: right;">1.67</td>
-</tr>
-</tbody>
-</table>
 <p><img src="analysis_files/figure-html/geographical-1.png" class="img-fluid" width="672"></p>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">'scripts/visualise_gender.R'</span>) <span class="co"># OK</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Top countries <img src="analysis_files/figure-html/geographical-2.png" class="img-fluid" width="672"><img src="analysis_files/figure-html/geographical-3.png" class="img-fluid" width="672"><img src="analysis_files/figure-html/geographical-4.png" class="img-fluid" width="672"></p>
@@ -801,7 +626,6 @@ Attaching package: 'modelsummary'</code></pre>
 </tr>
 </tbody>
 </table>
-<p>```</p>
 
 
 </section>
@@ -880,7 +704,7 @@ Attaching package: 'modelsummary'</code></pre>
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/tuomaseerola\.github\.io\/gender_in_music_psych\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

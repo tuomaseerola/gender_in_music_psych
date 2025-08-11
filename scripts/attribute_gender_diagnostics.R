@@ -56,3 +56,7 @@ detach("package:modelsummary", unload=TRUE)
 #### Gender distribution of authors -----------
 dist1 <- DescTools::MultinomCI(as.numeric(table(df$Gender)),conf.level=0.95,method="sisonglaz")
 print(knitr::kable(dist1,digits=3,caption='Gender Distribution'))
+
+
+
+

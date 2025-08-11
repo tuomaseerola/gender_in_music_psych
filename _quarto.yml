@@ -7,14 +7,20 @@ website:
       - icon: github
         href: https://github.com/tuomaseerola/
   title: "Gender in Music Psychology"
+  repo-url: https://github.com/tuomaseerola/gender_in_music_psych/
+  site-url: "https://tuomaseerola.github.io/gender_in_music_psych/"
+  search: true
   navbar:
     left:
       - href: index.qmd
+      - icon: github
+        href: https://github.com/tuomaseerola/gender_in_music_psych/
+        aria-label: GitHub
   page-navigation: true
   back-to-top-navigation: true
 format:
   html:
-    theme: materia # lumen, pulse, materia, yeti, zephyr
+    theme: materia # lumen, pulse, yeti, zephyr
     css: styles.css
     toc: false
     page-layout: full

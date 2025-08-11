@@ -1,37 +1,50 @@
 # quantify_authorship.R
-
+# T. Eerola
+# 09/08/2025
+# Gender analysis of MusicPsych authors
 # Use Odds ratios to quantify the probabilities of gendered authorships.
 
-# classify order: First author
+#### Classify order: Single author ----------
+df$authortype <- 'Other'
+df$authortype[df$author_order == 1] <- 'Other'
+df$authortype[df$author_last == 1] <- 'Other'
+df$authortype[df$author_single == 1] <- 'Single' # FOCUS
+t<-table(df$authortype,df$Gender)
+or1 <- effectsize::oddsratio(t) # 1.10
+#print(or1)
+
+#### Classify order: First author ----------
 df$authortype <- 'Other'
 df$authortype[df$author_order == 1] <- 'First'
 df$authortype[df$author_last == 1] <- 'Other'
+df$authortype[df$author_single == 1] <- 'Other' # Take out single authors from first authors!
 t<-table(df$authortype,df$Gender)
-
-or1 <- effectsize::oddsratio(t) # 1.32
+or2 <- effectsize::oddsratio(t) # 1.32
 #print(or1)
 
-# classify order: Coauthor
+#### classify order: Coauthor --------------
 df$authortype <- 'Coauthor'
 df$authortype[df$author_order == 1] <- 'Other'
 df$authortype[df$author_last == 1] <- 'Other'
+df$authortype[df$author_single == 1] <- 'Other' # Take out single authors from first authors!
 t<-table(df$authortype,df$Gender)
-t
-or2 <- effectsize::oddsratio(t) # 0.99
+
+or3 <- effectsize::oddsratio(t) # 1.01
 #print(or2)
 
-# classify order: Last
+#### Classify order: Last -------------
 df$authortype <- 'Other'
 df$authortype[df$author_order == 1] <- 'Other'
 df$authortype[df$author_last == 1] <- 'Last'
+df$authortype[df$author_single == 1] <- 'Other' # Take out single authors from first authors!
 t<-table(df$authortype,df$Gender)
 t
-or3 <- effectsize::oddsratio(t) # 0.73
+or4 <- effectsize::oddsratio(t) # 0.73
 
-or <- rbind(or1,or2,or3)
-or$name<-c("First","Coauthor","Last")
+or <- rbind(or1,or2,or3,or4)
+or$name<-c("Single","First","Coauthor","Last")
+or<-dplyr::select(or,name,Odds_ratio,CI_low,CI_high)
 print(knitr::kable(or))
-
 
 #### Annually ---------
 
