@@ -47,42 +47,23 @@ here::i_am("manuscript/manuscript.qmd")
 
 In recent years, meta-scientific attention has increasingly turned toward music psychology, with a focus on how WEIRD [@jakubowski2024] and transparent [@eerola2023transparency] the discipline is. In this study, we examine gender equality in authorship as an indicator of how equitably gender is represented within the field. Disparities in gender distribution may signal structural barriers and disciplinary cultures that constrain the diversity of contributors and hinder optimal knowledge production [@ni2021gendered]. Authorship visibility is also critical for academic career progression, influencing recognition, funding, and advancement opportunities. Establishing a clear understanding of gender representation in music psychology is therefore essential for supporting a more inclusive and sustainable academic community. Previous studies across various disciplines—including psychology—have consistently revealed persistent gender inequalities in authorship, though the extent of these disparities varies by field [@son2022scientific; @shah2021gender; @rock2021quantifying; @gonzalez2020women].
 
-Academia suffers from issues regarding equity. A lack equity impacts productivity, innovation, and job satisfaction in the workplace, which hugely impact academic progress. One aspect of this inequity is that gender. Women are more at a disadvantage than men, with evidence suggesting that women are less present in positions of power, a pay gap remains between men and women in academia (16%) which is wider than other sectors (9%). In a “publish or perish” culture of science and academia (Kiai, 2019), one crucial aspect to focus on is authorship. The number and quality (e.g., journal reputation) of authorships an individual determines crucial career development such as grant funding and future (permanent) positions. 
-
-Research across several scientific disciplines that show that women tend to be less represented in authors compared to men (Banks et al., 2025; @son2022scientific]. Encouragingly, however, there is a general trend that the ratio of women to men in authorships is improving. From around 1960 to 2021, studies show a general improvement [@gonzalez2020women]; Ioannadis et al., 2023; Jemielniak & Wilamowski, 2025). However, there is evidence that this improvement is plateauing (Jemielniak & Wilamowski, 2025) and that although women are more likely to be first author, women are still generally unfairly underrepresented as the last author [@gonzalez2020women; @rock2021quantifying; @shah2021gender]. There could be several reasons for such a disparity: despite efforts to give fair credit for author contributions [@ni2021gendered], for example, using the Contributor Roles Taxonomy (CRediT) system, assigning authorships can be unclear. What counts as an authorship may also differ between academic disciplines. Women are more likely to experience authorship disagreements (Ni et al., 2021). There are general disagreements of when to decide authorship - women preferring to discuss in earlier stages, but men choosing authorship at the final stage. Another reason could also come from parenthood and parental leave, which account for about ~40% of gender gap in career advancement (Neilsen et al 2023). Importantly, there are strides to improving this, with opinion papers discussing way to improve receipt and reporting of intellectual credit (Banks et al., 2025) as well as creating equitable environments in academic science (Martinez Acosta et al., 2025). 
-
-
 Equality – Why Should We Care?
+Academia suffers from issues regarding equity. A lack equity impacts productivity, innovation, and job satisfaction in the workplace, which hugely impact academic progress. One aspect of this inequity is that gender. Women are more at a disadvantage than men, with evidence suggesting that women are less present in positions of power (e.g. 30% UK profs- REF NEEDED?), a pay gap remains between men and women in academia (16%) which is wider than other sectors (9%) (REF also needed). In a “publish or perish” culture of science and academia [@kiai2019protect], one crucial aspect to focus on is authorship. The number and quality (e.g., journal reputation) of authorships an individual determines crucial career development such as grant funding and future (permanent) positions. 
 
-- Lack of equity impacts: 
+Research across several scientific disciplines that show that women tend to be less represented in authors compared to men [@banks2025women]; @son2022scientific]. Encouragingly, however, there is a general trend that the ratio of women to men in authorships is improving. From around 1960 to 2021, studies show a general improvement [@gonzalez2020women; @ioannidis2023gender; @jemielniak2025gender]. However, there is evidence that this improvement is plateauing [@jemielniak2025gender] and that although women are more likely to be first author, women are still generally unfairly underrepresented as the last author [@gonzalez2020women; @rock2021quantifying; @shah2021gender]. There could be several reasons for such a disparity: despite efforts to give fair credit for author contributions [@ni2021gendered], for example, using the Contributor Roles Taxonomy (CRediT) system, assigning authorships can be unclear. What counts as an authorship may also differ between academic disciplines. Women are more likely to experience authorship disagreements [@ni2021gendered]. There are general disagreements of when to decide authorship - women preferring to discuss in earlier stages, but men choosing authorship at the final stage. Another reason could also come from parenthood and parental leave, which account for about ~40% of gender gap in career advancement [@nielsen2024getting]. Importantly, there are strides to improving this, with opinion papers discussing way to improve receipt and reporting of intellectual credit [@banks2025women] as well as creating equitable environments in academic science [@martinez2024comparison]. 
 
-- productivity
-- innovation
-- job satisfaction
-
-Academia has acknowledged serious challenges in gender equity
-
-- women less present in positions of power (e.g. 30% UK profs)
-- pay gap is wider in academia (16%) than in other sectors (9%)
-- women represent fewer than 30% authorships globally
-
-Weave these studies into the narrative: 
-
-- @ni2021gendered presented an overview of the gendered nature of authorship
-
-- @son2022scientific Scientific authorship by gender and they concluded that...
-
-- @shah2021gender showed how far off is the gender parity in scientific authorship using a bibliometric analysis.
-
-- @rock2021quantifying quantified the gender gap in authorship in herpetology, showing that .... (we can omit this)
 
 See @gonzalez2020women for a baseline from other disciplines:
-
 - Hard Sciences (N=119,592) = 0.148
 - Bio and Social Sciences (N=262,122) =  0.433
 - Psychology (N=90,067) =  0.452
 
+
 What is the situation in music psychology?
+To improve certain academic equity issues, it is worthwhile focusing within disciplines and seeing how more local academic communities can provide more equity. To do this, it is worth giving a snapshot of specific fields. Indeed, instead of looking broadly at journal articles in STEM, or in several different kinds of journals, it can be worthwhile giving an idea of a more specific. For example, one paper explores authorship in Herpetology, showing that male authors outnumber female, but female authorship is increasing steadily across the last decade [@rock2021quantifying]. The current paper also focuses on music psychology as a discipline: within music psychology, there are many efforts to improve the field. There have been papers that provide a snapshot of the field to provide a rough overview of the state of affairs (e.g., @anglada2019visualizing) with suggestions of future directions to improve the field. [@eerola2023transparency] showcases how Open Science practices (e.g., preregistrations, sharing research materials, data, and analysis scripts) are relatively limited, and encourage authors in the field to start implementing such practices. @jakubowski2024 explores participant samples and musical stimuli used across a wide range of experiment to give an idea of how limited or generalizable the field is, which the view to see how – as a field – we need to diversify participant samples and stimuli to gain a more realistic understanding. In a similar way to these papers, the current paper aims to give a current overview of authorship in the field of music psychology.
+
+
+
 
 ## Aims
 

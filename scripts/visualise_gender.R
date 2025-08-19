@@ -79,7 +79,7 @@ g2 <- ggplot(data = D2, aes(x = Affiliation_country, fill = Gender)) +
   xlab('') +
   ylab('N') +
   theme_linedraw(base_size = 16)
-print(g2)
+#print(g2)
 #ggsave("gender_top10_countries_normal.png", g1, bg="transparent")
 
 ### %

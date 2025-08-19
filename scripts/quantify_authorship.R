@@ -103,15 +103,36 @@ coauthor$Type<-'Co'
 last$Type<-'Last'
 
 annual<-rbind(first,coauthor,last)
+annual$Type = factor(annual$Type, levels = c('First','Co', 'Last'))
 
-fig1 <- ggplot(annual,aes(x=YearRange,y=Odds_ratio,color=Type))+
+# Create a new facet variable that group INCREASE / DECREASE of OR 
+annual <- annual %>%
+  mutate(TypeGroup = case_when(Type %in% c("Co", "Last") ~ "Co and Last",TRUE ~ Type))
+annual$TypeGroup = as.factor(annual$TypeGroup)
+annual$TypeGroup = factor(annual$TypeGroup, levels = c( "First" ,"Co and Last"))
+  
+fig1 <- ggplot(annual,aes(x=YearRange,y=Odds_ratio,color=Type,group=Type))+
+  #facet_wrap(~TypeGroup,nrow = 2)+
   geom_hline(yintercept=1, linetype="dashed", color = "black") +
   geom_point(position = position_dodge(width = 0.4))+
   geom_errorbar(aes(ymin=CI_low,ymax=CI_high),width=0.2,position = position_dodge(width = 0.4))+
+  geom_line(alpha = 0.2,position = position_dodge(width = 0.4))+
   scale_color_brewer(palette = "Set1") +
   xlab('Year range')+
   ylab('Female Authorship Odds Ratio')+
   theme_classic()
+
+# fig1 <- ggplot(annual,aes(x=YearRange,y=Odds_ratio,color=Type,group=Type))+
+#   facet_wrap(~TypeGroup,nrow = 2)+
+#   geom_hline(yintercept=1, linetype="dashed", color = "black") +
+#   geom_point(position = position_dodge(width = 0.4))+
+#   geom_errorbar(aes(ymin=CI_low,ymax=CI_high),width=0.2,position = position_dodge(width = 0.4))+
+#   geom_line(alpha = 0.2)+
+#   scale_color_brewer(palette = "Set1") +
+#   xlab('Year range')+
+#   ylab('Female Authorship Odds Ratio')+
+#   theme_classic()
+
 print(fig1)
 
 #### Average growth rate ----------
