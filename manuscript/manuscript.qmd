@@ -53,8 +53,6 @@ Research across several scientific disciplines that show that women tend to be l
 
 It is important to recognise that fields of scholarship and academic disciplines vary considerably in terms of gender distribution [@huang2020]. For example, a large survey of authors by @gonzalez2020women showed that the hard sciences (N = 119,592) had the lowest prevalence of women (14.8%), whereas in the biological and social sciences (N = 262,122) the proportion was substantially higher (43.3%). In psychology, which is perhaps the closest benchmark for the present focus on music psychology, female authors accounted for 45.2% of the sample (N = 90,067).
 
-What is the situation in music psychology?
-
 To improve certain academic equity issues, it is worthwhile focusing on our discipline and to assess the equity in music psychology. The past efforts have already provided a snapshot a rough overview of the state of affairs (e.g., @anglada2019visualizing) with suggestions of future directions to improve the field. [@eerola2023transparency] showcases how Open Science practices (e.g., preregistrations, sharing research materials, data, and analysis scripts) are relatively limited, and encourage authors in the field to start implementing such practices. @jakubowski2024 explores participant samples and musical stimuli used across a wide range of experiment to give an idea of how limited or generalizable the field is, which the view to see how – as a field – we need to diversify participant samples and stimuli to gain a more realistic understanding. In a similar way to these papers, the current paper aims to give a current overview of authorship and gender patterns in the field of music psychology.
 
 
@@ -66,23 +64,6 @@ Our aim is to find out what is the gender distribution in the specialist journal
 
 ## Materials and analyses
 
-We retrieved bibliographic information for all articles published between 2000 and June 2025 from five specialist journals, resulting in 3,373 unique articles: Musicae Scientiae (N = 639), Psychology of Music (N = 1,231), Music Perception (N = 675), Journal of New Music Research (N = 563), and Music & Science (N = 265). These journals have also been used in previous meta-science studies to characterise research practices in music psychology [@jakubowski2024].
-Author affiliations were extracted automatically and converted into country-level data. However, these were not manually verified for each entry, as affiliations are not always clearly matched to individual authors due to variations in reporting conventions, such as multiple or partial affiliations.
-
-In total, the dataset included 9,066 authors, of whom 5,573 were unique. Author affiliations spanned 63 countries. We also extracted citation counts and Open Access status from Scopus. Information on joint first authorship was not available in the data.
-
-Gender attribution was initially based on first names. We recognise that treating gender as a binary category is inherently problematic. Gender is a complex and multidimensional social construct. However, consistent with prior meta-science research on gender and authorship [@son2022scientific; @shah2021gender; @rock2021quantifying; @ni2021gendered; @gonzalez2020women; @wais2006], we adopt a binary classification—male and female—for analytical purposes and assume that first names allow for a reasonable, though imperfect, attribution of gender. We used the _genderize API_ [@wais2006], which predicts gender from first names and can be supplemented with country information derived from author affiliations to improve accuracy. This method resolved the gender of 89.3% of authors with a probability greater than 0.90. Only 89 names had a low attribution probability (< 0.55). Unattributed cases were then checked manually, resulting in 185 manual corrections. After this process, 32 names remained ambiguous and 27 were unknown—some likely due to data entry errors in Scopus (e.g. only initials or surnames). These 59 cases were excluded from the dataset. It is likely that the due to challenge of attributing gender correctly not all the gender attributions are correct. Although genderize.io has been shown to achieve 96.6% accuracy in a diverse multinational test database without using a country of origin information -- 98% with the information included -- [@vanhelene2024inferring], the tool underperforms in Asian names (82% accuracy). However, the small error has been previously been shown to be non-biased, i.e. showing similar number of mistakes for both genders [@sebo2021performance;@vanhelene2024inferring].
-
-We carried out manual corrections of the gender attributions where we were familiar with the author or the database had the full first name coded with initials, or the second name used as the first name. This led to `XXXX` corrections.
-
-We defined three types of authorship positions: first authorship, coauthorship, and last authorship. Coauthorship includes all positions other than first and last. These positions carry different academic prestige: first authorship is typically associated with the primary contributor, while last authorship is often held by senior researchers with established reputations [@tscharntke2007author].
-
-For the analyses, we analysed gender disparities in authorship by comparing the frequency of these authorship types between male and female authors. Our analysis focused on the female author proportion (FAP) and odds ratios comparing the likelihood of occupying each authorship position by gender.
-
-
-
-# Results
-
 ```{r}
 #| id: results
 #| eval: true
@@ -92,13 +73,31 @@ For the analyses, we analysed gender disparities in authorship by comparing the 
 source(here("scripts","load_gender_data.R"))
 ```
 
-Among all authors (N = `{r} nrow(df)`), `{r} round(nrow(dplyr::filter(df,Gender=='female'))/nrow(df),2)*100`% (N = `{r} nrow(dplyr::filter(df,Gender=='female'))`) were identified as female. To account for the unequal number of male and female authors across the dataset, we used odds ratios (ORs) to compare the relative likelihood of females occupying different authorship positions. We first investigate the authorship types across gender and then examine the author order and the overall number of coauthors in more detail.
+We retrieved bibliographic information for all articles published between 2000 and June 2025 from five specialist journals, resulting in 3,373 unique articles: Musicae Scientiae (N = 639), Psychology of Music (N = 1,231), Music Perception (N = 675), Journal of New Music Research (N = 563), and Music & Science (N = 265). These journals have also been used in previous meta-science studies to characterise research practices in music psychology [@jakubowski2024].
+Author affiliations were extracted automatically and converted into country-level data. However, these were not manually verified for each entry, as affiliations are not always clearly matched to individual authors due to variations in reporting conventions, such as multiple or partial affiliations.
+
+In total, the dataset included `{r} nrow(df)` authors, of whom `{r} length(unique(df$unique_name))` were unique. Author affiliations spanned `{r} length(unique(df$Affiliation_country_code))` countries. We also extracted citation counts and Open Access status from Scopus. Information on joint first authorship was not available in the data.
+
+Gender attribution was initially based on first names. We recognise that treating gender as a binary category is inherently problematic. Gender is a complex and multidimensional social construct. However, consistent with prior meta-science research on gender and authorship [@son2022scientific; @shah2021gender; @rock2021quantifying; @ni2021gendered; @gonzalez2020women; @wais2006], we adopt a binary classification—male and female—for analytical purposes and assume that first names allow for a reasonable, though imperfect, attribution of gender. We used the _genderize API_ [@wais2006], which predicts gender from first names and can be supplemented with country information derived from author affiliations to improve accuracy. This method resolved the gender of 89.3% of authors with a probability greater than 0.90. Only `89` names had a low attribution probability (< 0.55). Unattributed cases were then checked manually, resulting in `185` manual corrections. After this process, `32` names remained ambiguous and `27` were unknown—some likely due to data entry errors in Scopus (e.g. only initials or surnames). These `59` cases were excluded from the dataset. It is likely that the due to challenge of attributing gender correctly not all the gender attributions are correct. Although genderize.io has been shown to achieve 96.6% accuracy in a diverse multinational test database without using a country of origin information -- 98% with the information included -- it also underperforms (82% accuracy) in Asian names [@vanhelene2024inferring]. However, the error rates of these processes have been previously been shown to be non-biased, i.e. showing similar number of mistakes for both genders [@sebo2021performance;@vanhelene2024inferring].
+
+We carried out manual corrections of the gender attributions where we were familiar with the author or the database had the full first name coded with initials, or the second name used as the first name. This led to `32` corrections.
+
+We defined four types of authorship positions: single authorship, first authorship (which does not include papers with a single author), coauthorship, and last authorship. Coauthorship includes all positions other than first and last. These positions carry different academic prestige: first authorship is typically associated with the primary contributor, while last authorship is often held by senior researchers with established reputations [@tscharntke2007author].
+
+For the analyses, we analysed gender disparities in authorship by comparing the frequency of these authorship types between male and female authors. Our analysis focused on the female author proportion (FAP) and odds ratios comparing the likelihood of occupying each authorship position by gender.
+
+
+# Results
+
+
+
+Among all authors (N = `{r} nrow(df)`), `{r} round(nrow(dplyr::filter(df,Gender=='female'))/nrow(df),3)*100`% (N = `{r} nrow(dplyr::filter(df,Gender=='female'))`) were identified as female. To account for the unequal number of male and female authors across the dataset, we used odds ratios (ORs) to compare the relative likelihood of females occupying different authorship positions. We first investigate the authorship types across gender and then examine the author order and the overall number of coauthors in more detail.
 
 ## Authorship positions
 
-The overall odds ratio for women as first authors was 1.32 [95% CI: 1.21–1.44], indicating that the odds of first authorship are 32% higher for females compared to the male authors. For coauthorship positions, the OR was 0.99 [0.90–1.08], suggesting no substantial gender difference. In contrast, the odds ratio for women as last authors was 0.73 [0.67–0.81], indicating that the odds of last authorship are 27% lower in females. For the first and last authorship position, the odds ratios are significant at _p_ < .001 level. 
+The overall odds ratio for women as first authors was 1.41 [95% CI: 1.28–1.54], indicating that the odds of first authorship are 41% higher for females compared to the male authors. For coauthorship positions, the OR was 1.00 [0.91–1.09], suggesting no substantial gender difference. In contrast, the odds ratio for women as last authors was 0.73 [0.67–0.81], indicating that the odds of last authorship are 27% lower for women compared to men. Being a single author has odds ratio of 1.11 [0.95-1.29] for females, which suggests that while women are represented with relatively more single authored papers than men, the difference is not substantial (95% crosses 1.0). For the first and last authorship position, the odds ratios are significant at _p_ < .001 level. 
 
-To illustrate the trends across time in the authorship positions across the gender, we looked at 5-year-windows of the authorship types across gender, shown in Figure 1. The higher odds for female authors at first author position seems to be established in 2010 onwards. Female first author position exhibits a positive 5-year growth rate of +11.1%. The coauthor positions for female authors are relative stable at the odds around 1, indicating relatively equal odds between female and male authors. However, the last author positions have become relatively more rare after 2010, showing statistically significantly lower odds ratios from 2010 onwards and negative 5-year growth rate (-9.5%). 
+To illustrate the trends across time in the authorship positions across the gender, we looked at 5-year-windows of the authorship types across gender, shown in Figure 1. The overall numbers across the whole data are illustrated in the first column of the graph and the remaining five columns portray the chronology in 5-year windows. The higher odds for female authors at first author position seems to be established in 2010 onwards. Female first author position exhibits a positive 5-year growth rate of +11.1%. The coauthor positions for female authors are relative stable at the odds around 1, indicating relatively equal odds between female and male authors. However, the last author positions have become relatively more rare after 2010, showing statistically significantly lower odds ratios from 2010 onwards and negative 5-year growth rate (-9.5%). The odds ratio for female single authored papers hovers around 1.0, showing no meaningful trend across the time.
 
 {{< include _figure1.qmd >}}
 
@@ -113,7 +112,7 @@ library(dplyr)
 s <- summarise(group_by(df, BIBTEXKEY), n = n())
 df <- mutate(group_by(df, BIBTEXKEY), author_N = max(author_order))
 ```
-The range of the number of authors in varies considerable. Here we have the maximum of `{r} max(s$n)` authors in a paper and a median of `{r} median(s$n)` (M=`{r} round(mean(s$n),2)`, SD=`{r} round(sd(s$n),2)`). To illustrate how the actual number of authors in a paper impacts female first author likelihood, we calculated the odds ratios across the number of authors in paper, pooling the papers with 7 or more authors together (N=`{r} sum(df$author_N>6)`,  `{r} round(sum(df$author_N>6)/nrow(df)*100,1)`%). We added the single-authored papers to the plot to indicate the odds of being female to be single authors compared to all studies with multiple authors. The results are shown in Figure 2. We can observe that while female authors are not more likely to be single authors than men, they tend to be more likely to be first authors than males in papers with 2 or 3 authors; the odds ratios for first authorship position for female authors for papers with 2 authors is 1.55 [130-1.85], and for 3 authors the odds ratio is 1.61 [1.35-1.92], both significantly different from equal proportion. The last authorship positions for female authors are consequently lower, odds ratio of 0.65 [0.54–0.77] for 2 authors and 0.59 [0.49–0.71] for 3 authors, both also significant at _p_<.001 level. At four and five authors, the higher odds ratio for female is still evident (OR of 1.37 both both), but the last authorship positions are no longer relative rare for papers with 4 and 5 authors (OR 0.90 and 0.95, respectively). At six authors and above, the odds ratios indicate the same trend (higher ratio for first author, lower for last) although due to lower number of observations, these are no longer significantly different.
+The range of the number of authors in varies considerable. Here we have the maximum of `{r} max(s$n)` authors in a paper and a median of `{r} median(s$n)` (M=`{r} round(mean(s$n),2)`, SD=`{r} round(sd(s$n),2)`). To illustrate how the actual number of authors in a paper impacts female first author likelihood, we calculated the odds ratios across the number of authors in paper, pooling the papers with 7 or more authors together (N=`{r} sum(df$author_N>6)`,  `{r} round(sum(df$author_N>6)/nrow(df)*100,1)`%). We added the single-authored papers to the plot to indicate the odds of being female to be single authors compared to all studies with multiple authors. The results are shown in Figure 2. We can observe that while female authors are not more likely to be single authors than men, they tend to be more likely to be first authors than males in papers with 2 or 3 authors; the odds ratios for first authorship position for female authors for papers with 2 authors is 1.55 [130-1.85], and for 3 authors the odds ratio is 1.61 [1.35-1.92], both significantly different from equal proportion. The last authorship positions for female authors are consequently lower, odds ratio of 0.65 [0.54–0.77] for 2 authors and 0.59 [0.49–0.71] for 3 authors, both also significant at _p_ < .001 level. At four and five authors, the higher odds ratio for female is still evident (OR of 1.37 both both), but the last authorship positions are no longer relative rare for papers with 4 and 5 authors (OR 0.90 and 0.95, respectively). At six authors and above, the odds ratios indicate the same trend (higher ratio for first author, lower for last) although due to lower number of observations, these are no longer significantly different.
 
 {{< include _figure2.qmd >}}
 
@@ -128,7 +127,7 @@ The range of the number of authors in varies considerable. Here we have the maxi
 source(here("scripts","citations.R"))
 options(scipen = 9999)
 ```
-One potential difference established in previous bibliometric analyses of gendered authorship is citations [@west2013role;@chatterjee2021gender]. Here we tested whether the citations -- as indexed by Scopus -- show differences across gender. The median citation for studies with female lead authors is `{r} citestats_first$Md[1]` [`{r} citestats_first$CI_lower[1]`–`{r} citestats_first$CI_upper[1]`], and for males, the numbers are identical (Md=`{r} citestats_first$Md[2]` [`{r} citestats_first$CI_lower[2]`–`{r} citestats_first$CI_upper[2]`]) and the difference is not statistically significant ($\chi^2$(1)=`{r} round(stats_first$statistic,2)`, _p_=`{r} round(stats_first$p.value,3)`) using rank-based Wilcoxon test. The same comparison of citations for studies with last authors yields similar results `{r} citestats_last$Md[1]` [`{r} citestats_last$CI_lower[1]`–`{r} citestats_last$CI_upper[1]`], and for males, the numbers are similar (Md=`{r} citestats_last$Md[2]` [`{r} citestats_last$CI_lower[2]`–`{r} citestats_last$CI_upper[2]`]). Again, the difference is not statistically significant ($\chi^2$(1)=`{r} round(stats_last$statistic,2)`, _p_=`{r} round(stats_last$p.value,3)`). If we assume that we can weight in the gender contribution of all authors in a publication to its citation count, we observe a minor difference, where median citations for female authors is `{r} citestats_all$Md[1]` [`{r} citestats_all$CI_lower[1]`–`{r} citestats_all$CI_upper[1]`], and for males, the central measure are statistically significantly higher (Md=`{r} citestats_all$Md[2]` [`{r} citestats_all$CI_lower[2]`–`{r} citestats_all$CI_upper[2]`], $\chi^2$(1)=`{r} round(stats_all$statistic,2)`, _p_=`{r} round(stats_all$p.value,4)`). 
+One potential difference established in previous bibliometric analyses of gendered authorship is citations [@west2013role;@chatterjee2021gender]. Here we tested whether the citations -- as indexed by Scopus -- show differences across gender. The median citation for studies with female lead authors is `{r} citestats_first$Md[1]` [`{r} citestats_first$CI_lower[1]`–`{r} citestats_first$CI_upper[1]`], and for males, the numbers are identical (Md=`{r} citestats_first$Md[2]` [`{r} citestats_first$CI_lower[2]`–`{r} citestats_first$CI_upper[2]`]) and the difference is not statistically significant ($\chi^2$(1)=`{r} round(stats_first$statistic,2)`, _p_ = `{r} round(stats_first$p.value,3)`) using rank-based Wilcoxon test. The same comparison of citations for studies with last authors yields similar results `{r} citestats_last$Md[1]` [`{r} citestats_last$CI_lower[1]`–`{r} citestats_last$CI_upper[1]`], and for males, the numbers are similar (Md=`{r} citestats_last$Md[2]` [`{r} citestats_last$CI_lower[2]`–`{r} citestats_last$CI_upper[2]`]). Again, the difference is not statistically significant ($\chi^2$(1)=`{r} round(stats_last$statistic,2)`, _p_ = `{r} round(stats_last$p.value,3)`). If we assume that we can weight in the gender contribution of all authors in a publication to its citation count, we observe a minor difference, where median citations for female authors is `{r} citestats_all$Md[1]` [`{r} citestats_all$CI_lower[1]`–`{r} citestats_all$CI_upper[1]`], and for males, the central measure are statistically significantly higher (Md=`{r} citestats_all$Md[2]` [`{r} citestats_all$CI_lower[2]`–`{r} citestats_all$CI_upper[2]`], $\chi^2$(1)=`{r} round(stats_all$statistic,2)`, _p_ < `{r} round(stats_all$p.value,4)`). 
 
 ```{r}
 #| id: openaccess
@@ -162,22 +161,10 @@ Past studies have identified consistent geographical patterns in female authorsh
 source(here("scripts","country_table.R"))
 ```
 
-OPTIONAL
 
-Table: Female author odds ratios across continents.
+## Gendered topics through analysis of keywords
 
-|Continent |    N| Odds_ratio| CI_low| CI_high|
-|:---------|----:|----------:|------:|-------:|
-|Europe    | 4985|       0.82|   0.75|    0.89|
-|Americas  | 2356|       1.12|   1.02|    1.23|
-|Asia      |  931|       0.89|   0.78|    1.02|
-|Oceania   |  742|       1.66|   1.43|    1.93|
-|Africa    |   52|       0.91|   0.52|    1.59|
-
-
-## More analyses?
-
-- Association with the keywords (similar)
+[to be done].
 
 
 # Conclusions
@@ -194,8 +181,7 @@ The analysis of gender distributions in the five most prominent music psychology
 
 - Not matched by musicology: 25% female profs, 38% below??? (these are just some UK stats, I don't think the field-wide analysis has been done)
 
-- Senior authorship positions
-
+- Senior authorship positions!
 
 ### Funding statement
 
