@@ -11,6 +11,7 @@ cat(paste(
 cat(paste('\n Number of rows:', nrow(df),'\n'))
 
 journal_with_total <- df %>%
+  ungroup() %>%
   count(JOURNAL) %>%
   mutate(percentage = round(n / sum(n) * 100, 1)) %>%
   bind_rows(
@@ -21,8 +22,6 @@ journal_with_total <- df %>%
   )
 
 print(knitr::kable(journal_with_total))
-
-
 
 cat("\n\n")
 

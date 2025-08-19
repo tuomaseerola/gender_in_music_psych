@@ -6,6 +6,7 @@
 #### 1. Gender distribution ------
 
 gender_with_total <- df %>%
+  ungroup() %>%
   count(Gender) %>%
   mutate(percentage = round(n / sum(n) * 100, 1)) %>%
   bind_rows(
