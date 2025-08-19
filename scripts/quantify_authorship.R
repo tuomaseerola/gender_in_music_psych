@@ -128,13 +128,7 @@ annual<-rbind(single,first,coauthor,last)
 annual$Type = factor(annual$Type, levels = c('Single','First','Co', 'Last'))
 annual
 
-# Create a new facet variable that group INCREASE / DECREASE of OR 
-#annual <- annual %>%
-#  mutate(TypeGroup = case_when(Type %in% c("Co", "Last") ~ "Co and Last",TRUE ~ Type))
-#annual$TypeGroup = as.factor(annual$TypeGroup)
-#annual$TypeGroup = factor(annual$TypeGroup, levels = c( "First" ,"Co and Last"))
-
-# add overall
+# Add overall numbers
 or$name = factor(or$name, levels = c('Single','First','Coauthor', 'Last'), labels = c('Single','First','Co', 'Last'))
 
 tmp <- data.frame(Odds_ratio = or$Odds_ratio, CI=0.95,CI_low = or$CI_low, CI_high = or$CI_high, YearRange = "Overall", Type = or$name)
