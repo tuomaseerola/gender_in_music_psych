@@ -1,5 +1,4 @@
 # attribute_gender_diagnostics.R
-library(modelsummary)
 #### Simple diagnostics
 
 cat(paste('\nUnique studies:', length(unique(df$BIBTEXKEY)),'\n'))
@@ -11,7 +10,19 @@ cat(paste(
 
 cat(paste('\n Number of rows:', nrow(df),'\n'))
 
-print(datasummary(JOURNAL + 1 ~ N + Percent(), data = dplyr::filter(df,author_order==1),output='markdown',title='Number of studies across journals'))
+journal_with_total <- df %>%
+  count(JOURNAL) %>%
+  mutate(percentage = round(n / sum(n) * 100, 1)) %>%
+  bind_rows(
+    summarise(., 
+              JOURNAL = "Total", 
+              n = sum(n), 
+              percentage = sum(percentage))
+  )
+
+print(knitr::kable(journal_with_total))
+
+
 
 cat("\n\n")
 
@@ -28,8 +39,8 @@ cat(paste("Prop. under .55 conf. =",sum(df$Gender.Probability<.55),"/n/n"))
 
 cat("\n***")
 
-print(datasummary(Mean + Median ~ Gender.Probability * Gender, data = df,output='markdown',title='Probability of API attributed Gender.'))
-
+S <- dplyr::summarise(group_by(df,Gender),M=mean(Gender.Probability),Md=median(Gender.Probability))
+print(knitr::kable(S,digits = 2))
 cat("\n***")
 
 upperCI<-function(x, conf.level = 0.95) {
@@ -44,19 +55,14 @@ lowerCI<-function(x, conf.level = 0.95) {
   #upperCI <- f[2]
   return(lowerCI)
 }
+# citations across gender
+S <- dplyr::summarise(group_by(df,Gender),M=mean(Citations),Md=median(Citations),LCI=lowerCI(Citations),UCI=upperCI(Citations))
+print(knitr::kable(S,digits = 2))
 
-print(datasummary(Mean + upperCI + lowerCI ~ Citations * Gender, data = df,output='markdown',title='Citation counts across Gender'))
-
+# get the stats of citations across gender
 print(broom::glance(t.test(Citations ~ Gender, data=df)))
 print(broom::glance(wilcox.test(Citations ~ Gender, data=df)))
-
-detach("package:modelsummary", unload=TRUE)
-
 
 #### Gender distribution of authors -----------
 dist1 <- DescTools::MultinomCI(as.numeric(table(df$Gender)),conf.level=0.95,method="sisonglaz")
 print(knitr::kable(dist1,digits=3,caption='Gender Distribution'))
-
-
-
-

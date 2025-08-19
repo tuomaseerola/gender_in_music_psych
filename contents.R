@@ -9,7 +9,6 @@ library(stringr)
 library(ggplot2)
 library(bib2df)
 library(countrycode)
-#library(modelsummary)
 library(DescTools)
 library(here)
 
@@ -28,11 +27,11 @@ source('scripts/export_gender_data.R') # save data (remove emails)
 
 #### Analyse --------
 source('scripts/load_gender_data.R') # Loads the data
-source('scripts/summarise_gender.R') # Requires work
-source('scripts/quantify_authorship.R') # Requires work
-source('scripts/visualise_gender.R') # Requires work
-source('scripts/visualise_continent.R') # Requires work
+source('scripts/summarise_gender.R') # removed modelsummary
+source('scripts/quantify_authorship.R') # Added overall. Add psych data?
+source('scripts/visualise_gender.R') # Which representation we prefer?
+#source('scripts/visualise_continent.R') # Is this needed?
 
 #source('scripts/visualise_gender_trends.R') # OK
 #source('scripts/visualise_names.R') # OK
-source('scripts/keyword_analysis.R') # creates figure (OK)
+#source('scripts/keyword_analysis.R') # creates figure (OK)

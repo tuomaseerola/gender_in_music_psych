@@ -1,8 +1,6 @@
 # install.packages("genderizeR")
 #suppressPackageStartupMessages(library(genderizeR))
 
-library(modelsummary)
-
 run_genderize <- FALSE
 
 if (run_genderize == TRUE) {
@@ -57,7 +55,18 @@ for (k in 1:nrow(inferred)) {
 df <- dplyr::filter(df, CATEGORY != "BOOK")
 
 # summarise
-print(datasummary(Gender + 1 ~ N + Percent(), data = df))
+
+gender_with_total <- df %>%
+  count(Gender) %>%
+  mutate(percentage = round(n / sum(n) * 100, 1)) %>%
+  bind_rows(
+    summarise(., 
+              Gender = "Total", 
+              n = sum(n), 
+              percentage = sum(percentage))
+  )
+
+print(knitr::kable(gender_with_total))
 
 # Remove unattributed gender
 df <- dplyr::filter(df, Gender != 'ambiguous' & Gender != 'unknown')
@@ -67,5 +76,4 @@ cat(paste(
   nrow(df)
 )) 
 
-detach("package:modelsummary", unload=TRUE)
-rm(unattributed, inferred, k, index, run_genderize)
+rm(unattributed, inferred, k, index, run_genderize,gender_with_total)

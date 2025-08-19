@@ -33,6 +33,6 @@ g1<-ggplot(DATA,aes(x=reorder(Country,Odds_ratio),y=Odds_ratio,label=paste0("n="
   theme_classic(base_size = 14)+
   geom_hline(yintercept = 1,linetype='dashed',color='grey20')+
   xlab('Country') +
-  ylab('Female Authorship Odds Ratio') +
+  ylab('Female Authorship Odds Ratio (95%CI)') +
   coord_flip()
 print(g1)

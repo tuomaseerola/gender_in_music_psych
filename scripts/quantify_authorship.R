@@ -10,7 +10,7 @@ df$authortype[df$author_order == 1] <- 'Other'
 df$authortype[df$author_last == 1] <- 'Other'
 df$authortype[df$author_single == 1] <- 'Single' # FOCUS
 t<-table(df$authortype,df$Gender)
-or1 <- effectsize::oddsratio(t) # 1.10
+or1 <- effectsize::oddsratio(t) # 1.00
 #print(or1)
 
 #### Classify order: First author ----------
@@ -19,18 +19,17 @@ df$authortype[df$author_order == 1] <- 'First'
 df$authortype[df$author_last == 1] <- 'Other'
 df$authortype[df$author_single == 1] <- 'Other' # Take out single authors from first authors!
 t<-table(df$authortype,df$Gender)
-or2 <- effectsize::oddsratio(t) # 1.32
-#print(or1)
+or2 <- effectsize::oddsratio(t) # 1.41
+#print(or2)
 
-#### classify order: Coauthor --------------
+#### Classify order: Coauthor --------------
 df$authortype <- 'Coauthor'
 df$authortype[df$author_order == 1] <- 'Other'
 df$authortype[df$author_last == 1] <- 'Other'
 df$authortype[df$author_single == 1] <- 'Other' # Take out single authors from first authors!
 t<-table(df$authortype,df$Gender)
-
-or3 <- effectsize::oddsratio(t) # 1.01
-#print(or2)
+or3 <- effectsize::oddsratio(t) # 1.00
+#print(or3)
 
 #### Classify order: Last -------------
 df$authortype <- 'Other'
@@ -38,13 +37,13 @@ df$authortype[df$author_order == 1] <- 'Other'
 df$authortype[df$author_last == 1] <- 'Last'
 df$authortype[df$author_single == 1] <- 'Other' # Take out single authors from first authors!
 t<-table(df$authortype,df$Gender)
-t
 or4 <- effectsize::oddsratio(t) # 0.73
+#print(or4)
 
 or <- rbind(or1,or2,or3,or4)
 or$name<-c("Single","First","Coauthor","Last")
 or<-dplyr::select(or,name,Odds_ratio,CI_low,CI_high)
-print(knitr::kable(or))
+print(knitr::kable(or,digits = 2))
 
 #### Annually ---------
 
@@ -53,10 +52,28 @@ df$YEAR_5 <- cut(df$YEAR, breaks=seq(2000, 2025, by=5), labels=c("2000-2004", "2
 table(df$YEAR,df$YEAR_5)
 table(df$YEAR_5)
 
-# classify order: First author
+#### Classify order: Single author ----------
+df$authortype <- 'Other'
+df$authortype[df$author_order == 1] <- 'Other'
+df$authortype[df$author_last == 1] <- 'Other'
+df$authortype[df$author_single == 1] <- 'Single' # FOCUS
+
+output <- NULL
+U<-levels(df$YEAR_5)
+for (k in 1:length(U)){
+  tmp<-dplyr::filter(df,YEAR_5==U[k])
+  t <- table(tmp$authortype,tmp$Gender)
+  output <- rbind(output,effectsize::oddsratio(t))
+}
+output$YearRange <- U
+single <- data.frame(output)
+single
+
+#### Classify order: First author ----------
 df$authortype <- 'Other'
 df$authortype[df$author_order == 1] <- 'First'
 df$authortype[df$author_last == 1] <- 'Other'
+df$authortype[df$author_single == 1] <- 'Other' # Take out single authors from first authors!
 
 output <- NULL
 U<-levels(df$YEAR_5)
@@ -68,10 +85,12 @@ for (k in 1:length(U)){
 output$YearRange <- U
 first <- data.frame(output)
 first
-# classify order: Coauthor
+
+#### Classify order: Coauthor --------------
 df$authortype <- 'Coauthor'
 df$authortype[df$author_order == 1] <- 'Other'
 df$authortype[df$author_last == 1] <- 'Other'
+df$authortype[df$author_single == 1] <- 'Other' # Take out single authors from first authors!
 
 U<-levels(df$YEAR_5)
 output <- NULL
@@ -83,10 +102,12 @@ for (k in 1:length(U)){
 output$YearRange <- U
 coauthor <- data.frame(output)
 coauthor
-# classify order: Last
+
+#### Classify order: Last -------------
 df$authortype <- 'Other'
 df$authortype[df$author_order == 1] <- 'Other'
 df$authortype[df$author_last == 1] <- 'Last'
+df$authortype[df$author_single == 1] <- 'Other' # Take out single authors from first authors!
 
 U<-levels(df$YEAR_5)
 output <- NULL
@@ -98,29 +119,42 @@ for (k in 1:length(U)){
 output$YearRange <- U
 last <- data.frame(output)
 
+single$Type<-'Single'
 first$Type<-'First'
 coauthor$Type<-'Co'
 last$Type<-'Last'
 
-annual<-rbind(first,coauthor,last)
-annual$Type = factor(annual$Type, levels = c('First','Co', 'Last'))
+annual<-rbind(single,first,coauthor,last)
+annual$Type = factor(annual$Type, levels = c('Single','First','Co', 'Last'))
+annual
 
 # Create a new facet variable that group INCREASE / DECREASE of OR 
-annual <- annual %>%
-  mutate(TypeGroup = case_when(Type %in% c("Co", "Last") ~ "Co and Last",TRUE ~ Type))
-annual$TypeGroup = as.factor(annual$TypeGroup)
-annual$TypeGroup = factor(annual$TypeGroup, levels = c( "First" ,"Co and Last"))
-  
-fig1 <- ggplot(annual,aes(x=YearRange,y=Odds_ratio,color=Type,group=Type))+
+#annual <- annual %>%
+#  mutate(TypeGroup = case_when(Type %in% c("Co", "Last") ~ "Co and Last",TRUE ~ Type))
+#annual$TypeGroup = as.factor(annual$TypeGroup)
+#annual$TypeGroup = factor(annual$TypeGroup, levels = c( "First" ,"Co and Last"))
+
+# add overall
+or$name = factor(or$name, levels = c('Single','First','Coauthor', 'Last'), labels = c('Single','First','Co', 'Last'))
+
+tmp <- data.frame(Odds_ratio = or$Odds_ratio, CI=0.95,CI_low = or$CI_low, CI_high = or$CI_high, YearRange = "Overall", Type = or$name)
+annual2<- rbind(tmp,annual)
+annual2$separator<-"Yearly"
+annual2$separator[annual2$YearRange=="Overall"]<-"Overall"
+annual2$YearRange <- factor(annual2$YearRange, levels = c("Overall", "2000-2004", "2005-2009", "2010-2014", "2015-2019", "2020-2024"))
+
+fig1 <- ggplot(annual2,aes(x=YearRange,y=Odds_ratio,color=Type,group=Type,shape=separator))+
   #facet_wrap(~TypeGroup,nrow = 2)+
   geom_hline(yintercept=1, linetype="dashed", color = "black") +
-  geom_point(position = position_dodge(width = 0.4))+
+  geom_point(position = position_dodge(width = 0.4),show.legend=FALSE,size=3)+
   geom_errorbar(aes(ymin=CI_low,ymax=CI_high),width=0.2,position = position_dodge(width = 0.4))+
-  geom_line(alpha = 0.2,position = position_dodge(width = 0.4))+
-  scale_color_brewer(palette = "Set1") +
+#  geom_line(alpha = 0.2,position = position_dodge(width = 0.4))+
+  scale_shape_manual(values = c(22, 16)) +
+  scale_color_brewer(name="Authorship",palette = "Set1") +
   xlab('Year range')+
-  ylab('Female Authorship Odds Ratio')+
+  ylab('Female Authorship Odds Ratio (95%CI)')+
   theme_classic()
+fig1
 
 # fig1 <- ggplot(annual,aes(x=YearRange,y=Odds_ratio,color=Type,group=Type))+
 #   facet_wrap(~TypeGroup,nrow = 2)+
