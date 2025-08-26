@@ -129,7 +129,7 @@ data = data %>% mutate(
                                "embodied knowledge",
                                "embodied",
                                "embodied mind",
-                               "4e cognition") 
+                               "4e cognition‌") 
                      ~ "embodied music cognition",TRUE ~ KW)
 )
 
@@ -175,8 +175,6 @@ data = data %>% mutate(
                  ~ "historical performance practice",TRUE ~ KW))
 
 ## Words related to performance anxiety
-idx = grep("performa", data$KW)
-unique(data$KW[idx])
 data = data %>% mutate(
   KW = case_when(KW %in% c("performance anxiety",
                            "anxiety-performance relationship",
@@ -477,6 +475,60 @@ data = data %>% mutate(
                            "social collaboration")
                  ~ "social",TRUE ~ KW))
 
+
+# Mental health
+idx = grep("mental health", data$KW)
+unique(data$KW[idx])
+data = data %>% mutate(
+  KW = case_when(KW %in% c("mental health",
+                           "mental health and the music industry",
+                           "mental health interventions",
+                           "mental health help-seeking" ,
+                           "mental health care")
+                 ~ "mental health",TRUE ~ KW))
+
+
+# health
+idx = grep("health", data$KW)
+unique(data$KW[idx])
+data = data %>% mutate(
+  KW = case_when(KW %in% c("health musician" ,
+                           "health care",
+                           "health" ,
+                           "health behaviors"  ,
+                           "healthcare",
+                           "healthy ageing" ,
+                           "health-promoting behaviours" ,
+                           "health promotion"  ,
+                           "health-oriented preventive behavior",
+                           "health-literacy" ,
+                           "physical health"     ,
+                           "health psychology",
+                           "healthcare services" ,
+                           "health outcomes"  ,
+                           "public health"  ,
+                           "health responsibility" ,
+                           "occupational health"  ,
+                           "general health" ,
+                           "healthy adults"    ,
+                           "job-related health problems")
+                 ~ "health",TRUE ~ KW))
+
+# art/music health
+idx = grep("health", data$KW)
+unique(data$KW[idx])
+data = data %>% mutate(
+  KW = case_when(KW %in% c("arts in health",
+                           "music and health"  ,
+                           "arts-and-health",
+                           "healthy music use",
+                           "unhealthy music use",
+                           "vocal health" ,
+                           "playing-related health problems",
+                           "musician's health"  ,
+                           "arts and health",
+                           "health musicking" )
+                 ~ "music health",TRUE ~ KW))
 
 
 #-------
