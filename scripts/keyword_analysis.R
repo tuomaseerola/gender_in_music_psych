@@ -4,8 +4,9 @@
 # Status: In progress
 
 #### Custom functions -------------------
-source('scripts/count2category.R')
-plotflag <- TRUE
+#source('scripts/count2category.R')
+plotflag <- FALSE
+duplication <- TRUE
 
 ## remove studies, keep articles (to avoid duplicating keywords)
 D <- dplyr::filter(df, author_id == 'author1') # 3373
@@ -15,58 +16,92 @@ if (!dim(D)[1] == 3373) {
   break
 }
 
-#### keyword analysis ------------------
-KW <- NULL
-d_index <- NULL
-GENDER_index <- NULL
-year_index <- NULL # year
+#### keyword analysis for first authors only ------------------
+if(duplication==FALSE){
+  KW <- NULL
+  d_index <- NULL
+  GENDER_index <- NULL
+  year_index <- NULL # year
 
-for (k in 1:nrow(D)) {
-  tmp <- D$AUTHOR_KEYWORDS[k]
-  GENDER <- as.character(D$Gender[k])
-  y <- D$YEAR[k]
-  tmp <- stringi::stri_trans_general(tmp, "latin-ascii")
-  if (!is.na(tmp)) {
-    kw <- str_split(tmp, '[;,]', simplify = TRUE)
-    KW <- c(KW, kw)
-    d_index <- c(d_index, rep(k, length(kw)))
-    # u_index <- c(u_index, rep(u, length(kw)))
-    # o_index <- c(o_index, rep(o, length(kw)))
-    # m_index <- c(m_index, rep(m, length(kw)))
-    # a_index <- c(a_index, rep(a, length(kw)))
-    # g_index <- c(g_index, rep(g, length(kw)))
-    year_index <- c(year_index, rep(y, length(kw)))
-    GENDER_index <- c(GENDER_index, rep(GENDER, length(kw)))
+  for (k in 1:nrow(D)) {
+    tmp <- D$AUTHOR_KEYWORDS[k]
+    GENDER <- as.character(D$Gender[k])
+    y <- D$YEAR[k]
+    tmp <- stringi::stri_trans_general(tmp, "latin-ascii")
+    if (!is.na(tmp)) {
+      kw <- str_split(tmp, '[;,]', simplify = TRUE)
+      KW <- c(KW, kw)
+      d_index <- c(d_index, rep(k, length(kw)))
+      # u_index <- c(u_index, rep(u, length(kw)))
+      # o_index <- c(o_index, rep(o, length(kw)))
+      # m_index <- c(m_index, rep(m, length(kw)))
+      # a_index <- c(a_index, rep(a, length(kw)))
+      # g_index <- c(g_index, rep(g, length(kw)))
+      year_index <- c(year_index, rep(y, length(kw)))
+      GENDER_index <- c(GENDER_index, rep(GENDER, length(kw)))
+    }
   }
+
+
+  KW <- stringi::stri_trans_general(KW, "latin-ascii")
+  KW<-stringr::str_trim(KW, side = "both")
+  KW<-tolower(KW)
+  length(KW)
+  length(unique(KW))
+
+  data <- data.frame(KW,
+                     GENDER_index,
+                     year_index)
 }
 
-length(KW)
-length(GENDER_index)
-length(year_index)
+#### All authors -------
+#### Alternatively where all authors contribute ------
+if(duplication==TRUE){
 
-KW <- stringi::stri_trans_general(KW, "latin-ascii")
-KW
-KW<-stringr::str_trim(KW, side = "both")
-KW<-tolower(KW)
+  KW <- NULL
+  d_index <- NULL
+  GENDER_index <- NULL
+  year_index <- NULL # year
 
-#source('scripts/simplify_keywords.R')
+  for (k in 1:nrow(df)) {
+    tmp <- df$AUTHOR_KEYWORDS[k]
+    GENDER <- as.character(df$Gender[k])
+    y <- df$YEAR[k]
+    tmp <- stringi::stri_trans_general(tmp, "latin-ascii")
+    if (!is.na(tmp)) {
+      kw <- str_split(tmp, '[;,]', simplify = TRUE)
+      KW <- c(KW, kw)
+      year_index <- c(year_index, rep(y, length(kw)))
+      GENDER_index <- c(GENDER_index, rep(GENDER, length(kw)))
+    }
+  }
 
-data <- data.frame(KW,
-                   GENDER_index,
-                   year_index)
+  KW <- stringi::stri_trans_general(KW, "latin-ascii")
+  KW<-stringr::str_trim(KW, side = "both")
+  KW<-tolower(KW)
+  length(KW)
+  length(unique(KW))
+
+  data <- data.frame(KW,
+                     GENDER_index,
+                     year_index)
+}
 
 
-# Clean up similar keywords
+
+
+
+
 
 ## Words related to music cognition
 idx = grep("cognition", data$KW)
 unique(data$KW[idx])
 data = data %>% mutate(
   KW = case_when(KW %in% c("music cognition",
-                           "music and cognition", 
+                           "music and cognition",
                            "musical and cognition",
                            "language and music cognition",
-                           "music and social cognition") 
+                           "music and social cognition")
                      ~ "music cognition",TRUE ~ KW))
 
 ## Words related to recognition
@@ -74,20 +109,20 @@ idx = grep("recognition", data$KW)
 unique(data$KW[idx])
 data = data %>% mutate(
   KW = case_when(KW %in% c("recognition",
-                           "optical music recognition", 
+                           "optical music recognition",
                            "optical music recognition (omr)",
-                           "omr (optical music recognition)", 
-                           "content-based generalized sound recognition", 
-                           "tempo recognition", 
+                           "omr (optical music recognition)",
+                           "content-based generalized sound recognition",
+                           "tempo recognition",
                            "melody recognition",
                            "serial recognition",
                            "recognition of scale and key by experts",
                            "emotion recognition",
                            "recognition task" ,
-                           "auditory recognition", 
+                           "auditory recognition",
                            "pattern recognition",
                            "sound recognition",
-                           "recognition performance") 
+                           "recognition performance")
                  ~ "music recognition",TRUE ~ KW))
 
 ## Words related to music emotion
@@ -95,7 +130,7 @@ idx = grep("emotion", data$KW)
 unique(data$KW[idx])
 data = data %>% mutate(
   KW = case_when(KW %in% c("emotional music experience",
-                           "music and emotions", 
+                           "music and emotions",
                            "music emotion recognition",
                            "emotional response to music",
                            "music emotion classification",
@@ -109,9 +144,10 @@ data = data %>% mutate(
                            "musical emotion mechanisms",
                            "emotional use of music",
                            "music emotion identification" ,
-                           "musical emotional contagion",  
+                           "musical emotional contagion",
                            "emotion in music",
-                           "emotions during listening" ) 
+                           "arousal",
+                           "emotions during listening" )
                      ~ "music emotions",TRUE ~ KW)
 )
 
@@ -121,7 +157,7 @@ unique(data$KW[idx])
 data = data %>% mutate(
   KW = case_when(KW %in% c("embodied music cognition",
                                "embodiment",
-                               "embodied cognition", 
+                               "embodied cognition",
                                "embodied interaction",
                                "embodied music interaction",
                                "embodied musical experience",
@@ -129,7 +165,7 @@ data = data %>% mutate(
                                "embodied knowledge",
                                "embodied",
                                "embodied mind",
-                               "4e cognition‌") 
+                               "4e cognition‌")
                      ~ "embodied music cognition",TRUE ~ KW)
 )
 
@@ -141,7 +177,7 @@ data = data %>% mutate(
   KW = case_when(KW %in% c("piano performance",
                            "music performance",
                            "musical performance",
-                           "violin performance", 
+                           "violin performance",
                            "music performance studies",
                            "performance",
                            "performance psychology",
@@ -158,7 +194,7 @@ data = data %>% mutate(
                            "classical music performance",
                            "guitar performance achievement",
                            "music performance quality",
-                           "solo performance" ) 
+                           "solo performance" )
                  ~ "music performance",TRUE ~ KW)
 )
 
@@ -170,7 +206,7 @@ data = data %>% mutate(
   KW = case_when(KW %in% c("historical performance practice",
                            "historically informed performance (hip)",
                            "nineteenth century music performance",
-                           "historically-informed performance", 
+                           "historically-informed performance",
                            "historically informed performance")
                  ~ "historical performance practice",TRUE ~ KW))
 
@@ -179,7 +215,7 @@ data = data %>% mutate(
   KW = case_when(KW %in% c("performance anxiety",
                            "anxiety-performance relationship",
                            "musical performance anxiety",
-                           "music performance anxiety characteristics", 
+                           "music performance anxiety characteristics",
                            "music performance anxiety inventory for adolescents")
                  ~ "music performance anxiety",TRUE ~ KW))
 
@@ -195,7 +231,7 @@ data = data %>% mutate(
                            "vocal expression" ,
                            "artistic expression",
                            "emotional facial expressions",
-                           "expressive gestures", 
+                           "expressive gestures",
                            "expressivity",
                            "expression" ,
                            "musical expression",
@@ -251,7 +287,7 @@ data = data %>% mutate(
                            "filled duration illusion" ,
                            "time-shrinking illusion",
                            "auditory illusion",
-                           "octave illusion",            
+                           "octave illusion",
                            "illusion")
                  ~ "music illusion",TRUE ~ KW))
 
@@ -405,7 +441,7 @@ data = data %>% mutate(
                            "social acceptance" ,
                            "sociality" ,
                            "social processes",
-                           "social connectedness" ,                       
+                           "social connectedness" ,
                            "social networks",
                            "social self",
                            "social surrogates" ,
@@ -531,6 +567,53 @@ data = data %>% mutate(
                  ~ "music health",TRUE ~ KW))
 
 
+dim(data)
+length(unique(data$KW))
+#### Additional aggregating
+# what about collapsing music performance and performance?
+idx = grep("music performance", data$KW)
+unique(data$KW[idx])
+data = data %>% mutate(
+  KW = case_when(KW %in% c("music performance",
+                           "network music performance",
+                           "networked music performance",
+                           "generation of artificial music performances",
+                           "repeats and skips in music performance",
+                           "instrumental music performance",
+                           "music performance evaluation",
+                           "music performance assessment",
+                           "virtuoso's music performance",
+                           "ensemble music performance",
+                           "optimal music performance")
+                 ~ "performance",TRUE ~ KW))
+
+# what about collapsing music perception and perception?
+idx = grep("music perception", data$KW)
+unique(data$KW[idx])
+data = data %>% mutate(
+  KW = case_when(KW %in% c("music perception",
+                           "mmusic perception")
+                 ~ "perception",TRUE ~ KW))
+
+# what about collapsing music cognition and cognition?
+idx = grep("music cognition", data$KW)
+unique(data$KW[idx])
+data = data %>% mutate(
+  KW = case_when(KW %in% c("music cognition")
+                 ~ "cognition",TRUE ~ KW))
+# what about collapsing music emotion and emotion?
+idx = grep("music emotion", data$KW)
+unique(data$KW[idx])
+data = data %>% mutate(
+  KW = case_when(KW %in% c("music emotion",
+                           "music emotions")
+                 ~ "emotion",TRUE ~ KW))
+
+# what about removing music
+head(data)
+data<-dplyr::filter(data,KW!="music")
+data<-dplyr::filter(data,KW!="music psychology")
+
 #-------
 x1 <- count2category(data,
                      index = "GENDER_index",
@@ -538,12 +621,12 @@ x1 <- count2category(data,
                      str2 = "male")
 
 FROM <- 1
-TO <- 25
+TO <- 40
 
 #### Figure 1 ----------
 
 figure1 <- ggplot(data = x1[FROM:TO, ], aes(
-  x = reorder(KW, prop),
+  x = reorder(KW, Freq),
   y = prop,
   label = paste0("n=",Freq)
 )) +
@@ -555,9 +638,10 @@ figure1 <- ggplot(data = x1[FROM:TO, ], aes(
     labels = (seq(0, 1, .1)) * 100
   ) +
   scale_fill_grey() +
-  coord_flip(ylim = c(.25,.75)) +
+  coord_flip(ylim = c(.20,.80)) +
   ylab("% Female (first authors)") +
   xlab("Keyword (ranked)") +
+  annotate("text", x = 20, y = 0.55, label = "NOT GOING TO BE USED", size=12,color="red",angle=45) +
   geom_hline(yintercept = 0.5, linetype = "dashed", color = "black") +
   theme_classic(base_size = 15) +
   theme(
@@ -569,58 +653,25 @@ figure1 <- ggplot(data = x1[FROM:TO, ], aes(
 
 print(figure1)
 
-#### Alternatively where all authors contribute ------
 
-#### keyword analysis ------------------
-KW <- NULL
-d_index <- NULL
-GENDER_index <- NULL
-year_index <- NULL # year
+head(x1)
 
-for (k in 1:nrow(df)) {
-  tmp <- df$AUTHOR_KEYWORDS[k]
-  GENDER <- as.character(df$Gender[k])
-  y <- df$YEAR[k]
-  tmp <- stringi::stri_trans_general(tmp, "latin-ascii")
-  if (!is.na(tmp)) {
-    kw <- str_split(tmp, '[;,]', simplify = TRUE)
-    KW <- c(KW, kw)
-    year_index <- c(year_index, rep(y, length(kw)))
-    GENDER_index <- c(GENDER_index, rep(GENDER, length(kw)))
-  }
-}
-
-length(KW) # 42782
-length(GENDER_index)
-length(year_index)
-
-KW <- stringi::stri_trans_general(KW, "latin-ascii")
-KW
-KW<-stringr::str_trim(KW, side = "both")
-KW<-tolower(KW)
-
-#source('scripts/simplify_keywords.R')
-
-data <- data.frame(KW,
-                   GENDER_index,
-                   year_index)
-
-x1 <- count2category(data,
-                     index = "GENDER_index",
-                     str1 = "female",
-                     str2 = "male")
 all_females<-sum(x1$female)
 all_males<-sum(x1$male)
 x1$or<-NA
+x1$or_LCI<-NA
+x1$or_UCI<-NA
 
 for (k in 1:nrow(x1)) {
   tmp<-data.frame(kw=c(x1$female[k],x1$male[k]),all=c(all_females,all_males))
   x1$or[k] <- as.numeric(effectsize::oddsratio(tmp)[1])
+  x1$or_LCI[k] <- as.numeric(effectsize::oddsratio(tmp)[3])
+  x1$or_UCI[k] <- as.numeric(effectsize::oddsratio(tmp)[4])
 }
-
+head(x1)
 
 FROM <- 1
-TO <- 25
+TO <- 40
 
 #### Figure 2 ----------
 
@@ -637,9 +688,10 @@ figure2 <- ggplot(data = x1[FROM:TO, ], aes(
     labels = (seq(0, 1, .1)) * 100
   ) +
   scale_fill_grey() +
-  coord_flip(ylim = c(.25,.75)) +
+  coord_flip(ylim = c(.20,.70)) +
   ylab("% Female (all authors)") +
   xlab("Keyword (ranked)") +
+  annotate("text", x = 20, y = 0.55, label = "NOT GOING TO BE USED", size=12,color="red",angle=45) +
   geom_hline(yintercept = 0.5, linetype = "dashed", color = "black") +
   theme_classic(base_size = 15) +
   theme(
@@ -653,23 +705,23 @@ print(figure2)
 
 
 #### odds ratio -------
-#### Figure 2 ----------
 
 figure3 <- ggplot(data = x1[FROM:TO, ], aes(
   x = reorder(KW, or),
   y = or,
   label = paste0("n=",Freq)
 )) +
-  geom_col(fill = 'grey70', color = 'grey10') +
-  geom_text(nudge_y = -.0997, size=2.25) +
+  geom_col(fill = 'grey80', color = 'grey10') +
+  geom_errorbar(aes(ymin=or_LCI, ymax=or_UCI), width=.2, alpha=0.6,color="grey40",linetype="solid") +
+  geom_text(y=.1,nudge_y = -.0997, size=2.25) +
   theme(text = element_text(size = 16)) +
   scale_y_continuous(
-    breaks = seq(0, 2, .25),
-    limits = c(0,2.05),
+    breaks = seq(0, 3.78, .25),
+    limits = c(0,3.78),
     expand = c(0.001,0.01)
   ) +
   scale_fill_grey() +
-  coord_flip(ylim = c(0,2.05)) +
+  coord_flip(ylim = c(0,3.78)) +
   ylab("OR Female (all authors)") +
   xlab("Keyword (ranked)") +
   geom_hline(yintercept = 1.0, linetype = "dashed", color = "grey39") +
@@ -683,6 +735,20 @@ figure3 <- ggplot(data = x1[FROM:TO, ], aes(
 
 print(figure3)
 
+tmp <- x1[FROM:TO, ]
+dim(tmp)
+
+nurturing_topics <- c(
+tmp$Freq[which(tmp$KW=='development')],
+tmp$Freq[which(tmp$KW=='social')],
+tmp$Freq[which(tmp$KW=='music education')],
+tmp$Freq[which(tmp$KW=='emotion regulation')],
+tmp$Freq[which(tmp$KW=='well-being')],
+tmp$Freq[which(tmp$KW=='mental health')],
+tmp$Freq[which(tmp$KW=='music therapy')]
+)
+sum(nurturing_topics) / sum(tmp$Freq)
+
 #### Save figures ----------------------
 plotflag <- FALSE
 if (plotflag) {
@@ -692,14 +758,14 @@ if (plotflag) {
     width = 8, height = 6, units = "in",
     dpi = 300
   )
-  
+
   ggsave(
     filename = 'figure2.png',
     plot = figure2,
     width = 8, height = 6, units = "in",
     dpi = 300
   )
-  
+
   ggsave(
     filename = 'figure3.png',
     plot = figure3,
