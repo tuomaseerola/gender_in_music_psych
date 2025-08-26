@@ -44,8 +44,8 @@ df$authortype <- 'Coauthor'
 df$authortype[df$author_order == 1] <- 'Other'
 df$authortype[df$author_last == 1] <- 'Other'
 df$authortype[df$author_single == 1] <- 'Other' # Take out single authors from first authors!
-t<-table(df$authortype,df$Gender)
-t
+#t<-table(df$authortype,df$Gender)
+#t
 # Explicit order of the rows and columns!
 t <- table(
   factor(df$authortype, levels = c("Coauthor", "Other")),
@@ -62,8 +62,8 @@ df$authortype <- 'Other'
 df$authortype[df$author_order == 1] <- 'Other'
 df$authortype[df$author_last == 1] <- 'Last'
 df$authortype[df$author_single == 1] <- 'Other' # Take out single authors from first authors!
-t<-table(df$authortype,df$Gender)
-t
+#t<-table(df$authortype,df$Gender)
+#t
 # Explicit order of the rows and columns!
 t <- table(
   factor(df$authortype, levels = c("Last", "Other")),

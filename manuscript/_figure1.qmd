@@ -18,8 +18,13 @@ df$authortype <- 'Other'
 df$authortype[df$author_order == 1] <- 'Other'
 df$authortype[df$author_last == 1] <- 'Other'
 df$authortype[df$author_single == 1] <- 'Single' # FOCUS
-t<-table(df$authortype,df$Gender)
-or1 <- effectsize::oddsratio(t) # 1.00
+# Explicit order of the rows and columns!
+t <- table(
+  factor(df$authortype, levels = c("Single", "Other")),
+  factor(df$Gender,levels = c("female","male"))
+)
+
+or1 <- effectsize::oddsratio(t) # 0.90
 #print(or1)
 
 #### Classify order: First author ----------
@@ -27,7 +32,13 @@ df$authortype <- 'Other'
 df$authortype[df$author_order == 1] <- 'First'
 df$authortype[df$author_last == 1] <- 'Other'
 df$authortype[df$author_single == 1] <- 'Other' # Take out single authors from first authors!
-t<-table(df$authortype,df$Gender)
+# t<-table(df$authortype,df$Gender)
+# t
+# Explicit order of the rows and columns!
+t <- table(
+  factor(df$authortype, levels = c("First", "Other")),
+  factor(df$Gender,levels = c("female","male"))
+)
 or2 <- effectsize::oddsratio(t) # 1.41
 #print(or2)
 
@@ -36,7 +47,12 @@ df$authortype <- 'Coauthor'
 df$authortype[df$author_order == 1] <- 'Other'
 df$authortype[df$author_last == 1] <- 'Other'
 df$authortype[df$author_single == 1] <- 'Other' # Take out single authors from first authors!
-t<-table(df$authortype,df$Gender)
+# Explicit order of the rows and columns!
+t <- table(
+  factor(df$authortype, levels = c("Coauthor", "Other")),
+  factor(df$Gender,levels = c("female","male"))
+)
+
 or3 <- effectsize::oddsratio(t) # 1.00
 #print(or3)
 
@@ -45,14 +61,18 @@ df$authortype <- 'Other'
 df$authortype[df$author_order == 1] <- 'Other'
 df$authortype[df$author_last == 1] <- 'Last'
 df$authortype[df$author_single == 1] <- 'Other' # Take out single authors from first authors!
-t<-table(df$authortype,df$Gender)
+t <- table(
+  factor(df$authortype, levels = c("Last", "Other")),
+  factor(df$Gender,levels = c("female","male"))
+)
+
 or4 <- effectsize::oddsratio(t) # 0.73
 #print(or4)
 
 or <- rbind(or1,or2,or3,or4)
 or$name<-c("Single","First","Coauthor","Last")
-or<-dplyr::select(or,name,Odds_ratio,CI_low,CI_high)
-#print(knitr::kable(or,digits = 2))
+#_or<-dplyr::select(or,name,Odds_ratio,CI_low,CI_high)
+#_print(knitr::kable(or,digits = 2))
 
 #### Annually ---------
 
@@ -71,7 +91,10 @@ output <- NULL
 U<-levels(df$YEAR_5)
 for (k in 1:length(U)){
   tmp<-dplyr::filter(df,YEAR_5==U[k])
-  t <- table(tmp$authortype,tmp$Gender)
+  t <- table(
+    factor(tmp$authortype, levels = c("Single", "Other")),
+    factor(tmp$Gender,levels = c("female","male"))
+  )
   output <- rbind(output,effectsize::oddsratio(t))
 }
 output$YearRange <- U
@@ -88,7 +111,10 @@ output <- NULL
 U<-levels(df$YEAR_5)
 for (k in 1:length(U)){
   tmp<-dplyr::filter(df,YEAR_5==U[k])
-  t <- table(tmp$authortype,tmp$Gender)
+  t <- table(
+    factor(tmp$authortype, levels = c("First", "Other")),
+    factor(tmp$Gender,levels = c("female","male"))
+  )
   output <- rbind(output,effectsize::oddsratio(t))
 }
 output$YearRange <- U
@@ -105,7 +131,10 @@ U<-levels(df$YEAR_5)
 output <- NULL
 for (k in 1:length(U)){
   tmp<-dplyr::filter(df,YEAR_5==U[k])
-  t <- table(tmp$authortype,tmp$Gender)
+  t <- table(
+    factor(tmp$authortype, levels = c("Coauthor", "Other")),
+    factor(tmp$Gender,levels = c("female","male"))
+  )
   output <- rbind(output,effectsize::oddsratio(t))
 }
 output$YearRange <- U
@@ -122,7 +151,10 @@ U<-levels(df$YEAR_5)
 output <- NULL
 for (k in 1:length(U)){
   tmp<-dplyr::filter(df,YEAR_5==U[k])
-  t <- table(tmp$authortype,tmp$Gender)
+  t <- table(
+    factor(tmp$authortype, levels = c("Last", "Other")),
+    factor(tmp$Gender,levels = c("female","male"))
+  )
   output <- rbind(output,effectsize::oddsratio(t))
 }
 output$YearRange <- U
@@ -152,14 +184,18 @@ annual2$separator<-"Yearly"
 annual2$separator[annual2$YearRange=="Overall"]<-"Overall"
 annual2$YearRange <- factor(annual2$YearRange, levels = c("Overall", "2000-2004", "2005-2009", "2010-2014", "2015-2019", "2020-2024"))
 
+custom_palette <- brewer.pal(n = 4, name = "Set1")
+custom_palette<-c(custom_palette[4],custom_palette[1:3])
+
+
 fig1 <- ggplot(annual2,aes(x=YearRange,y=Odds_ratio,color=Type,group=Type,shape=separator))+
   #facet_wrap(~TypeGroup,nrow = 2)+
   geom_hline(yintercept=1, linetype="dashed", color = "black") +
-  geom_point(position = position_dodge(width = 0.4),show.legend=FALSE,size=3)+
+  geom_point(position = position_dodge(width = 0.4),show.legend=TRUE,size=3)+
   geom_errorbar(aes(ymin=CI_low,ymax=CI_high),width=0.2,position = position_dodge(width = 0.4))+
 #  geom_line(alpha = 0.2,position = position_dodge(width = 0.4))+
-  scale_shape_manual(values = c(22, 16)) +
-  scale_color_brewer(name="Authorship\ntype",palette = "Set1",direction=-1) +
+  scale_shape_manual(name="Authorship\ntype",values = c(22, 16),guide = "none") +
+  scale_color_manual(name="Authorship\ntype",values=custom_palette) +
   xlab('Year range')+
   ylab('Female Authorship Odds Ratio (95%CI)')+
   theme_classic(base_size = 15)

@@ -35,14 +35,18 @@ df$author_N_cropped <- cut(
 df$authortype <- 'Other'
 df$authortype[df$author_order == 1] <- 'First'
 df$authortype[df$author_last == 1] <- 'Other'
+df$authortype[df$author_single == 1] <- 'Other'
 #table(df$authortype,df$Gender)
-
 
 output <- NULL
 U<-levels(df$author_N_cropped)
 for (k in 2:length(U)){
   tmp<-dplyr::filter(df,author_N_cropped==U[k])
-  t <- table(tmp$authortype,tmp$Gender)
+#  t <- table(tmp$authortype,tmp$Gender)
+  t <- table(
+    factor(tmp$authortype, levels = c("First", "Other")),
+    factor(tmp$Gender,levels = c("female","male"))
+  )
   output <- rbind(output,effectsize::oddsratio(t))
 }
 
@@ -54,13 +58,19 @@ first <- data.frame(output)
 df$authortype <- 'Coauthor'
 df$authortype[df$author_order == 1] <- 'Other'
 df$authortype[df$author_last == 1] <- 'Other'
+df$authortype[df$author_single == 1] <- 'Other'
 #table(df$authortype,df$Gender)
 
 output <- NULL
 U<-levels(df$author_N_cropped)
 for (k in 3:length(U)){
   tmp<-dplyr::filter(df,author_N_cropped==U[k])
-  t <- table(tmp$authortype,tmp$Gender)
+#  t <- table(tmp$authortype,tmp$Gender)
+  t <- table(
+    factor(tmp$authortype, levels = c("Coauthor", "Other")),
+    factor(tmp$Gender,levels = c("female","male"))
+  )
+  
   output <- rbind(output,effectsize::oddsratio(t))
 }
 
@@ -71,12 +81,18 @@ coauthor <- data.frame(output)
 df$authortype <- 'Other'
 df$authortype[df$author_order == 1] <- 'Other'
 df$authortype[df$author_last == 1] <- 'Last'
+df$authortype[df$author_single == 1] <- 'Other'
 
 output <- NULL
 U<-levels(df$author_N_cropped)
 for (k in 2:length(U)){
   tmp<-dplyr::filter(df,author_N_cropped==U[k])
-  t <- table(tmp$authortype,tmp$Gender)
+  #t <- table(tmp$authortype,tmp$Gender)
+  t <- table(
+    factor(tmp$authortype, levels = c("Last", "Other")),
+    factor(tmp$Gender,levels = c("female","male"))
+  )
+  
   output <- rbind(output,effectsize::oddsratio(t))
 }
 
