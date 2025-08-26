@@ -20,8 +20,8 @@ df$author_last[df$author_order == 1] <- 0 # except when the rank is 1
 
 #### Check all author roles -----------
 table(df$author_last,df$author_order)
-table(df$author_order==1,df$author_order) # 
-table(df$author_order==1,df$Max) # 
+table(df$author_order==1,df$author_order) #
+table(df$author_order==1,df$Max) #
 
 df$author_single <- 0
 df$author_single[df$author_order==1 & df$Max==1] <- 1 # if the author is the only one in the paper

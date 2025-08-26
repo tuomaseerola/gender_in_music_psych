@@ -9,18 +9,35 @@ df$authortype <- 'Other'
 df$authortype[df$author_order == 1] <- 'Other'
 df$authortype[df$author_last == 1] <- 'Other'
 df$authortype[df$author_single == 1] <- 'Single' # FOCUS
-t<-table(df$authortype,df$Gender)
-or1 <- effectsize::oddsratio(t) # 1.00
-#print(or1)
+# t<-table(df$authortype,df$Gender)
+# t
+# Explicit order of the rows and columns!
+t <- table(
+  factor(df$authortype, levels = c("Single", "Other")),
+  factor(df$Gender,levels = c("female","male"))
+)
+t
+or1 <- effectsize::oddsratio(t) # 0.83       | [0.71, 0.96]
+print(or1)
+fisher.test(t)
 
 #### Classify order: First author ----------
 df$authortype <- 'Other'
 df$authortype[df$author_order == 1] <- 'First'
 df$authortype[df$author_last == 1] <- 'Other'
 df$authortype[df$author_single == 1] <- 'Other' # Take out single authors from first authors!
-t<-table(df$authortype,df$Gender)
-or2 <- effectsize::oddsratio(t) # 1.41
-#print(or2)
+# t<-table(df$authortype,df$Gender)
+# t
+# Explicit order of the rows and columns!
+t <- table(
+  factor(df$authortype, levels = c("First", "Other")),
+  factor(df$Gender,levels = c("female","male"))
+)
+t
+
+or2 <- effectsize::oddsratio(t) # 1.27       | [1.03, 1.56]
+print(or2)
+fisher.test(t)
 
 #### Classify order: Coauthor --------------
 df$authortype <- 'Coauthor'
@@ -28,8 +45,17 @@ df$authortype[df$author_order == 1] <- 'Other'
 df$authortype[df$author_last == 1] <- 'Other'
 df$authortype[df$author_single == 1] <- 'Other' # Take out single authors from first authors!
 t<-table(df$authortype,df$Gender)
-or3 <- effectsize::oddsratio(t) # 1.00
-#print(or3)
+t
+# Explicit order of the rows and columns!
+t <- table(
+  factor(df$authortype, levels = c("Coauthor", "Other")),
+  factor(df$Gender,levels = c("female","male"))
+)
+t
+
+or3 <- effectsize::oddsratio(t) # 1.06       | [0.77, 1.46]
+print(or3)
+fisher.test(t)
 
 #### Classify order: Last -------------
 df$authortype <- 'Other'
@@ -37,6 +63,14 @@ df$authortype[df$author_order == 1] <- 'Other'
 df$authortype[df$author_last == 1] <- 'Last'
 df$authortype[df$author_single == 1] <- 'Other' # Take out single authors from first authors!
 t<-table(df$authortype,df$Gender)
+t
+# Explicit order of the rows and columns!
+t <- table(
+  factor(df$authortype, levels = c("Last", "Other")),
+  factor(df$Gender,levels = c("female","male"))
+)
+t
+
 or4 <- effectsize::oddsratio(t) # 0.73
 #print(or4)
 
@@ -62,7 +96,12 @@ output <- NULL
 U<-levels(df$YEAR_5)
 for (k in 1:length(U)){
   tmp<-dplyr::filter(df,YEAR_5==U[k])
-  t <- table(tmp$authortype,tmp$Gender)
+  #t <- table(tmp$authortype,tmp$Gender)
+  # Explicit order of the rows and columns!
+  t <- table(
+    factor(df$authortype, levels = c("Single", "Other")),
+    factor(df$Gender,levels = c("female","male"))
+  )
   output <- rbind(output,effectsize::oddsratio(t))
 }
 output$YearRange <- U
@@ -79,7 +118,12 @@ output <- NULL
 U<-levels(df$YEAR_5)
 for (k in 1:length(U)){
   tmp<-dplyr::filter(df,YEAR_5==U[k])
-  t <- table(tmp$authortype,tmp$Gender)
+  #t <- table(tmp$authortype,tmp$Gender)
+  # Explicit order of the rows and columns!
+  t <- table(
+    factor(df$authortype, levels = c("First", "Other")),
+    factor(df$Gender,levels = c("female","male"))
+  )
   output <- rbind(output,effectsize::oddsratio(t))
 }
 output$YearRange <- U
@@ -96,7 +140,12 @@ U<-levels(df$YEAR_5)
 output <- NULL
 for (k in 1:length(U)){
   tmp<-dplyr::filter(df,YEAR_5==U[k])
-  t <- table(tmp$authortype,tmp$Gender)
+#  t <- table(tmp$authortype,tmp$Gender)
+  # Explicit order of the rows and columns!
+  t <- table(
+    factor(df$authortype, levels = c("Coauthor", "Other")),
+    factor(df$Gender,levels = c("female","male"))
+  )
   output <- rbind(output,effectsize::oddsratio(t))
 }
 output$YearRange <- U
@@ -113,7 +162,12 @@ U<-levels(df$YEAR_5)
 output <- NULL
 for (k in 1:length(U)){
   tmp<-dplyr::filter(df,YEAR_5==U[k])
-  t <- table(tmp$authortype,tmp$Gender)
+#  t <- table(tmp$authortype,tmp$Gender)
+  # Explicit order of the rows and columns!
+  t <- table(
+    factor(df$authortype, levels = c("Last", "Other")),
+    factor(df$Gender,levels = c("female","male"))
+  )
   output <- rbind(output,effectsize::oddsratio(t))
 }
 output$YearRange <- U
@@ -166,13 +220,13 @@ print(fig1)
 #### Average growth rate ----------
 
 # [GR = (ending value - ending value) - 1]
-#[ AAGR = (GR1 + GR2 + ... +GRn) / N ] 
+#[ AAGR = (GR1 + GR2 + ... +GRn) / N ]
 first
-first$Year<-recode(first$YearRange, 
-                   '2000-2004' = 1, 
-                   '2005-2009' = 2, 
-                   '2010-2014' = 3, 
-                   '2015-2019' = 4, 
+first$Year<-recode(first$YearRange,
+                   '2000-2004' = 1,
+                   '2005-2009' = 2,
+                   '2010-2014' = 3,
+                   '2015-2019' = 4,
                    '2020-2024' = 5)
 first
 first_gr <- first %>%
@@ -185,11 +239,11 @@ first_gr <- first %>%
 first_gr
 first_gr_AAGR <- mean(first_gr$Rate_percent,na.rm = TRUE)
 
-coauthor$Year<-recode(coauthor$YearRange, 
-                   '2000-2004' = 1, 
-                   '2005-2009' = 2, 
-                   '2010-2014' = 3, 
-                   '2015-2019' = 4, 
+coauthor$Year<-recode(coauthor$YearRange,
+                   '2000-2004' = 1,
+                   '2005-2009' = 2,
+                   '2010-2014' = 3,
+                   '2015-2019' = 4,
                    '2020-2024' = 5)
 
 coauthor_gr <- coauthor %>%
@@ -201,11 +255,11 @@ coauthor_gr <- coauthor %>%
 
 coauthor_gr_AAGR <- mean(coauthor_gr$Rate_percent,na.rm = TRUE)
 
-last$Year<-recode(last$YearRange, 
-                   '2000-2004' = 1, 
-                   '2005-2009' = 2, 
-                   '2010-2014' = 3, 
-                   '2015-2019' = 4, 
+last$Year<-recode(last$YearRange,
+                   '2000-2004' = 1,
+                   '2005-2009' = 2,
+                   '2010-2014' = 3,
+                   '2015-2019' = 4,
                    '2020-2024' = 5)
 
 last_gr <- last %>%
