@@ -14,11 +14,11 @@ for (k in 1:length(U)) {
   prominent$target_country <- 'Untarget'
   prominent$target_country[prominent$Affiliation_country == U[k]] <- 'Target'
   t<-table(prominent$target_country,prominent$Gender)
-  or <- effectsize::oddsratio(t) 
+  or <- effectsize::oddsratio(t)
   or <- data.frame(or)
   or$Country<- U[k]
   or$N<- sum(t[1,])
-  DATA <- rbind(DATA, or)  
+  DATA <- rbind(DATA, or)
 }
 DATA<-dplyr::select(DATA,Country,N,-CI,Odds_ratio,CI_low,CI_high)
 DATA<-dplyr::arrange(DATA,-N)
