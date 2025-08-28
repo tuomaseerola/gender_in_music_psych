@@ -259,7 +259,6 @@ data = data %>% mutate(
 
 
 # Dance related
-## Words related to music expression
 idx = grep("dance", data$KW)
 unique(data$KW[idx])
 data = data %>% mutate(
@@ -333,7 +332,7 @@ data = data %>% mutate(
                            "tertiary music education" )
                  ~ "music education",TRUE ~ KW))
 
-# religion
+# Religion
 idx = grep("religi", data$KW)
 unique(data$KW[idx])
 data = data %>% mutate(
@@ -384,6 +383,32 @@ data = data %>% mutate(
                            "second language learning")
                  ~ "language",TRUE ~ KW))
 
+# Speech
+idx = grep("speech", data$KW)
+unique(data$KW[idx])
+data = data %>% mutate(
+  KW = case_when(KW %in% c("speech",
+                           "speech-in-noise",
+                           "speech prosody",
+                           "musicalized speech",
+                           "music and speech",
+                           "speech and oral archives",
+                           "expressive speech" ,
+                           "sung speech",
+                           "speech perception",
+                           "joint speech" ,
+                           "speech rhythm",
+                           "perception of speech in noise",
+                           "speech intonation",
+                           "nonpropositional and propositional speech",
+                           "pre-speech development" ,
+                           "private speech",
+                           "speech-to-song" ,
+                           "l2 speech",
+                           "dialogic speech",
+                           "thai speech" )
+                 ~ "speech",TRUE ~ KW))
+
 # Prosocial
 idx = c(grep("prosocial", data$KW),grep("pro-social", data$KW))
 unique(data$KW[idx])
@@ -400,7 +425,7 @@ data = data %>% mutate(
                            "music with prosocial lyrics",
                            "prosocial information"  ,
                            "pro-social behaviour" )
-                 ~ "prosocial",TRUE ~ KW))
+                 ~ "speech",TRUE ~ KW))
 
 # Para social
 idx = grep("parasocial", data$KW)
@@ -566,9 +591,127 @@ data = data %>% mutate(
                            "health musicking" )
                  ~ "music health",TRUE ~ KW))
 
+## Words related to children
+idx = grep("child", data$KW)
+unique(data$KW[idx])
+data = data %>% mutate(
+  KW = case_when(KW %in% c("children's music" ,
+                           "children's musical preferences" ,
+                           "children",
+                           "child development" ,
+                           "middle childhood",
+                           "children's audience" ,
+                           "children's use of singing voice" ,
+                           "children's singing" ,
+                           "early childhood music" ,
+                           "children and music" ,
+                           "music and children" ,
+                           "children and adolescents",
+                           "child personality",
+                           "rules of children's songs",
+                           "preschool children",
+                           "childhood" ,
+                           "parent-child communication",
+                           "early childhood" ,
+                           "elementary school children" ,
+                           "parent-child interaction" ,
+                           "young children" ,
+                           "migrant children"  ,
+                           "child to parent violence"  ,
+                           "children's cognition"  ,
+                           "children's drawings",
+                           "state-trait anxiety inventory for children (staic)",
+                           "parent-child interactions" )
+                 ~ "children",TRUE ~ KW))
+
+## Words related to infants / toddler 
+idx = c( grep("infant", data$KW), grep("toddler", data$KW) )
+unique(data$KW[idx])
+data = data %>% mutate(
+  KW = case_when(KW %in% c("mother-infant bonding",
+                           "infants",
+                           "infant" ,
+                           "infant-directed singing" ,
+                           "mother-infant interaction",
+                           "infant communication",
+                           "parent-infant groups",
+                           "preterm infants",
+                           "infant daily care" ,
+                           "mother-infant bond" ,
+                           "infants musical development"  ,
+                           "maternal singing to infants" ,
+                           "mother-infant vocal interaction",
+                           "infants' overlapping vocalizations",
+                           "mother-infant" ,
+                           "toddlers")
+                 ~ "infant",TRUE ~ KW))
+
+
+## Words related to audience
+idx = grep("audience", data$KW)
+unique(data$KW[idx])
+data = data %>% mutate(
+  KW = case_when(KW %in% c("audience motion" ,
+                           "audience",
+                           "audience research" ,
+                           "audience response"  ,
+                           "technology-mediated audience participation (tmap)",
+                           "global audiences" ,
+                           "children's audience" ,
+                           "audience expertise" ,
+                           "audience behavior" ,
+                           "artist-audience interaction",
+                           "audiences",
+                           "audience effects" )
+                 ~ "audience",TRUE ~ KW))
+
+
+## Words related to audience
+idx = grep("concert", data$KW)
+unique(data$KW[idx])
+data = data %>% mutate(
+  KW = case_when(KW %in% c("live concert",
+                           "classical concert" ,
+                           "concert experience",
+                           "digital concert stream",
+                           "concert research",
+                           "research concerts",
+                           "live concerts",
+                           "digital concerts",
+                           "concert situation" ,
+                           "concert" ,
+                           "concert band" ,
+                           "concert attendance",
+                           "mock concert",
+                           "concerts" ,
+                           "concert going"  )
+                 ~ "concert",TRUE ~ KW))
+
+## Words related to audience
+idx = grep(" sing", data$KW)
+unique(data$KW[idx])
+data = data %>% mutate(
+  KW = case_when(KW %in% c("live concert",
+                           "classical concert" ,
+                           "concert experience",
+                           "digital concert stream",
+                           "concert research",
+                           "research concerts",
+                           "live concerts",
+                           "digital concerts",
+                           "concert situation" ,
+                           "concert" ,
+                           "concert band" ,
+                           "concert attendance",
+                           "mock concert",
+                           "concerts" ,
+                           "concert going"  )
+                 ~ "concert",TRUE ~ KW))
+
 
 dim(data)
 length(unique(data$KW))
+
 #### Additional aggregating
 # what about collapsing music performance and performance?
 idx = grep("music performance", data$KW)
@@ -601,6 +744,7 @@ unique(data$KW[idx])
 data = data %>% mutate(
   KW = case_when(KW %in% c("music cognition")
                  ~ "cognition",TRUE ~ KW))
+
 # what about collapsing music emotion and emotion?
 idx = grep("music emotion", data$KW)
 unique(data$KW[idx])
@@ -613,6 +757,7 @@ data = data %>% mutate(
 head(data)
 data<-dplyr::filter(data,KW!="music")
 data<-dplyr::filter(data,KW!="music psychology")
+
 
 #-------
 x1 <- count2category(data,
