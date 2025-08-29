@@ -91,7 +91,7 @@ if(duplication==TRUE){
 
 
 
-
+# length(unique(data$KW))
 
 ## Words related to music cognition
 idx = grep("cognition", data$KW)
@@ -331,6 +331,50 @@ data = data %>% mutate(
                            "general music education" ,
                            "tertiary music education" )
                  ~ "music education",TRUE ~ KW))
+
+# teaching
+idx = grep("teaching", data$KW)
+unique(data$KW[idx])
+data = data %>% mutate(
+  KW = case_when(KW %in% c("music teaching",
+                           "instrumental teaching and learning",
+                           "teaching beliefs" ,
+                           "instrumental music teaching",
+                           "teaching behaviours",
+                           "teaching styles",
+                           "studio music teaching" ,
+                           "scholarship of teaching and learning",
+                           "teaching methods" ,
+                           "instrumental learning and teaching",
+                           "teaching effectiveness",
+                           "teaching" ,
+                           "piano teaching",
+                           "conceptions of teaching" ,
+                           "teaching experience" ,
+                           "instrumental teaching" ,
+                           "applied teaching",
+                           "instrumental learning/teaching" ,
+                           "peer teaching and learning" ,
+                           "teaching techniques"      )
+                 ~ "teaching",TRUE ~ KW))
+
+# learning
+idx = c( grep("audio-visual", data$KW),  grep("audiovisual", data$KW), grep("audio/v", data$KW))
+unique(data$KW[idx])
+data = data %>% mutate(
+  KW = case_when(KW %in% c("audio-visual",
+                           "audio-visuals",
+                           "audio-visual perception",
+                           "audio-visual processing",
+                           "audio-visual aids",
+                           "audiovisual interaction",
+                           "audiovisual processing" ,
+                           "audiovisual perception",
+                           "audiovisual" ,
+                           "audiovisual integration",
+                           "audio/visual" )
+                 ~ "audio-visual",TRUE ~ KW))
+
 
 # Religion
 idx = grep("religi", data$KW)
@@ -666,7 +710,7 @@ data = data %>% mutate(
                  ~ "audience",TRUE ~ KW))
 
 
-## Words related to audience
+## Words related to concert
 idx = grep("concert", data$KW)
 unique(data$KW[idx])
 data = data %>% mutate(
@@ -687,30 +731,412 @@ data = data %>% mutate(
                            "concert going"  )
                  ~ "concert",TRUE ~ KW))
 
-## Words related to audience
-idx = grep(" sing", data$KW)
+## Words related to memory
+idx = grep("memor", data$KW)
 unique(data$KW[idx])
 data = data %>% mutate(
-  KW = case_when(KW %in% c("live concert",
-                           "classical concert" ,
-                           "concert experience",
-                           "digital concert stream",
-                           "concert research",
-                           "research concerts",
-                           "live concerts",
-                           "digital concerts",
-                           "concert situation" ,
-                           "concert" ,
-                           "concert band" ,
-                           "concert attendance",
-                           "mock concert",
-                           "concerts" ,
-                           "concert going"  )
+  KW = case_when(KW %in% c("analytical memory",
+                           "aural memory",
+                           "kinesthetic memory" ,
+                           "musical memory" ,
+                           "visual memory" ,
+                           "memory",
+                           "working memory capacity"  ,
+                           "memorisation strategies" ,
+                           "musical semantic memories",
+                           "autobiographical memory" ,
+                           "tonal memory" ,
+                           "features memory",
+                           "music-evoked autobiographical memory" ,
+                           "emotional memories",
+                           "memory bias" ,
+                           "music-evoked memories"  ,
+                           "spontaneous autobiographical memories" ,
+                           "memory for music" ,
+                           "musical tempo memory" ,
+                           "phonological working memory (wm)" ,
+                           "short-term memory" ,
+                           "melodic memory"  ,
+                           "recall memory" ,
+                           "singing from memory" ,
+                           "tone memory" ,
+                           "working memory"  ,
+                           "musical working memory",
+                           "visuospatial working memory",
+                           "episodic memory" ,
+                           "memory for harmony" ,
+                           "schematic memory",
+                           "veridical memory" ,
+                           "auditory memory",
+                           "verbal working memory"  ,
+                           "music memory",
+                           "auditory short-term memory" ,
+                           "flashbulb memory"  ,
+                           "memory encoding"   ,
+                           "implicit vs. explicit memory",
+                           "true and false memories" ,
+                           "music memorization" ,
+                           "semantic memory"  ,
+                           "memory diary"  ,
+                           "implicit memory"   ,
+                           "working memory for auditory material"  ,
+                           "memory improvement",
+                           "recognition memory",
+                           "false memory" ,
+                           "meta-memory",
+                           "expert memory" ,
+                           "mesial temporal lobe memory system"  ,
+                           "pitch memory" ,
+                           "memorisation",
+                           "memory for melody" ,
+                           "collective memory" ,
+                           "item-source memory",
+                           "analytic memory" ,
+                           "kinaesthetic memory" ,
+                           "involuntary memory" ,
+                           "memories of body",
+                           "lyrics memorization",
+                           "memory recall",
+                           "long-term memory" ,
+                           "echoic memory" ,
+                            "music-evoked autobiographical memories",
+                           "memorized music",
+                           "visual working memory",
+                           "memories" ,
+                           "motor memory",
+                           "visuospatial memory" ,
+                           "performance memory",
+                           "very long-term memory" ,
+                           "short term memory" ,
+                           "autobiographical memories" ,
+                           "verbal memory" ,
+                           "long-term memory of music",
+                           "involuntary autobiographical/semantic memory (iam/ism)",
+                           "visual-spatial working memory" ,
+                           "memory errors" ,
+                           "working memory model" ,
+                           "flashbulb memories"   ,
+                           "play from memory"  ,
+                           "memorization"  ,
+                           "context-dependent memory" ,
+                           "memory span" )        
                  ~ "concert",TRUE ~ KW))
 
 
+
+
+## Words related to listening
+idx = grep("listening", data$KW)
+unique(data$KW[idx])
+data = data %>% mutate(
+  KW = case_when(KW %in% c("everyday music listening",
+                           "music listening",
+                           "listening",
+                           "listening habits",
+                           "solitary music listening",
+                           "everyday listening",
+                           "music listening behavior",
+                           "listening duration" ,
+                           "listening experiment",
+                           "modern musical listening",
+                           "listening time",
+                           "adaptive functions of music listening",
+                           "music listening test" ,
+                           "focused listening",
+                           "dichotic listening",
+                           "listening engagement" ,
+                           "music-listening" ,
+                           "listening preferences",
+                           "listening behaviors" ,
+                           "listening modes" ,
+                           "listening strategies",
+                           "classical music listening" ,
+                           "passive listening",
+                           "focused music listening" ,
+                           "music listening experiences"  ,
+                           "listening comprehension" ,
+                           "typical music listening situations",
+                           "functions of music listening"  ,
+                           "listening experience" ,
+                           "re-listening",
+                           "listening reasons" ,
+                           "personal music listening" ,
+                           "listening device",
+                           "sad music listening",
+                           "listening behavior" ,
+                           "music listening preferences" ,
+                           "listening maps" )
+                 ~ "listening",TRUE ~ KW))
+
+
+## Words related to attention
+idx = grep("attention", data$KW)
+unique(data$KW[idx])
+data = data %>% mutate(
+  KW = case_when(KW %in% c("attention",
+                           "focus of attention",
+                           "attentional resources",
+                           "attentional focus" ,
+                           "visual attention",
+                           "audio-visual perception and attention",
+                           "supramodal attentional system",
+                           "divided attention" ,
+                           "attention economy",
+                           "joint attention",
+                           "temporal attention",
+                           "attentional bias" ,
+                           "attentional disengagement",
+                           "attentional engagement" ,
+                           "attention deficit hyperactivity disorder",
+                           "attentional control theory",
+                           "visuospatial attention",
+                           "attention states",
+                           "selective attention")
+                 ~ "attention",TRUE ~ KW))
+
+## Words related to computing
+idx = grep("comput", data$KW)
+unique(data$KW[idx])
+data = data %>% mutate(
+  KW = case_when(KW %in% c("human-computer interaction" ,
+                           "computational thinking",
+                           "computing" ,
+                           "computational approach",
+                           "computational musicology" ,
+                           "computational music analysis",
+                           "computer music",
+                           "computational analysis",
+                           "computer-aided composition (cac)",
+                           "music computing",
+                           "computational creativity",
+                           "movement and computing",
+                           "quantum computing" ,
+                           "computer-aided composition",
+                           "computer-assisted composition",
+                           "computational music",
+                           "affective computing",
+                           "computational ethnomusicology",
+                           "computational methods",
+                           "computational models" ,
+                           "computer-based musicology",
+                           "computational modeling",
+                           "computer-generated music",
+                           "computer-assisted musical analysis",
+                           "computation",
+                           "computerized test" ,
+                           "computer music designer",
+                           "computing in musicology",
+                           "computational modelling",
+                           "computer games" ,
+                           "computer-based assessment" ,
+                           "computer software design" )
+                 ~ "computation",TRUE ~ KW))
+
+## Words related to cross modal 
+idx = c(grep("crossmodal", data$KW),grep("cross-modal", data$KW))
+unique(data$KW[idx])
+data = data %>% mutate(
+  KW = case_when(KW %in% c( "crossmodal relationships",
+                            "crossmodal correspondences",
+                            "crossmodal" ,
+                            "crossmodal correspondence" ,
+                            "crossmodal associations",
+                            "crossmodal integration",
+                            "cross-modal correspondences",
+                            "cross-modal",
+                            "cross-modal rating",
+                            "cross-modality",
+                            "cross-modal matching",
+                            "cross-modal associations",
+                            "cross-modal perception" ,
+                            "cross-modal correspondence",
+                            "cross-modal emotion perception",
+                            "cross-modal interaction",
+                            "cross-modal integration")
+                 ~ "cross-modal",TRUE ~ KW))
+
+## Words related to computing
+idx = grep("evolution", data$KW)
+unique(data$KW[idx])
+data = data %>% mutate(
+  KW = case_when(KW %in% c("human evolution",
+                           "cultural evolution",
+                           "evolution" , 
+                           "evolution of music",
+                           "hominin evolution" ,
+                           "evolutionary optimisation" ,
+                           "music evolution",
+                           "baldwinian evolution"   ,
+                           "gene-culture co-evolution" ,
+                           "music and evolution" ,
+                           "co-evolutionary simulation",
+                           "origin and evolution of music")
+                 ~ "evolution",TRUE ~ KW))
+
+
+## Words related to computing
+idx = grep("genet", data$KW)
+unique(data$KW[idx])
+data = data %>% mutate(
+  KW = case_when(KW %in% c("genetic algorithm",  "phylogenetic trees",  "genetic criticism" ,  "microgenetic method")
+                 ~ "genetics",TRUE ~ KW))
+
+
+## Words related to improvisation
+idx = grep("improv", data$KW)
+unique(data$KW[idx])
+data = data %>% mutate(
+  KW = case_when(KW %in% c("improvisation",
+                           "sung improvisation",
+                           "musical improvisation",
+                           "machine improvisation",
+                           "free music improvisation",
+                           "professionalimprovisers",
+                           "jazz improvisation",
+                           "cognitive improvement",
+                           "taksim (improvisation)",
+                           "improvement",
+                           "free improvisation",
+                           "music improvisation",
+                           "improvised song endings",
+                           "improvising",
+                           "improvise")
+                 ~ "improvisation",TRUE ~ KW))
+
+## Words related to personality
+idx = grep("personality", data$KW)
+unique(data$KW[idx])
+data = data %>% mutate(
+  KW = case_when(KW %in% c("personality",
+                           "personality traits" ,
+                           "big five personality",
+                           "borderline personality disorder",
+                           "music and personality",
+                           "musician personality",
+                           "type d personality" ,
+                           "personality perception",
+                           "personality traits of pianists")
+                 ~ "personality",TRUE ~ KW))
+
+
+## Words related to physiology
+idx = grep("physiol", data$KW)
+unique(data$KW[idx])
+data = data %>% mutate(
+  KW = case_when(KW %in% c("psychophysiology",
+                           "physiological evidence",
+                           "physiological sensing" ,
+                           "physiology"  ,
+                           "psychophysiological responses",
+                           "physiological stress",
+                           "music physiology",
+                           "neurophysiology"  ,
+                           "psychophysiological responses to music",
+                           "physiological measurement" ,
+                           "physiological parameters",
+                           "physiological" ,
+                           "physiological responses",
+                           "physiological reactivity" )
+                 ~ "physiology",TRUE ~ KW))
+
+
+
+## Words related to harmony
+idx = grep("harmony", data$KW)
+unique(data$KW[idx])
+data = data %>% mutate(
+  KW = case_when(KW %in% c("harmony",
+                           "romantic harmony",
+                           "harmony analysis",
+                           "functional harmony",
+                           "harmony perception",
+                           "jazz harmony",
+                           "rock harmony",
+                           "vertical harmony")
+                 ~ "harmony",TRUE ~ KW))
+
+## Words related to expertise
+idx = c(grep("expertise", data$KW))
+unique(data$KW[idx])
+data = data %>% mutate(
+  KW = case_when(KW %in% c("musical expertise",
+                           "expertise",
+                           "music expertise",
+                           "musical performance and expertise",
+                           "sound expertise",
+                           "motor expertise",
+                           "musikalische expertise",
+                           "visual expertise",
+                           "expertise levels" ,
+                           "expertise/familiarity" ,
+                           "expertise development")
+                 ~ "expertise",TRUE ~ KW))
+
+## Words related to predictability
+idx = c(grep("modeling", data$KW),grep("modelling", data$KW))
+unique(data$KW[idx])
+data = data %>% mutate(
+  KW = case_when(KW %in% c("bayesian modeling",
+                           "lda-based topic modeling" ,
+                           "causal modeling",
+                           "structural equation modeling",
+                           "modeling",
+                           "predictive modeling" ,
+                           "cognitive modeling",
+                           "krumhansl's modeling" ,
+                           "probabilistic modeling",
+                           "latent variable modeling",
+                           "modeling musicality" ,
+                           "multilevel modeling" ,
+                           "hierarchical linear modeling",
+                           "topic modelling",
+                           "conceptual modelling" ,
+                           "listener modelling" ,
+                           "biomechanical modelling",
+                           "item response modelling",
+                           "performance modelling" ,
+                           "melodic modelling",   
+                           "segmentation modelling" ,
+                           "structural equation modelling (sem)",
+                           "structural equation modelling")
+                 ~ "modelling",TRUE ~ KW))
+
+
+## Words related to AI
+idx = c(grep("machine", data$KW))
+unique(data$KW[idx])
+data = data %>% mutate(
+  KW = case_when(KW %in% c("machine learning" ,
+                           "applied machine learning",
+                           "machine-learning")
+                 ~ "machine learning",TRUE ~ KW))
+
+
+
+## Words related to 
+idx = c(grep("individual", data$KW))
+unique(data$KW[idx])
+data = data %>% mutate(
+  KW = case_when(KW %in% c("individual differences",
+                           "individual difference",
+                           "individual_differences")
+                 ~ "individual differences",TRUE ~ KW))
+
+
+## Words related to 
+idx = c(grep("analysis", data$KW))
+unique(data$KW[idx])
+data = data %>% mutate(
+  KW = case_when(KW %in% c("individual differences",
+                           "individual difference",
+                           "individual_differences")
+                 ~ "individual differences",TRUE ~ KW))
+
+
 dim(data)
-length(unique(data$KW))
+length(unique(data$KW)) # before: 6734
+
+
 
 #### Additional aggregating
 # what about collapsing music performance and performance?
