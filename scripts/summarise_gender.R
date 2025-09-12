@@ -10,9 +10,9 @@ gender_with_total <- df %>%
   count(Gender) %>%
   mutate(percentage = round(n / sum(n) * 100, 1)) %>%
   bind_rows(
-    summarise(., 
-              Gender = "Total", 
-              n = sum(n), 
+    summarise(.,
+              Gender = "Total",
+              n = sum(n),
               percentage = sum(percentage))
   )
 
@@ -42,4 +42,19 @@ cat(paste("\n mean:",round(mean(s$n),3)))
 cat(paste("\n sd:",round(sd(s$n),3)))
 cat(paste("\n max:",round(max(s$n),3)))
 cat("\n")
+s$n
+# create a histogram
+S<-s
+S$n[S$n > 9]<-10
+g<-ggplot(S,aes(x=n))+
+  geom_histogram(binwidth=1,fill='grey90',color='black')+
+  theme_classic()+
+  labs(x='Number of authors',y='Count of articles')+
+  scale_x_continuous(breaks=seq(1,10,1),expand = c(0.001,0.001),limits = c(0,11),
+                     labels = c(seq(1,9,1),"10+"))+
+  scale_y_continuous(expand = c(0.001,0.001))+
+  theme(axis.text=element_text(size=12),
+        axis.title=element_text(size=14))
+print(g)
+
 rm(s,gender_with_total)

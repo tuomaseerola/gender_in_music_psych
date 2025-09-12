@@ -11,7 +11,7 @@ prominent <- df[df$Affiliation_country %in% names(index)[index==TRUE],]
 U<-unique(prominent$Affiliation_country)
 
 DATA <- NULL
-for (k in 1:length(U)) { 
+for (k in 1:length(U)) {
   prominent$target_country <- 'Untarget'
   prominent$target_country[prominent$Affiliation_country == U[k]] <- 'Target'
   t<-table(prominent$target_country,prominent$Gender)
@@ -40,11 +40,11 @@ print(g1)
 
 
 
-## By continent? 
+## By continent?
 
 
 # Assign continents
-library(countrycode) 
+library(countrycode)
 df$assigned_continent = countrycode(df$Affiliation_country, origin = "country.name", destination = "continent")
 
 
@@ -52,7 +52,7 @@ df$assigned_continent = countrycode(df$Affiliation_country, origin = "country.na
 continent_counts <- table(df$assigned_continent)
 #table(prominent$Affiliation_country)
 #length(table(prominent$Affiliation_country))
-continent_count = df 
+continent_count = df
 
 U<-unique(continent_count$assigned_continent)
 

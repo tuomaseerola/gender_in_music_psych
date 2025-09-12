@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Tuomas Eerola">
+<meta name="author" content="Anna Czepiel">
+<meta name="dcterms.date" content="2025-08-01">
 
-<title>analysis – Gender in Music Psychology</title>
+<title>Analyse gender in music psychology from journal publication data – Gender in Music Psychology</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -144,22 +147,59 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#diagnostics" id="toc-diagnostics" class="nav-link active" data-scroll-target="#diagnostics"><span class="header-section-number">1</span> Diagnostics</a></li>
+  <li><a href="#summarise" id="toc-summarise" class="nav-link" data-scroll-target="#summarise"><span class="header-section-number">2</span> Summarise</a></li>
+  <li><a href="#quantify-authorship-types-citations-and-open-access" id="toc-quantify-authorship-types-citations-and-open-access" class="nav-link" data-scroll-target="#quantify-authorship-types-citations-and-open-access"><span class="header-section-number">3</span> Quantify authorship types, citations and open access</a></li>
+  <li><a href="#geographical" id="toc-geographical" class="nav-link" data-scroll-target="#geographical"><span class="header-section-number">4</span> Geographical</a>
+  <ul class="collapse">
+  <li><a href="#keywords-and-gender" id="toc-keywords-and-gender" class="nav-link" data-scroll-target="#keywords-and-gender"><span class="header-section-number">4.1</span> Keywords and gender</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content column-page-left" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Analyse gender in music psychology from journal publication data</h1>
+</div>
 
 
 
+<div class="quarto-title-meta column-page-left">
 
-<section id="analyse-gender-in-music-psychology" class="level1">
-<h1>Analyse gender in music psychology</h1>
-<p>T. Eerola, 1/8/2025</p>
-<p>Gender analysis of the music psychology journals since 2000 (Musicae Scientiae, Psychology of Music, Music Perception, Journal of New Music Research, and Music &amp; Science).</p>
-<section id="required-libraries" class="level2">
-<h2 class="anchored" data-anchor-id="required-libraries">Required libraries</h2>
-</section>
-<section id="load-and-preprocess-data" class="level2">
-<h2 class="anchored" data-anchor-id="load-and-preprocess-data">Load and preprocess data</h2>
+    <div>
+    <div class="quarto-title-meta-heading">Authors</div>
+    <div class="quarto-title-meta-contents">
+             <p>Tuomas Eerola </p>
+             <p>Anna Czepiel </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 1, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Gender analysis of the authors in music psychology journals since 2000. The journals included are <em>Musicae Scientiae</em>, <em>Psychology of Music</em>, <em>Music Perception</em>, <em>Journal of New Music Research</em>, and <em>Music &amp; Science</em> and the data been obtained in June 2025 from Scopus.</p>
+<section id="diagnostics" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="diagnostics"><span class="header-section-number">1</span> Diagnostics</h2>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">'scripts/load_scopus_datasets.R'</span>) <span class="co"># Creates full_names dataset</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Entries in the merged database: 3926 Entries in the author-expanded database: 9922 Entries in the author-expanded database after filtering editorials etc: 9662 Entries in the author-expanded database after filtering empty: 9651</p>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">'scripts/attribute_country.R'</span>) <span class="co"># Add country affiliations</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -252,8 +292,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<p>Prop. over .90 conf. = 0.892786234281932 /nProp. over .95 conf. = 0.866644606221046 /nProp. under .55 conf. = 0.00981689830134569 /nProp. under .55 conf. = 89 /n/n ***</p>
+<p>Confidence of gender attribution by the API:</p>
+<p>Prop. over .90 conf. = 0.893</p>
+<p>Prop. over .95 conf. = 0.867</p>
+<p>Prop. under .55 conf. = 0.01</p>
+<p>Prop. under .55 conf. = 0.01</p>
+<hr>
 <table class="caption-top table">
+<caption>API: Gender probability means/medians.</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Gender</th>
@@ -276,6 +322,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 <hr>
 <table class="caption-top table">
+<caption>Citations across gender.</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Gender</th>
@@ -302,12 +349,74 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-</section>
-</section>
-<section id="a-tibble-1-10" class="level1">
-<h1>A tibble: 1 × 10</h1>
-<p>estimate estimate1 estimate2 statistic p.value parameter conf.low conf.high <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> 1 -2.43 19.8 22.2 -3.25 0.00114 8417. -3.90 -0.967 # ℹ 2 more variables: method <chr>, alternative <chr> # A tibble: 1 × 4 statistic p.value method alternative <dbl> <dbl> <chr> <chr><br>
-1 9392423 0.0000616 Wilcoxon rank sum test with continuity correc… two.sided</chr></chr></dbl></dbl></chr></chr></dbl></dbl></dbl></dbl></dbl></dbl></dbl></dbl></p>
+<table class="caption-top table">
+<caption>Citations (t-test)</caption>
+<colgroup>
+<col style="width: 7%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 9%">
+<col style="width: 20%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">estimate1</th>
+<th style="text-align: right;">estimate2</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+<th style="text-align: right;">parameter</th>
+<th style="text-align: right;">conf.low</th>
+<th style="text-align: right;">conf.high</th>
+<th style="text-align: left;">method</th>
+<th style="text-align: left;">alternative</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">-2.43184</td>
+<td style="text-align: right;">19.80861</td>
+<td style="text-align: right;">22.24045</td>
+<td style="text-align: right;">-3.254233</td>
+<td style="text-align: right;">0.0011415</td>
+<td style="text-align: right;">8416.543</td>
+<td style="text-align: right;">-3.896703</td>
+<td style="text-align: right;">-0.9669776</td>
+<td style="text-align: left;">Welch Two Sample t-test</td>
+<td style="text-align: left;">two.sided</td>
+</tr>
+</tbody>
+</table>
+<table class="caption-top table">
+<caption>Citations (Wilcox-test)</caption>
+<colgroup>
+<col style="width: 12%">
+<col style="width: 11%">
+<col style="width: 61%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+<th style="text-align: left;">method</th>
+<th style="text-align: left;">alternative</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">9392423</td>
+<td style="text-align: right;">6.16e-05</td>
+<td style="text-align: left;">Wilcoxon rank sum test with continuity correction</td>
+<td style="text-align: left;">two.sided</td>
+</tr>
+</tbody>
+</table>
 <table class="caption-top table">
 <caption>Gender Distribution</caption>
 <thead>
@@ -331,8 +440,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">'scripts/export_gender_data.R'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<section id="summarise" class="level2">
-<h2 class="anchored" data-anchor-id="summarise">Summarise</h2>
+</section>
+<section id="summarise" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="summarise"><span class="header-section-number">2</span> Summarise</h2>
 <div class="cell" data-messages="false">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">'scripts/summarise_gender.R'</span>) <span class="co"># different summaries</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <table class="caption-top table table-sm table-striped small">
@@ -363,13 +473,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 <p>Number of coauthors:</p>
 <p>median: 2 mean: 2.688 sd: 1.77 max: 34</p>
+<pre><code>Warning: Removed 2 rows containing missing values or values outside the scale range
+(`geom_bar()`).</code></pre>
+<p><img src="analysis_files/figure-html/summarise-1.png" class="img-fluid" width="672"></p>
 </div>
 </section>
-<section id="quantify" class="level2">
-<h2 class="anchored" data-anchor-id="quantify">Quantify</h2>
+<section id="quantify-authorship-types-citations-and-open-access" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="quantify-authorship-types-citations-and-open-access"><span class="header-section-number">3</span> Quantify authorship types, citations and open access</h2>
 <div class="cell" data-messages="false">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">'scripts/quantify_authorship.R'</span>) <span class="co"># use Odds</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">'scripts/quantify_authorship.R'</span>) <span class="co"># use Odds</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <table class="caption-top table table-sm table-striped small">
+<caption>Female authorship odds ratios by authorship type.</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">name</th>
@@ -381,32 +495,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Single</td>
-<td style="text-align: right;">1.11</td>
-<td style="text-align: right;">0.95</td>
-<td style="text-align: right;">1.29</td>
+<td style="text-align: right;">0.905</td>
+<td style="text-align: right;">0.778</td>
+<td style="text-align: right;">1.052</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">First</td>
-<td style="text-align: right;">1.41</td>
-<td style="text-align: right;">1.28</td>
-<td style="text-align: right;">1.54</td>
+<td style="text-align: right;">1.408</td>
+<td style="text-align: right;">1.284</td>
+<td style="text-align: right;">1.544</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Coauthor</td>
-<td style="text-align: right;">1.00</td>
-<td style="text-align: right;">0.91</td>
-<td style="text-align: right;">1.09</td>
+<td style="text-align: right;">0.997</td>
+<td style="text-align: right;">0.913</td>
+<td style="text-align: right;">1.090</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Last</td>
-<td style="text-align: right;">0.73</td>
-<td style="text-align: right;">0.67</td>
-<td style="text-align: right;">0.81</td>
+<td style="text-align: right;">0.733</td>
+<td style="text-align: right;">0.667</td>
+<td style="text-align: right;">0.806</td>
 </tr>
 </tbody>
 </table>
-<p><img src="analysis_files/figure-html/quantify-1.png" class="img-fluid" width="672">[1] “5-year growth rate of female authorships:”</p>
 <table class="caption-top table table-sm table-striped small">
+<caption>5-year growth rate of female authorships</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Type</th>
@@ -428,8 +542,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">'scripts/citations.R'</span>)           <span class="co"># Citations and gender</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(knitr<span class="sc">::</span><span class="fu">kable</span>(citestats_all, <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">caption =</span> <span class="st">'Citations across all authors'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">'scripts/citations.R'</span>)           <span class="co"># Citations and gender</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(knitr<span class="sc">::</span><span class="fu">kable</span>(citestats_all, <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">caption =</span> <span class="st">'Citations across all authors'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <table class="caption-top table table-sm table-striped small">
 <caption>Citations across all authors</caption>
 <thead>
@@ -461,7 +575,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(knitr<span class="sc">::</span><span class="fu">kable</span>(stats_all))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(knitr<span class="sc">::</span><span class="fu">kable</span>(stats_all))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <table class="caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
@@ -480,8 +594,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">'scripts/open_access.R'</span>)         <span class="co"># OA and gender</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(knitr<span class="sc">::</span><span class="fu">kable</span>(author_OA, <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">caption =</span> <span class="st">'Open access across all authors'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">'scripts/open_access.R'</span>)         <span class="co"># OA and gender</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(knitr<span class="sc">::</span><span class="fu">kable</span>(author_OA, <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">caption =</span> <span class="st">'Open access across all authors'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <table class="caption-top table table-sm table-striped small">
 <caption>Open access across all authors</caption>
 <thead>
@@ -519,12 +633,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 </div>
 </section>
-<section id="geographical" class="level2">
-<h2 class="anchored" data-anchor-id="geographical">Geographical</h2>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">'scripts/country_table.R'</span>) <span class="co"># OK</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><img src="analysis_files/figure-html/geographical-1.png" class="img-fluid" width="672"></p>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">'scripts/visualise_gender.R'</span>) <span class="co"># OK</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Top countries <img src="analysis_files/figure-html/geographical-2.png" class="img-fluid" width="672"><img src="analysis_files/figure-html/geographical-3.png" class="img-fluid" width="672"></p>
+<section id="geographical" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="geographical"><span class="header-section-number">4</span> Geographical</h2>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">'scripts/country_table.R'</span>) <span class="co"># OK</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="analysis_files/figure-html/geographical-1.png" class="img-fluid" width="672"><img src="analysis_files/figure-html/geographical-2.png" class="img-fluid" width="672"></p>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#source('scripts/visualise_gender.R') # OK</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <table class="caption-top table">
 <caption>Female author odds ratios across continents.</caption>
 <thead>
@@ -574,10 +687,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<section id="keywords-and-gender" class="level3">
-<h3 class="anchored" data-anchor-id="keywords-and-gender">Keywords and gender</h3>
+<section id="keywords-and-gender" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="keywords-and-gender"><span class="header-section-number">4.1</span> Keywords and gender</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">'scripts/keyword_analysis.R'</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">'scripts/count2category.R'</span>) </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">'scripts/keyword_analysis.R'</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -585,24 +699,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="analysis_files/figure-html/keywords-2.png" class="img-fluid figure-img" width="960"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="analysis_files/figure-html/keywords-3.png" class="img-fluid figure-img" width="960"></p>
-</figure>
-</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Nurturing keywords/topics:"
+[1] 0.1291887</code></pre>
 </div>
 </div>
 
 
-</section>
 </section>
 </section>
 

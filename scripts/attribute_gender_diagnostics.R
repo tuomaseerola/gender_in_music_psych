@@ -15,9 +15,9 @@ journal_with_total <- df %>%
   count(JOURNAL) %>%
   mutate(percentage = round(n / sum(n) * 100, 1)) %>%
   bind_rows(
-    summarise(., 
-              JOURNAL = "Total", 
-              n = sum(n), 
+    summarise(.,
+              JOURNAL = "Total",
+              n = sum(n),
               percentage = sum(percentage))
   )
 
@@ -31,15 +31,17 @@ cat("\n\n")
 #hist(df$Gender.Probability)
 
 # the majority is confidently attributed
-cat(paste("Prop. over .90 conf. =",sum(df$Gender.Probability>.90)/nrow(df),"/n"))
-cat(paste("Prop. over .95 conf. =",sum(df$Gender.Probability>.95)/nrow(df),"/n"))
-cat(paste("Prop. under .55 conf. =",sum(df$Gender.Probability<.55)/nrow(df),"/n"))
-cat(paste("Prop. under .55 conf. =",sum(df$Gender.Probability<.55),"/n/n"))
+cat("Confidence of gender attribution by the API:\n\n")
+cat(paste("Prop. over .90 conf. =",round(sum(df$Gender.Probability>.90)/nrow(df),3),"\n\n"))
+cat(paste("Prop. over .95 conf. =",round(sum(df$Gender.Probability>.95)/nrow(df),3),"\n\n"))
+cat(paste("Prop. under .55 conf. =",round(sum(df$Gender.Probability<.55)/nrow(df),3),"\n\n"))
+cat(paste("Prop. under .55 conf. =",round(sum(df$Gender.Probability<.55)/nrow(df),3),"\n\n"))
 
 cat("\n***")
 
 S <- dplyr::summarise(group_by(df,Gender),M=mean(Gender.Probability),Md=median(Gender.Probability))
-print(knitr::kable(S,digits = 2))
+print(knitr::kable(S,digits = 2,caption="API: Gender probability means/medians."))
+
 cat("\n***")
 
 upperCI<-function(x, conf.level = 0.95) {
@@ -56,11 +58,11 @@ lowerCI<-function(x, conf.level = 0.95) {
 }
 # citations across gender
 S <- dplyr::summarise(group_by(df,Gender),M=mean(Citations),Md=median(Citations),LCI=lowerCI(Citations),UCI=upperCI(Citations))
-print(knitr::kable(S,digits = 2))
+print(knitr::kable(S,digits = 2,caption="Citations across gender."))
 
 # get the stats of citations across gender
-print(broom::glance(t.test(Citations ~ Gender, data=df)))
-print(broom::glance(wilcox.test(Citations ~ Gender, data=df)))
+print(knitr::kable(broom::glance(t.test(Citations ~ Gender, data=df)),caption = "Citations (t-test)"))
+print(knitr::kable(broom::glance(wilcox.test(Citations ~ Gender, data=df)),caption = "Citations (Wilcox-test)"))
 
 #### Gender distribution of authors -----------
 dist1 <- DescTools::MultinomCI(as.numeric(table(df$Gender)),conf.level=0.95,method="sisonglaz")

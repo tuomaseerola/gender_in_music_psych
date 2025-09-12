@@ -676,7 +676,7 @@ data = data %>% mutate(
                            "parent-child interactions" )
                  ~ "children",TRUE ~ KW))
 
-## Words related to infants / toddler 
+## Words related to infants / toddler
 idx = c( grep("infant", data$KW), grep("toddler", data$KW) )
 unique(data$KW[idx])
 data = data %>% mutate(
@@ -827,7 +827,7 @@ data = data %>% mutate(
                            "play from memory"  ,
                            "memorization"  ,
                            "context-dependent memory" ,
-                           "memory span" )        
+                           "memory span" )
                  ~ "concert",TRUE ~ KW))
 
 
@@ -940,7 +940,7 @@ data = data %>% mutate(
                            "computer software design" )
                  ~ "computation",TRUE ~ KW))
 
-## Words related to cross modal 
+## Words related to cross modal
 idx = c(grep("crossmodal", data$KW),grep("cross-modal", data$KW))
 unique(data$KW[idx])
 data = data %>% mutate(
@@ -969,7 +969,7 @@ unique(data$KW[idx])
 data = data %>% mutate(
   KW = case_when(KW %in% c("human evolution",
                            "cultural evolution",
-                           "evolution" , 
+                           "evolution" ,
                            "evolution of music",
                            "hominin evolution" ,
                            "evolutionary optimisation" ,
@@ -1103,7 +1103,7 @@ data = data %>% mutate(
                            "biomechanical modelling",
                            "item response modelling",
                            "performance modelling" ,
-                           "melodic modelling",   
+                           "melodic modelling",
                            "segmentation modelling" ,
                            "structural equation modelling (sem)",
                            "structural equation modelling")
@@ -1185,7 +1185,7 @@ data<-dplyr::filter(data,KW!="music psychology")
 
 
 
-#kw_num = data %>% count(KW) %>% arrange(n) 
+#kw_num = data %>% count(KW) %>% arrange(n)
 kw_num = data %>% count(KW) %>% arrange(desc(n))
 
 
@@ -1227,10 +1227,10 @@ figure1 <- ggplot(data = x1[FROM:TO, ], aes(
     axis.line = element_line(colour = "black")
   )
 
-print(figure1)
+#print(figure1)
 
 
-head(x1)
+#head(x1)
 
 all_females<-sum(x1$female)
 all_males<-sum(x1$male)
@@ -1277,7 +1277,7 @@ figure2 <- ggplot(data = x1[FROM:TO, ], aes(
     axis.line = element_line(colour = "black")
   )
 
-print(figure2)
+#print(figure2)
 
 
 #### odds ratio -------
@@ -1323,24 +1323,25 @@ tmp$Freq[which(tmp$KW=='well-being')],
 tmp$Freq[which(tmp$KW=='mental health')],
 tmp$Freq[which(tmp$KW=='music therapy')]
 )
-sum(nurturing_topics) / sum(tmp$Freq)
+#print("Nurturing keywords/topics:")
+#print(sum(nurturing_topics) / sum(tmp$Freq))
 
 #### Save figures ----------------------
 plotflag <- FALSE
 if (plotflag) {
-  ggsave(
-    filename = 'figure1.png',
-    plot = figure1,
-    width = 8, height = 6, units = "in",
-    dpi = 300
-  )
-
-  ggsave(
-    filename = 'figure2.png',
-    plot = figure2,
-    width = 8, height = 6, units = "in",
-    dpi = 300
-  )
+  # ggsave(
+  #   filename = 'figure1.png',
+  #   plot = figure1,
+  #   width = 8, height = 6, units = "in",
+  #   dpi = 300
+  # )
+  #
+  # ggsave(
+  #   filename = 'figure2.png',
+  #   plot = figure2,
+  #   width = 8, height = 6, units = "in",
+  #   dpi = 300
+  # )
 
   ggsave(
     filename = 'figure3.png',

@@ -18,8 +18,8 @@ t <- table(
 )
 t
 or1 <- effectsize::oddsratio(t) # 0.83       | [0.71, 0.96]
-print(or1)
-fisher.test(t)
+#print(or1)
+#fisher.test(t)
 
 #### Classify order: First author ----------
 df$authortype <- 'Other'
@@ -36,8 +36,8 @@ t <- table(
 t
 
 or2 <- effectsize::oddsratio(t) # 1.27       | [1.03, 1.56]
-print(or2)
-fisher.test(t)
+#print(or2)
+#fisher.test(t)
 
 #### Classify order: Coauthor --------------
 df$authortype <- 'Coauthor'
@@ -54,8 +54,8 @@ t <- table(
 t
 
 or3 <- effectsize::oddsratio(t) # 1.06       | [0.77, 1.46]
-print(or3)
-fisher.test(t)
+#print(or3)
+#fisher.test(t)
 
 #### Classify order: Last -------------
 df$authortype <- 'Other'
@@ -77,7 +77,7 @@ or4 <- effectsize::oddsratio(t) # 0.73
 or <- rbind(or1,or2,or3,or4)
 or$name<-c("Single","First","Coauthor","Last")
 or<-dplyr::select(or,name,Odds_ratio,CI_low,CI_high)
-print(knitr::kable(or,digits = 3))
+print(knitr::kable(or,digits = 3,caption = "Female authorship odds ratios by authorship type."))
 
 #### Annually ---------
 
@@ -201,10 +201,10 @@ annual
 # Add overall numbers
 or$name = factor(or$name, levels = c('Single','First','Coauthor', 'Last'), labels = c('Single','First','Co', 'Last'))
 
-tmp <- data.frame(Odds_ratio = or$Odds_ratio, 
+tmp <- data.frame(Odds_ratio = or$Odds_ratio,
                   CI=0.95,
-                  CI_low = or$CI_low, 
-                  CI_high = or$CI_high, 
+                  CI_low = or$CI_low,
+                  CI_high = or$CI_high,
                   YearRange = "Overall",
                   Type = or$name)
 annual2<- rbind(tmp,annual)
@@ -292,10 +292,10 @@ last_gr <- last %>%
 last_gr
 last_gr_AAGR <- mean(last_gr$Rate_percent, na.rm = TRUE)
 
-print('5-year growth rate of female authorships:')
+#print('5-year growth rate of female authorships:')
 annual_growth <- data.frame(
   Type = c("First", "Coauthor", "Last"),
   AAGR = c(first_gr_AAGR, coauthor_gr_AAGR, last_gr_AAGR)
 )
 
-print(knitr::kable(annual_growth,digits = 2))
+print(knitr::kable(annual_growth,digits = 2,caption="5-year growth rate of female authorships"))

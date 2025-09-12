@@ -1,12 +1,12 @@
 ```{r}
 #| label: fig2
-#| fig-width: 9
+#| fig-width: 13
 #| fig-height: 4
 #| echo: false
 #| warning: false
 #| message: false
 #| fig.cap: > 
-#|   Authorship types across author counts.
+#|   A) Number of authors and B) female odds ratio for authorship types across the number of authors.
 
 source(here("scripts","load_gender_data.R"))
 library(ggplot2,quietly = TRUE)
@@ -123,8 +123,24 @@ fig2 <- ggplot(author_N,aes(x=author_N_cropped,y=Odds_ratio,color=Type))+
   geom_point(position = position_dodge(width = 0.4),shape=15,size=3)+
   geom_errorbar(aes(ymin=CI_low,ymax=CI_high),width=0.2,position = position_dodge(width = 0.4))+
   scale_color_manual(name="Authorship\ntype",values = custom_palette) +
-  xlab('Author N')+
+  xlab('Number of authors/article')+
   ylab('Female Authorship Odds Ratio')+
   theme_classic(base_size = 15)
-print(fig2)
+#print(fig2)
+
+s <- summarise(group_by(df, BIBTEXKEY), n = n())
+S<-s
+S$n[S$n > 9]<-10
+fig2a <- ggplot(S,aes(x=n))+
+  geom_histogram(binwidth=1,fill='grey90',color='black')+
+  theme_classic(base_size = 15)+
+  labs(x='Number of authors/article',y='Count of articles')+
+  scale_x_continuous(breaks=seq(1,10,1),expand = c(0.001,0.001),limits = c(0,11),
+                     labels = c(seq(1,9,1),"10+"))+
+  scale_y_continuous(expand = c(0.001,0.001))
+#print(g)
+
+G<-cowplot::plot_grid(fig2a,fig2,nrow=1,labels=c('A','B'),rel_widths = c(0.4,1))
+print(G)
+
 ```
