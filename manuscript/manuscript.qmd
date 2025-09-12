@@ -186,14 +186,12 @@ Past studies have identified consistent geographical patterns in female authorsh
 #| message: false
 #| output: asis
 #| fig-width: 9
-#| fig-height: 6
+#| fig-height: 8
 #| fig.cap: > 
 #|   Female author odds ratio across the prolific countries publishing music psychology (with more than sixty publications).
 
 source(here("scripts","country_table.R"))
 ```
-
-- If we want to add the continents at this figure, that's possible.
 
 ## Gendered topics through analysis of keywords
 
