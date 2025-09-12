@@ -77,7 +77,7 @@ or4 <- effectsize::oddsratio(t) # 0.73
 or <- rbind(or1,or2,or3,or4)
 or$name<-c("Single","First","Coauthor","Last")
 or<-dplyr::select(or,name,Odds_ratio,CI_low,CI_high)
-print(knitr::kable(or,digits = 2))
+print(knitr::kable(or,digits = 3))
 
 #### Annually ---------
 
@@ -98,9 +98,13 @@ for (k in 1:length(U)){
   tmp<-dplyr::filter(df,YEAR_5==U[k])
   #t <- table(tmp$authortype,tmp$Gender)
   # Explicit order of the rows and columns!
+  # t <- table(
+  #   factor(df$authortype, levels = c("Single", "Other")),
+  #   factor(df$Gender,levels = c("female","male"))
+  # )
   t <- table(
-    factor(df$authortype, levels = c("Single", "Other")),
-    factor(df$Gender,levels = c("female","male"))
+    factor(tmp$authortype, levels = c("Single", "Other")),
+    factor(tmp$Gender,levels = c("female","male"))
   )
   output <- rbind(output,effectsize::oddsratio(t))
 }
@@ -120,9 +124,13 @@ for (k in 1:length(U)){
   tmp<-dplyr::filter(df,YEAR_5==U[k])
   #t <- table(tmp$authortype,tmp$Gender)
   # Explicit order of the rows and columns!
+  # t <- table(
+  #   factor(df$authortype, levels = c("First", "Other")),
+  #   factor(df$Gender,levels = c("female","male"))
+  # )
   t <- table(
-    factor(df$authortype, levels = c("First", "Other")),
-    factor(df$Gender,levels = c("female","male"))
+    factor(tmp$authortype, levels = c("First", "Other")),
+    factor(tmp$Gender,levels = c("female","male"))
   )
   output <- rbind(output,effectsize::oddsratio(t))
 }
@@ -142,9 +150,13 @@ for (k in 1:length(U)){
   tmp<-dplyr::filter(df,YEAR_5==U[k])
 #  t <- table(tmp$authortype,tmp$Gender)
   # Explicit order of the rows and columns!
+  # t <- table(
+  #   factor(df$authortype, levels = c("Coauthor", "Other")),
+  #   factor(df$Gender,levels = c("female","male"))
+  # )
   t <- table(
-    factor(df$authortype, levels = c("Coauthor", "Other")),
-    factor(df$Gender,levels = c("female","male"))
+    factor(tmp$authortype, levels = c("Coauthor", "Other")),
+    factor(tmp$Gender,levels = c("female","male"))
   )
   output <- rbind(output,effectsize::oddsratio(t))
 }
@@ -164,9 +176,13 @@ for (k in 1:length(U)){
   tmp<-dplyr::filter(df,YEAR_5==U[k])
 #  t <- table(tmp$authortype,tmp$Gender)
   # Explicit order of the rows and columns!
+  # t <- table(
+  #   factor(df$authortype, levels = c("Last", "Other")),
+  #   factor(df$Gender,levels = c("female","male"))
+  # )
   t <- table(
-    factor(df$authortype, levels = c("Last", "Other")),
-    factor(df$Gender,levels = c("female","male"))
+    factor(tmp$authortype, levels = c("Last", "Other")),
+    factor(tmp$Gender,levels = c("female","male"))
   )
   output <- rbind(output,effectsize::oddsratio(t))
 }
@@ -185,7 +201,12 @@ annual
 # Add overall numbers
 or$name = factor(or$name, levels = c('Single','First','Coauthor', 'Last'), labels = c('Single','First','Co', 'Last'))
 
-tmp <- data.frame(Odds_ratio = or$Odds_ratio, CI=0.95,CI_low = or$CI_low, CI_high = or$CI_high, YearRange = "Overall", Type = or$name)
+tmp <- data.frame(Odds_ratio = or$Odds_ratio, 
+                  CI=0.95,
+                  CI_low = or$CI_low, 
+                  CI_high = or$CI_high, 
+                  YearRange = "Overall",
+                  Type = or$name)
 annual2<- rbind(tmp,annual)
 annual2$separator<-"Yearly"
 annual2$separator[annual2$YearRange=="Overall"]<-"Overall"
@@ -196,7 +217,7 @@ fig1 <- ggplot(annual2,aes(x=YearRange,y=Odds_ratio,color=Type,group=Type,shape=
   geom_hline(yintercept=1, linetype="dashed", color = "black") +
   geom_point(position = position_dodge(width = 0.4),show.legend=FALSE,size=3)+
   geom_errorbar(aes(ymin=CI_low,ymax=CI_high),width=0.2,position = position_dodge(width = 0.4))+
-#  geom_line(alpha = 0.2,position = position_dodge(width = 0.4))+
+  #geom_line(alpha = 0.2,position = position_dodge(width = 0.4))+
   scale_shape_manual(values = c(22, 16)) +
   scale_color_brewer(name="Authorship",palette = "Set1") +
   xlab('Year range')+
@@ -205,7 +226,7 @@ fig1 <- ggplot(annual2,aes(x=YearRange,y=Odds_ratio,color=Type,group=Type,shape=
 fig1
 
 # fig1 <- ggplot(annual,aes(x=YearRange,y=Odds_ratio,color=Type,group=Type))+
-#   facet_wrap(~TypeGroup,nrow = 2)+
+#   facet_wrap(~Type,nrow = 4)+
 #   geom_hline(yintercept=1, linetype="dashed", color = "black") +
 #   geom_point(position = position_dodge(width = 0.4))+
 #   geom_errorbar(aes(ymin=CI_low,ymax=CI_high),width=0.2,position = position_dodge(width = 0.4))+
@@ -214,8 +235,7 @@ fig1
 #   xlab('Year range')+
 #   ylab('Female Authorship Odds Ratio')+
 #   theme_classic()
-
-print(fig1)
+# print(fig1)
 
 #### Average growth rate ----------
 

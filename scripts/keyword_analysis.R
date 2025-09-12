@@ -88,7 +88,7 @@ if(duplication==TRUE){
 }
 
 
-
+kw_num = data %>% count(KW)
 
 
 # length(unique(data$KW))
@@ -254,6 +254,14 @@ data = data %>% mutate(
   KW = case_when(KW %in% c("new interfaces for musical expression",
                            "new interface for musical expression" )
                  ~ "new interface for musical expression",TRUE ~ KW))
+
+idx = grep("absolute", data$KW)
+unique(data$KW[idx])
+data = data %>% mutate(
+  KW = case_when(KW %in% c("absolute pitch",
+                           "absolute pitch shift",
+                           "absolute pitch (ap)")
+                 ~ "absolute pitch",TRUE ~ KW))
 
 
 
@@ -955,7 +963,7 @@ data = data %>% mutate(
                             "cross-modal integration")
                  ~ "cross-modal",TRUE ~ KW))
 
-## Words related to computing
+## Words related to evolution
 idx = grep("evolution", data$KW)
 unique(data$KW[idx])
 data = data %>% mutate(
@@ -974,7 +982,7 @@ data = data %>% mutate(
                  ~ "evolution",TRUE ~ KW))
 
 
-## Words related to computing
+## Words related to genetics
 idx = grep("genet", data$KW)
 unique(data$KW[idx])
 data = data %>% mutate(
@@ -1072,7 +1080,7 @@ data = data %>% mutate(
                            "expertise development")
                  ~ "expertise",TRUE ~ KW))
 
-## Words related to predictability
+## Words related to  modeling
 idx = c(grep("modeling", data$KW),grep("modelling", data$KW))
 unique(data$KW[idx])
 data = data %>% mutate(
@@ -1113,18 +1121,8 @@ data = data %>% mutate(
 
 
 
-## Words related to 
+## Words related to individual differences
 idx = c(grep("individual", data$KW))
-unique(data$KW[idx])
-data = data %>% mutate(
-  KW = case_when(KW %in% c("individual differences",
-                           "individual difference",
-                           "individual_differences")
-                 ~ "individual differences",TRUE ~ KW))
-
-
-## Words related to 
-idx = c(grep("analysis", data$KW))
 unique(data$KW[idx])
 data = data %>% mutate(
   KW = case_when(KW %in% c("individual differences",
@@ -1183,6 +1181,13 @@ data = data %>% mutate(
 head(data)
 data<-dplyr::filter(data,KW!="music")
 data<-dplyr::filter(data,KW!="music psychology")
+
+
+
+
+#kw_num = data %>% count(KW) %>% arrange(n) 
+kw_num = data %>% count(KW) %>% arrange(desc(n))
+
 
 
 #-------
