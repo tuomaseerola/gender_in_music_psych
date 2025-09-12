@@ -34,9 +34,10 @@ g1<-ggplot(DATA,aes(x=reorder(Country,Odds_ratio),y=Odds_ratio,label=paste0("n="
   theme_classic(base_size = 14)+
   geom_hline(yintercept = 1,linetype='dashed',color='grey20')+
   xlab('Country') +
-  ylab('Female Authorship Odds Ratio (95%CI)') +
+  ylab('') +
+  scale_y_continuous(limits=c(0,2))+
   coord_flip()
-print(g1)
+#print(g1)
 
 
 
@@ -80,7 +81,11 @@ g2<-ggplot(DATA,aes(x=reorder(Continent,Odds_ratio),y=Odds_ratio,label=paste0("n
   geom_text(nudge_x = .30, size=2.25)+
   theme_classic(base_size = 14)+
   geom_hline(yintercept = 1,linetype='dashed',color='grey20')+
-  xlab('Country') +
+  scale_y_continuous(limits=c(0,2))+
+  xlab('Continent') +
   ylab('Female Authorship Odds Ratio (95%CI)') +
   coord_flip()
-print(g2)
+#print(g2)
+
+G <- cowplot::plot_grid(g1,g2,ncol=1,labels=c('A','B'),rel_heights = c(1,0.35),axis = "tblr",align = "hv")
+print(G)
