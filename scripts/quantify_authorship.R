@@ -4,6 +4,10 @@
 # Gender analysis of MusicPsych authors
 # Use Odds ratios to quantify the probabilities of gendered authorships.
 
+# Store the raw counts in a separate table
+stored_table <- data.frame(matrix(data = NA,nrow=5,ncol=3)); colnames(stored_table)<-c("Author Type","Female","Male")
+
+
 #### Classify order: Single author ----------
 df$authortype <- 'Other'
 df$authortype[df$author_order == 1] <- 'Other'
@@ -18,6 +22,8 @@ t <- table(
 )
 t
 or1 <- effectsize::oddsratio(t) # 0.83       | [0.71, 0.96]
+stored_table[1,2:3] <- t[1,]; stored_table[1,1]<-"Single"
+#stored_table
 #print(or1)
 #fisher.test(t)
 
@@ -36,6 +42,7 @@ t <- table(
 t
 
 or2 <- effectsize::oddsratio(t) # 1.27       | [1.03, 1.56]
+stored_table[2,2:3] <- t[1,]; stored_table[2,1]<-"First"
 #print(or2)
 #fisher.test(t)
 
@@ -54,6 +61,7 @@ t <- table(
 t
 
 or3 <- effectsize::oddsratio(t) # 1.06       | [0.77, 1.46]
+stored_table[3,2:3] <- t[1,]; stored_table[3,1]<-"Co-author"
 #print(or3)
 #fisher.test(t)
 
@@ -72,6 +80,9 @@ t <- table(
 t
 
 or4 <- effectsize::oddsratio(t) # 0.73
+stored_table[4,2:3] <- t[1,]; stored_table[4,1]<-"Last"
+
+
 #print(or4)
 
 or <- rbind(or1,or2,or3,or4)
@@ -79,6 +90,22 @@ or$name<-c("Single","First","Coauthor","Last")
 or<-dplyr::select(or,name,Odds_ratio,CI_low,CI_high)
 print(knitr::kable(or,digits = 3,caption = "Female authorship odds ratios by authorship type."))
 
+
+t<-table(df$Gender)
+t
+stored_table[5,2:3] <- as.numeric(t); stored_table[5,1]<-"All"
+stored_table$Female_prc <- stored_table$Female/(stored_table$Female+stored_table$Male)*100
+
+stored_table$OR<-NA
+stored_table$OR_L<-NA
+stored_table$OR_U<-NA
+stored_table$OR[1:4]<-or$Odds_ratio
+stored_table$OR_L[1:4]<-or$CI_low
+stored_table$OR_U[1:4]<-or$CI_high
+stored_table
+
+print(knitr::kable(stored_table,digits = 2,caption = "Summary of authortypes across gender (raw counts, percentage, and odds ratios)."))
+#write.csv(stored_table,'data/authorship_counts_table.csv',row.names = FALSE)
 #### Annually ---------
 
 # introduce 5 year bins

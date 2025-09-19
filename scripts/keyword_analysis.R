@@ -91,6 +91,45 @@ if(duplication==TRUE){
 kw_num = data %>% count(KW)
 
 
+# # # # # # instead of year, keep first author id
+alt <- TRUE
+
+if(alt==TRUE){
+
+  KW <- NULL
+  d_index <- NULL
+  GENDER_index <- NULL
+  year_index <- NULL # year
+
+for (k in 1:nrow(df)) {
+  tmp <- df$AUTHOR_KEYWORDS[k]
+  GENDER <- as.character(df$Gender[k])
+  y <- df$unique_name[k]
+  tmp <- stringi::stri_trans_general(tmp, "latin-ascii")
+  if (!is.na(tmp)) {
+    kw <- str_split(tmp, '[;,]', simplify = TRUE)
+    KW <- c(KW, kw)
+    year_index <- c(year_index, rep(y, length(kw)))
+    GENDER_index <- c(GENDER_index, rep(GENDER, length(kw)))
+  }
+}
+
+KW <- stringi::stri_trans_general(KW, "latin-ascii")
+KW<-stringr::str_trim(KW, side = "both")
+KW<-tolower(KW)
+length(KW)
+length(unique(KW))
+
+data <- data.frame(KW,
+                   GENDER_index,
+                   year_index)
+}
+
+# # # # # #
+
+
+
+
 # length(unique(data$KW))
 
 ## Words related to music cognition
@@ -1132,7 +1171,7 @@ data = data %>% mutate(
 
 
 dim(data)
-length(unique(data$KW)) # before: 6734
+length(unique(data$KW))
 
 
 
@@ -1177,16 +1216,75 @@ data = data %>% mutate(
                            "music emotions")
                  ~ "emotion",TRUE ~ KW))
 
+data = data %>% mutate(
+  KW = case_when(KW %in% c("emotions")
+                 ~ "emotion",TRUE ~ KW))
+
+# Music preference
+idx = grep("musical preference", data$KW)
+unique(data$KW[idx])
+data = data %>% mutate(
+  KW = case_when(KW %in% c("musical preference",
+                           "musical preferences")
+                 ~ "music preference",TRUE ~ KW))
+# Music training
+idx = grep("musical training", data$KW)
+unique(data$KW[idx])
+data = data %>% mutate(
+  KW = case_when(KW %in% c("musical training",
+                           "school-based musical training","early musical training","age of musical training onset")
+                 ~ "music training",TRUE ~ KW))
+
+# Musician
+idx = grep("musicians", data$KW)
+unique(data$KW[idx])
+data = data %>% mutate(
+  KW = case_when(KW %in% c("musicianship", "expert musicianship", "professional orchestral musicians", "musicians", "professional musicians", "nonmusicians", "performing musicians", "musicians' injuries", "high-level musicians", "musicians' perspectives", "young musicians", "self-taught musicians", "musicians' medicine", "life-span musicianship", "seasoned musicians", "types of musicians", "conservatory musicians", "amateur musicians", "differences between musicians and nonmusicians", "professional popular musicians", "non-musicians", "musicians' hearing", "community musicians", "musicians' wellbeing", "expert musicians", "advanced musicians", "orchestral musicians", "orchestra musicians", "jazz musicians", "musicians in hospitals", "freelance musicians", "musicians' lifestyles","musician advantage","professional musician","musician effect","jazz musician","classical musician","musician bodily expression","amateur musician")
+                 ~ "musician",TRUE ~ KW))
+
+# Musician
+idx = grep("well-being", data$KW)
+unique(data$KW[idx])
+data = data %>% mutate(
+  KW = case_when(KW %in% c("well-being", "mother well-being", "psychological well-being", "music and well-being","eudaimonic well-being","subjective well-being","human well-being")
+                 ~ "wellbeing",TRUE ~ KW))
+
+
 # what about removing music
 head(data)
 data<-dplyr::filter(data,KW!="music")
 data<-dplyr::filter(data,KW!="music psychology")
 
 
-
+length(data$KW)
+length(unique(data$KW))
 
 #kw_num = data %>% count(KW) %>% arrange(n)
 kw_num = data %>% count(KW) %>% arrange(desc(n))
+
+# # # # #
+if(alt==TRUE){
+  keyword_counts <- data %>%
+    count(KW, sort = TRUE, name = "keyword_count")
+
+  data_prominent <- data %>%
+    inner_join(keyword_counts, by = "KW") %>%
+    filter(keyword_count >= 40) # Threshold for prominence
+
+  top_authors_by_keyword <- data_prominent %>%
+    count(KW, year_index, name = "count") %>%
+    group_by(KW) %>%
+    slice_max(count, n = 3, with_ties = FALSE) %>%
+    arrange(KW, desc(count))
+#  print(top_authors_by_keyword[top_authors_by_keyword$KW=="performance expression",])
+#  print(top_authors_by_keyword[top_authors_by_keyword$KW=="emotion",])
+#  print(top_authors_by_keyword[top_authors_by_keyword$KW=="emotion regulation",])
+#  print(top_authors_by_keyword[top_authors_by_keyword$KW=="performance",])
+
+  write.csv(top_authors_by_keyword,"top_authors_by_keyword.csv",row.names=FALSE)
+
+}
+# # # # #
 
 
 
