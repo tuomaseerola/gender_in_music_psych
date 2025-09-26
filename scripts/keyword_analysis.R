@@ -92,7 +92,7 @@ kw_num = data %>% count(KW)
 
 
 # # # # # # instead of year, keep first author id
-alt <- TRUE
+alt <- FALSE
 
 if(alt==TRUE){
 
