@@ -6,7 +6,7 @@
 #| warning: false
 #| message: false
 #| fig.cap: > 
-#|   A) Number of authors and B) female odds ratio for authorship types across the number of authors.
+#|   A) Number of authors and B) female odds ratio for authorship types across the number of authors
 
 source(here("scripts","load_gender_data.R"))
 library(ggplot2,quietly = TRUE)

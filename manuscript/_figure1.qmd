@@ -6,7 +6,7 @@
 #| warning: false
 #| message: false
 #| fig.cap: > 
-#|   Authorship types across time.
+#|   Authorship types across time
 
 source(here("scripts","load_gender_data.R"))
 library(ggplot2,quietly = TRUE)
