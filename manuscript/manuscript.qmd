@@ -7,9 +7,9 @@ author:
     corresponding : yes    # Define only one corresponding author
     address       : "Palace Green, Department of Music, Durham University, DH1 3RL Durham, United Kingdom"
     email         : "tuomas.eerola@durham.ac.uk"
-  - name          : "Anna Czepiel"
+  - name          : "Anna M. Czepiel"
     affiliation   : "2"
-    address       : "Department of Psychology, University of Toronto Mississauga, Canada"
+    address       : "Department of Psychology, University of Toronto Mississauga, L5L 1C6 Mississauga, Canada"
     email         : "a.czepiel@utoronto.ca"
 affiliation:
   - id            : "1"
