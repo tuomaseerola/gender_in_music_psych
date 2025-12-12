@@ -194,15 +194,32 @@ annual3<-dplyr::filter(annual2,YearRange!="Overall")
 
 fig1 <- ggplot(annual2,aes(x=YearRange,y=Odds_ratio,color=Type,group=Type,shape=separator))+
   #facet_wrap(~TypeGroup,nrow = 2)+
-  geom_hline(yintercept=1, linetype="dashed", color = "black") +
+  geom_hline(yintercept=1, linetype="dashed", color = "grey75") +
   geom_point(position = position_dodge(width = 0.4),show.legend=TRUE,size=3)+
   geom_errorbar(aes(ymin=CI_low,ymax=CI_high),width=0.2,position = position_dodge(width = 0.4))+
   geom_line(data=annual3,aes(x=YearRange,y=Odds_ratio,color=Type,group=Type,shape=separator),alpha = 0.75,position = position_dodge(width = 0.4))+
   scale_shape_manual(name="Authorship\ntype",values = c(22, 16),guide = "none") +
   scale_color_manual(name="Authorship\ntype",values=custom_palette) +
   xlab('Year range')+
-  ylab('Women Authorship Odds Ratio (95%CI)')+
+  ylab('Female Author Odds Ratio (95%CI)')+
   theme_classic(base_size = 15)
 print(fig1)
+
+# apply dark theme
+fig1 <- fig1 + dark_theme_bw(base_size = 16) + theme(legend.position="top")
+
+# make transparent
+
+fig1<-fig1 + theme(
+  panel.background = element_rect(fill='transparent'),
+  plot.background = element_rect(fill='transparent', color=NA),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  legend.background = element_rect(fill='transparent',color=NA),
+  legend.box.background = element_rect(fill='transparent',color=NA)
+)
+fig1
+
+ggsave(fig1,filename = "figure1_authorship_oddsratio_dark.png",width = 7.8,height = 5,dpi = 300)
 
 ```

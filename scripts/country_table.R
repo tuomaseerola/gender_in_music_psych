@@ -83,7 +83,7 @@ g2<-ggplot(DATA,aes(x=reorder(Continent,Odds_ratio),y=Odds_ratio,label=paste0("n
   geom_hline(yintercept = 1,linetype='dashed',color='grey20')+
   scale_y_continuous(limits=c(0,2))+
   xlab('Continent') +
-  ylab('Female Authorship Odds Ratio (95%CI)') +
+  ylab('Women Authorship Odds Ratio (95%CI)') +
   coord_flip()
 #print(g2)
 

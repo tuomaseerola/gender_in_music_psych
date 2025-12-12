@@ -34,3 +34,5 @@ source('scripts/visualise_gender.R') # Which representation we prefer?
 
 #source('scripts/visualise_names.R') # Bonus feature
 source('scripts/keyword_analysis.R') # creates 3 alternative figures
+
+# extra analysis: career changes in authorship positions

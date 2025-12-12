@@ -1385,21 +1385,21 @@ figure3 <- ggplot(data = x1[FROM:TO, ], aes(
   y = or,
   label = paste0("n=",Freq)
 )) +
-  geom_col(fill = 'grey80', color = 'grey10') +
-  geom_errorbar(aes(ymin=or_LCI, ymax=or_UCI), width=.2, alpha=0.6,color="grey40",linetype="solid") +
-  geom_text(y=.1,nudge_y = -.0997, size=2.25) +
-  theme(text = element_text(size = 16)) +
+  geom_col(fill = 'lightblue4', color = 'grey10') +
+  geom_errorbar(aes(ymin=or_LCI, ymax=or_UCI), width=.2, alpha=0.6,color="white",linetype="solid") +
+  geom_text(y=.1,nudge_y = -.0997, size=2.25,color='yellow2') +
+  theme(text = element_text(size = 14)) +
   scale_y_continuous(
-    breaks = seq(0, 3.78, .25),
+    breaks = seq(0, 3.78, .50),
     limits = c(0,3.78),
     expand = c(0.001,0.01)
   ) +
   scale_fill_grey() +
   coord_flip(ylim = c(0,3.78)) +
-  ylab("Women Author Odds Ratio (all authors)") +
+  ylab("OR Female (all authors)") +
   xlab("Keyword (ranked)") +
-  geom_hline(yintercept = 1.0, linetype = "dashed", color = "grey39") +
-  theme_classic(base_size = 15) +
+  geom_hline(yintercept = 1.0, linetype = "dashed", color = "yellow3") +
+  theme_classic(base_size = 14) +
   theme(
     panel.border = element_blank(),
     panel.grid.major = element_blank(),
@@ -1407,7 +1407,27 @@ figure3 <- ggplot(data = x1[FROM:TO, ], aes(
     axis.line = element_line(colour = "black")
   )
 
-print(figure3)
+library(ggdark)
+figure3 <- figure3 + dark_theme_bw(base_size = 16)
+
+# make transparent
+
+figure3<-figure3 + theme(
+  panel.background = element_rect(fill='transparent'),
+  plot.background = element_rect(fill='transparent', color=NA),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  legend.background = element_rect(fill='transparent',color=NA),
+  legend.box.background = element_rect(fill='transparent',color=NA)
+)
+
+#print(figure3)
+ggsave(
+  filename = 'figure3_dark.png',
+  plot = figure3,
+  width = 8, height = 6, units = "in",
+  dpi = 300
+)
 
 tmp <- x1[FROM:TO, ]
 dim(tmp)
