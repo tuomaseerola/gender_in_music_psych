@@ -13,7 +13,7 @@ names_of_countries$country.name[names_of_countries$country.name=="Hong Kong SAR 
 names_of_countries$country.name[names_of_countries$country.name=="Czechia"] <- "Czech"
 
 #### patch those countries that are not listed directly but mention city
-source('scripts/missing_countries_in_affiliations.R') # 
+source('scripts/missing_countries_in_affiliations.R') #
 
 # read missing affiliations
 miss <- read.csv("data/missing_affiliations.txt", stringsAsFactors = FALSE,header = TRUE)
@@ -29,7 +29,7 @@ for (k in 1:nrow(miss)) {
   df$AFFILIATIONS[df$BIBTEXKEY==miss$BIBTEXKEY[k]] <- miss$FIX[k]
 }
 
-# attempt to estimate the countries from affiliations, but due to 
+# attempt to estimate the countries from affiliations, but due to
 # unattributed / multiple attributions, this is not accurate
 uniq <- unique(df$BIBTEXKEY)
 df$Affiliation_country <- NA
@@ -43,7 +43,7 @@ for (k in 1:length(uniq)) {
   tmp_expanded <- tmp_strings[[1]]
   tmp_expanded
   if(!is.na(tmp_expanded[1])) {
-  
+
     tmp_names <- NULL
     for (i in 1:length(tmp_expanded)) {
 #      print(paste(i,"=>",tmp_expanded[i]))
@@ -71,9 +71,9 @@ df$Affiliation_country<-str_replace_all(df$Affiliation_country,'Czech','Czechia'
 
 # add country codes using ISO standard
 
-df$Affiliation_country_code <- countrycode::countrycode(df$Affiliation_country, 
-                                                         origin = "country.name", 
-                                                         destination = "iso2c", 
+df$Affiliation_country_code <- countrycode::countrycode(df$Affiliation_country,
+                                                         origin = "country.name",
+                                                         destination = "iso2c",
                                                                                                                  warn = TRUE)
 #df$Affiliation_country_code
 

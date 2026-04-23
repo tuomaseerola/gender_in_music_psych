@@ -2,3 +2,4 @@
 /.quarto/
 gender.sublime-workspace
 gender.sublime-project
+**/*.quarto_ipynb

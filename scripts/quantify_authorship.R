@@ -20,8 +20,8 @@ t <- table(
   factor(df$authortype, levels = c("Single", "Other")),
   factor(df$Gender,levels = c("female","male"))
 )
-t
-or1 <- effectsize::oddsratio(t) # 0.83       | [0.71, 0.96]
+#t
+or1 <- effectsize::oddsratio(t) # 0.91       | [0.78, 1.06]
 stored_table[1,2:3] <- t[1,]; stored_table[1,1]<-"Single"
 #stored_table
 #print(or1)
@@ -105,7 +105,7 @@ stored_table$OR_U[1:4]<-or$CI_high
 stored_table
 
 print(knitr::kable(stored_table,digits = 2,caption = "Summary of authortypes across gender (raw counts, percentage, and odds ratios)."))
-#write.csv(stored_table,'data/authorship_counts_table.csv',row.names = FALSE)
+write.csv(stored_table,'data/authorship_counts_table.csv',row.names = FALSE)
 #### Annually ---------
 
 # introduce 5 year bins
@@ -285,7 +285,7 @@ first_gr <- first %>%
 
 first_gr
 first_gr_AAGR <- mean(first_gr$Rate_percent,na.rm = TRUE)
-
+#first_gr_AAGR
 coauthor$Year<-recode(coauthor$YearRange,
                    '2000-2004' = 1,
                    '2005-2009' = 2,
@@ -301,7 +301,7 @@ coauthor_gr <- coauthor %>%
          Rate_percent = (Diff_growth / Diff_year)/Odds_ratio * 100) # growth rate in percent
 
 coauthor_gr_AAGR <- mean(coauthor_gr$Rate_percent,na.rm = TRUE)
-
+#coauthor_gr_AAGR
 last$Year<-recode(last$YearRange,
                    '2000-2004' = 1,
                    '2005-2009' = 2,

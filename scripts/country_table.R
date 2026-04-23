@@ -30,12 +30,12 @@ g1<-ggplot(DATA,aes(x=reorder(Country,Odds_ratio),y=Odds_ratio,label=paste0("n="
   geom_point(shape=15)+
 #  geom_line()+
   geom_errorbar(aes(ymin=CI_low,ymax=CI_high),width=.2,linetype='solid',color='grey50')+
-  geom_text(nudge_x = .30, size=2.25)+
+  geom_text(nudge_x = .35, size=2.5)+
   theme_classic(base_size = 14)+
   geom_hline(yintercept = 1,linetype='dashed',color='grey20')+
   xlab('Country') +
   ylab('') +
-  scale_y_continuous(limits=c(0,2))+
+  scale_y_continuous(limits=c(0,2.1))+
   coord_flip()
 #print(g1)
 
@@ -78,12 +78,12 @@ g2<-ggplot(DATA,aes(x=reorder(Continent,Odds_ratio),y=Odds_ratio,label=paste0("n
   geom_point(shape=15)+
   #  geom_line()+
   geom_errorbar(aes(ymin=CI_low,ymax=CI_high),width=.2,linetype='solid',color='grey50')+
-  geom_text(nudge_x = .30, size=2.25)+
+  geom_text(nudge_x = .35, size=2.5)+
   theme_classic(base_size = 14)+
   geom_hline(yintercept = 1,linetype='dashed',color='grey20')+
-  scale_y_continuous(limits=c(0,2))+
+  scale_y_continuous(limits=c(0,2.1))+
   xlab('Continent') +
-  ylab('Women Authorship Odds Ratio (95%CI)') +
+  ylab('Women Authorship Odds Ratio (95% CI)') +
   coord_flip()
 #print(g2)
 

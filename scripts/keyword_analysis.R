@@ -11,7 +11,7 @@ duplication <- TRUE
 ## remove studies, keep articles (to avoid duplicating keywords)
 D <- dplyr::filter(df, author_id == 'author1') # 3373
 
-if (!dim(D)[1] == 3373) {
+if (!dim(D)[1] == 3383) {
   print("incorrect number of observations! (Needs to be run at the level of studies, N=1360)")
   break
 }

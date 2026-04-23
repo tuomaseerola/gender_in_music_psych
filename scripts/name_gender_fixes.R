@@ -14,7 +14,7 @@ df$Gender[df$first_name=='Zohar']<-'male'   # TE
 # from a full name
 df$Gender[df$full_name=='Ashley D. Vanstone']<-'male' # TE
 df$Gender[df$full_name=='Andrea Schiavio']<-'male'    # TE
-df$Gender[df$full_name=='J. Riikka Ahokas']<-'female'    # TE 
+df$Gender[df$full_name=='J. Riikka Ahokas']<-'female'    # TE
 df$Gender[df$full_name=='J. Ginsborg']<-'female'    # TE
 df$Gender[df$last_name=="graham-jackson"] <- "female" # TE
 
@@ -32,13 +32,13 @@ df$full_name[df$last_name=="Windsor"]
 df$full_name[df$last_name=="de Haas"]
 df$full_name[df$full_name=="B. S. Gupta"]
 df$full_name[df$last_name=="Fung"] # several variants and two persons
-df$full_name[df$last_name=="Beaman"] 
-df$full_name[df$last_name=="Yates"] 
-df$full_name[df$last_name=="Zhang"] 
-df$full_name[df$last_name=="Gaydecki"] 
-df$full_name[df$last_name=="Ali"] 
-df$full_name[df$last_name=="Lloyd"] 
-df$full_name[df$last_name=="graham-jackson"] 
+df$full_name[df$last_name=="Beaman"]
+df$full_name[df$last_name=="Yates"]
+df$full_name[df$last_name=="Zhang"]
+df$full_name[df$last_name=="Gaydecki"]
+df$full_name[df$last_name=="Ali"]
+df$full_name[df$last_name=="Lloyd"]
+df$full_name[df$last_name=="graham-jackson"]
 
 
 df$Gender[df$full_name=='Andrea Ravignani']<-'male' # AMC

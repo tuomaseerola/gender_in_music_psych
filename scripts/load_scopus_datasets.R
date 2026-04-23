@@ -15,7 +15,7 @@ rm(df1,df2,df3,df4,df5)
 
 cat(paste("\nEntries in the merged database:", nrow(d)))
 
-#### Deal with authors, now nested into AUTHOR column 
+#### Deal with authors, now nested into AUTHOR column
 library(tidyr)
 library(dplyr)
 
@@ -48,7 +48,7 @@ df$AFFILIATIONS <- df$AFFILIATIONS %>%
   stringr::str_replace_all("United States, Brunswick", "") %>%
   stringr::str_replace_all("United States, Georgia", "") %>%
   stringr::str_replace_all("Atlanta, United States", "") %>%
-  
+
   stringr::str_replace_all("Oldenburg, Oldenburg, Germany", "Oldenburg, Germany") %>%
   stringr::str_replace_all("Italy, Italy", "Italy") %>%
   stringr::str_replace_all("Parma, Parma, Italy", "Parma, Italy")

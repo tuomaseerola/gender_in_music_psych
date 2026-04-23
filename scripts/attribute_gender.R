@@ -60,9 +60,9 @@ gender_with_total <- df %>%
   count(Gender) %>%
   mutate(percentage = round(n / sum(n) * 100, 1)) %>%
   bind_rows(
-    summarise(., 
-              Gender = "Total", 
-              n = sum(n), 
+    summarise(.,
+              Gender = "Total",
+              n = sum(n),
               percentage = sum(percentage))
   )
 
@@ -74,6 +74,9 @@ df <- dplyr::filter(df, Gender != 'ambiguous' & Gender != 'unknown')
 cat(paste(
   "\nEntries in the author-expanded database after filtering books/unattributed:",
   nrow(df)
-)) 
+))
 
 rm(unattributed, inferred, k, index, run_genderize,gender_with_total)
+
+#### Resolve some initials-only names manually, this was done manually
+source("scripts/initials_only_resolve.R") #

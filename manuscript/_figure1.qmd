@@ -201,7 +201,7 @@ fig1 <- ggplot(annual2,aes(x=YearRange,y=Odds_ratio,color=Type,group=Type,shape=
   scale_shape_manual(name="Authorship\ntype",values = c(22, 16),guide = "none") +
   scale_color_manual(name="Authorship\ntype",values=custom_palette) +
   xlab('Year range')+
-  ylab('Women Authorship Odds Ratio (95%CI)')+
+  ylab('Women Authorship Odds Ratio (95% CI)')+
   theme_classic(base_size = 15)
 print(fig1)
 

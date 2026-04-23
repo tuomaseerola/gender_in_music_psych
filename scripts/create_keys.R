@@ -1,5 +1,8 @@
 # create_keys.R
 
+#### Run BIBTEXKEYs fix since there are some (10) DOI discrepancies --------
+source("scripts/fix_bibtexkeys.R")
+
 #### Add Author ids--------
 
 library(dplyr)
